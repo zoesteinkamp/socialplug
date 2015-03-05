@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sign In
+{% endblock title %}
+
+{% block content %}
+<h2>Test</h2>
+    <div class="jumbotron">
+    {% if user.is_authenticated %}
+		            <h2>You logged in!</h2>
+                {% else %}
+        <div class="inner_content">
+            <!--form to call registration via facebook -->
+            <form method="post" action="{% url 'login' %}">{% csrf_token %}
+                <table>
+                <tr>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </tr>
+                </table>
+{#                <p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>#}
+
+                <input type="submit" value="login" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+
+            <form action="{% url 'facebook_connect' %}" method="post">
+                <h2>Register, login or connect with Facebook</h2>
+                <br />
+                {% csrf_token %}
+                <input type="hidden" value="{{ request.path }}" name="next" />
+
+                <!--
+                use error next for a seperate error page
+                <input type="hidden" value="/error/" name="error_next" />
+                -->
+                <div id="facebook_login_js">
+                <input onclick="F.connect(this.parentNode.parentNode); return false;" type="image" src="{{ STATIC_URL }}django_facebook/images/facebook_login.png" /><br />
+                </div>
+            </form>
+        </div>
+                {% endif %}
+{% endblock %}
