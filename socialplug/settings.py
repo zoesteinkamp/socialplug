@@ -60,8 +60,6 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
     'social.backends.facebook.FacebookOAuth2',
     'social.backends.google.GoogleOAuth2',
-    'social.backends.linkedin.LinkedinOAuth2',
-    'social.backends.soundcloud.SoundcloudOAuth2',
     'social.backends.spotify.SpotifyOAuth2',
     'social.backends.twitter.TwitterOAuth',
     'social.backends.email.EmailAuth',

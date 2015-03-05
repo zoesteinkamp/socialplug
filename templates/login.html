@@ -1,3 +1,5 @@
-<a href="{% url 'social:begin' 'facebook' %}">login facebook</a> <br>
+<a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">login facebook</a> <br>
 <a href="login/twitter/">login twitter</a>
-<a href="/login/google-oauth2" >GOOGLE</a>
+<a href="{% url 'social:begin' 'google-oauth2' %}">Google OAuth2</a> <br />
+<a href="/login/soundcloud" >soundcloud</a>
+<a href="/login/spotify" >SPOTIFY</a>
