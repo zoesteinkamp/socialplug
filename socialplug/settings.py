@@ -78,6 +78,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
 )
 
 SOCIAL_AUTH_PIPELINE = (
@@ -151,6 +152,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip('/').split('/'))
 STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
+LOGIN_REDIRECT_URL = '/'
 
 
 try:

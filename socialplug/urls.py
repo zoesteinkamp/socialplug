@@ -11,12 +11,12 @@ urlpatterns = patterns('',
     # url(r'^$', 'socialplug.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     # url(r'^$', 'main.views.home', name='home'),
-    url(r'^search1/', 'main.views.searchpeople', name='search1'),
+    # url(r'^search1/', 'main.views.searchpeople', name='search1'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', LoginView.as_view(), name='view_login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': reverse_lazy('view_login')}, name='logout'),
     url(r'^secret', SecretView.as_view(), name='view_secret'),
-    url('', include('social.apps.django_app.urls', namespace='social')), 
+    url('', include('social.apps.django_app.urls', namespace='social')),
 )
 
 if settings.DEBUG:

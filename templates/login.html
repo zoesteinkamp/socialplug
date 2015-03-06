@@ -1,5 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
 <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">login facebook</a> <br>
-<a href="login/twitter/">login twitter</a>
-<a href="{% url 'social:begin' 'google-oauth2' %}">Google OAuth2</a> <br />
-<a href="/login/soundcloud" >soundcloud</a>
-<a href="/login/spotify" >SPOTIFY</a>
+<a href="{% url 'social:begin' "twitter" %}">login twitter</a>
+<a href="{% url 'social:begin' "google-oauth2" %}">Google OAuth2</a> <br />
+<a href="{% url 'social:begin' "spotify" %}" >SPOTIFY</a>
+{% endblock %}
