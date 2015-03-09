@@ -9,10 +9,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # api urls
-    url(r'^api/', include('main.api.urls')),
+    # url(r'^api/', include('main.api.urls')),
 
     #login url
-    url(r'^$', 'main.views.home', name='home'),
+    # url(r'^$', 'main.views.home', name='home'),
+    url(r'^$', LoginView.as_view(), name='view_login'),
 
     #main page url
     url(r'^main/', 'main.views.main', name='home'),

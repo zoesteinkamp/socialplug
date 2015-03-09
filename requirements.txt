@@ -1,7 +1,7 @@
 django
 psycopg2
 pillow
-python-social-auth
 djangorestframework
 django-postman
 django-allauth
+facebook-sdk
