@@ -1,5 +1,5 @@
 django
 psycopg2
 pillow
-python-social-auth
+django-allauth
 djangorestframework

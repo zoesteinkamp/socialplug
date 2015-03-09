@@ -1,31 +1,27 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
 
 {% block content %}
- <div>
- <h1>Third-party authentication demo</h1>
 
- <p>
-   <ul>
-   {% if user and not user.is_anonymous %}
-     <li>
-       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-     <a>Your likes {{ user.get_likes|default:user.email }}</a>
-     </li>
-     <li>
-       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
-     </li>
-   {% else %}
-     <li>
-       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
-     </li>
-     <li>
-       <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
-     </li>
-     <li>
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
-     </li>
-   {% endif %}
-   </ul>
- </p>
- </div>
+<h1>{% trans 'My Account' %}</h1>
+
+<ul class="nav nav-tabs">
+  <li class="{% block account_nav_email %}{% endblock %}">
+    <a href="{% url 'account_email' %}">{% trans 'E-mail Addresses' %}</a>
+  </li>
+  <li class="{% block account_nav_change_password %}{% endblock %}">
+    <a href="{% url 'account_change_password' %}">{% trans 'Change Password' %}</a>
+  </li>
+  {% url 'socialaccount_connections' as connections_url %}
+  {% if connections_url %}
+  <li class="{% block account_nav_socialaccount_connections %}{% endblock %}">
+    <a href="{{ connections_url}}">{% trans 'Connected Accounts' %}</a>
+  </li>
+  {% endif %}
+</ul>
+{% block account_content %}
+{% endblock %}
+
 {% endblock %}

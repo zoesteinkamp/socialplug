@@ -38,7 +38,20 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.soundcloud',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.spotify',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,46 +69,6 @@ ROOT_URLCONF = 'socialplug.urls'
 WSGI_APPLICATION = 'socialplug.wsgi.application'
 
 
-AUTHENTICATION_BACKENDS = (
-    # 'social.backends.facebook.FacebookAppOAuth2',
-    'social.backends.open_id.OpenIdAuth',
-    'social.backends.facebook.FacebookOAuth2',
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.spotify.SpotifyOAuth2',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.email.EmailAuth',
-    'social.backends.username.UsernameAuth',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.tz',
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'django.contrib.auth.context_processors.auth',
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-)
-
-SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.social_details',
-    'social.pipeline.social_auth.social_uid',
-    'social.pipeline.social_auth.auth_allowed',
-    'social.pipeline.social_auth.social_user',
-    'social.pipeline.social_auth.associate_by_email',
-    'social.pipeline.user.get_username',
-    'social.pipeline.user.create_user',
-    'social.pipeline.social_auth.associate_user',
-    'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details',
-    'main.pipeline.get_profile_avatar',
-    #'accounts.social_auth_pipeline.get_profile_data', # custom
-    #'accounts.social_auth_pipeline.get_profile_avatar', # custom
-)
 
 LOGGING = {
     'version': 1,
@@ -121,8 +94,31 @@ LOGGING = {
     }
 }
 
-SOCIAL_AUTH_LOGIN_URL = reverse_lazy('view_login')
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = reverse_lazy('view_secret')
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.request",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+
+
+
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
