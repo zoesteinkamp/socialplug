@@ -40,6 +40,20 @@ INSTALLED_APPS = (
     'main',
     'social.apps.django_app.default',
     'postman',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.soundcloud',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.spotify',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,6 +69,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'socialplug.urls'
 
 WSGI_APPLICATION = 'socialplug.wsgi.application'
+
 
 
 # Postman settings
@@ -102,6 +117,7 @@ SOCIAL_AUTH_PIPELINE = (
     #'accounts.social_auth_pipeline.get_profile_avatar', # custom
 )
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -126,8 +142,31 @@ LOGGING = {
     }
 }
 
-SOCIAL_AUTH_LOGIN_URL = reverse_lazy('view_login')
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = reverse_lazy('view_secret')
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.request",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+
+
+
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

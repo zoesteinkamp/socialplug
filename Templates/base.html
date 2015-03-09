@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
@@ -76,23 +77,27 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <a class="navbar-brand">Social Plug</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
-                            <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
-                            <li role="presentation" class="divider"></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">log out</a></li>
-                            <li role="presentation" class="divider"></li>
 
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenicated %}
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
+                        <li role="presentation" class="divider"></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
+                        <li role="presentation" class="divider"></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'account_logout' %}">log out</a></li>
+                    </ul>
+                </li>
+
+      {% else %}
+          <li><a href="{% url 'account_login' %}">Sign In</a></li>
+          <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+      {% endif %}
+        </ul>
+      </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 

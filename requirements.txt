@@ -4,3 +4,4 @@ pillow
 python-social-auth
 djangorestframework
 django-postman
+django-allauth

@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from main.views import LoginView, SecretView
 from django.contrib import admin
+from django.views.generic import TemplateView
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -32,6 +34,12 @@ urlpatterns = patterns('',
     (r'^message/', include('postman.urls')),
 
     # url(r'^message/', 'main.views.message', name='message')
+
+
+    # url('', include('django.contrib.auth.urls', namespace='auth')),
+    # url(r'^facebook_profile/$', 'main.views.get_facebook_profile', name='get_facebook_profile'),
+    (r'^accounts/', include('allauth.urls')),
+
 )
 
 if settings.DEBUG:
