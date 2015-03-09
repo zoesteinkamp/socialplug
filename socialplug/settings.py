@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main',
     'social.apps.django_app.default',
+    'postman',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,6 +56,10 @@ ROOT_URLCONF = 'socialplug.urls'
 
 WSGI_APPLICATION = 'socialplug.wsgi.application'
 
+
+# Postman settings
+
+POSTMAN_DISALLOW_ANONYMOUS = True  # default is False
 
 AUTHENTICATION_BACKENDS = (
     # 'social.backends.facebook.FacebookAppOAuth2',

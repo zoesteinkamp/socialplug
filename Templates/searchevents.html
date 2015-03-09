@@ -1,0 +1,137 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block main %}
+
+
+
+<div class="col-md-8" style="margin-left: -50px">
+    <div class="jumbotron">
+
+        <!-- Search bar -- >
+<!-- The Start of the Header Nav Bar -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+        <!-- Header -->
+      <div class="navbar-header">
+        <h3> Search Events </h3>
+      </div>
+        <!-- end header -->
+
+      <!-- Search -->
+       <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+      <!-- end search-->
+
+      <!-- Search calendar -->
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <div class="col-sm-4" style="height:130px;">
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker9'>
+                <input type='text' class="form-control" placeholder="Date" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar">
+                      </span>
+                </span>
+            </div>
+            </div>
+        </div>
+        <!-- calendar end -->
+
+      <!-- Category Search -->
+ <select data-placeholder="Choose a Category" class="chosen-select" style="width:350px;" tabindex="2">
+            <option value=""></option>
+            <option value="Buisness">Buisness</option>
+            <option value="Crafts">Crafts</option>
+            <option value="Education">Education</option>
+            <option value="Family">Family</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Fitness"> Fitness</option>
+            <option value="Food"> Food </option>
+            <option value="Learning">Learning</option>
+            <option value="Literature">Literature</option>
+            <option value="Gaming"> Gaming</option>
+            <option value="Music">Music</option>
+            <option value="Outdoor">Outdoors</option>
+            <option value="Pets">Pets</option>
+            <option value="Photography">Photography</option>
+            <option value="Politics">Politics</option>
+            <option value="Technology"> Technology</option>
+            <option value="Television">Television</option>
+            <option value="Special">Special Occasion</option>
+            <option value="Spiritual">Spiritual</option>
+            <option value="Sports"> Sports</option>
+            <option value="Writing">Writing</option>
+          </select>
+
+
+      <!-- Category End -->
+
+
+
+
+
+      <!-- Distance dropdown -->
+      <div class="btn-group">
+     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Distance <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+      <li><input type="radio" id="1" name="1mile" value="1"><label for="1"> 1 Mile </label></li>
+      <li><input type="radio" id="5" name="5mile" value="5"><label for="5"> 5 Miles </label></li>
+      <li><input type="radio" id="10" name="10mile" value="10"><label for="10"> 10 Miles </label></li>
+      <li><input type="radio" id="50" name="50mile" value="50"><label for="50"> 50 Miles </label></li>
+    </ul>
+        </div>
+      <!-- Distnace end -->
+
+
+
+  </ul>
+</div>
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <!-- end of search bar -->
+    </div>
+</div>
+
+
+<!-- script for category -->
+ <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+  </script>
+
+<!-- script for date picker -->
+
+
+{% endblock main %}
+
+
+
+  <!--  Example of sub menu
+    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown trigger
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu"  role="menu" aria-labelledby="dLabel">
+           <li class="dropdown-submenu">
+               <a href="#" data-toggle="dropdown">Action</a>
+               <ul class="dropdown-menu">
+               <li> Sub</li>
+           </ul>
+       </li>
+  </ul>
+     -->

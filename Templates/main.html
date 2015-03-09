@@ -1,9 +1,10 @@
-{% load staticfiles %}
-{% block title %}Main Page{% endblock %}
 
+{% extends 'base.html' %}
+{% load staticfiles %}
 {% block content %}
 
 <!--sidebar-->
+
 <div class="col-md-3">
     <ul class="sidebar-nav" >
        <div class="span3">
@@ -52,8 +53,8 @@
     </ul>
 </div>
 <!---sidebar end-->
-
-<div class="col-md-8" style="margin-left: -50px">
+{% block main %}
+<div class="col-md-9" style="margin-left: -50px">
     <div class="jumbotron">
          <h1>Profile</h1>
 
@@ -95,6 +96,6 @@
     </div>
 
 </div>
-
+{% endblock %}
 
 {% endblock %}
