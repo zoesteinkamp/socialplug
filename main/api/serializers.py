@@ -5,4 +5,4 @@
 # class UserSocialAuthSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = UserSocialAuth
-        # fields = ('')
+#         fields = ('')

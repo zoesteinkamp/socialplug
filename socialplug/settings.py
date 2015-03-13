@@ -38,13 +38,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    # messaging system
     'postman',
-
+    # the best thing eva
+    'swampdragon',
+    'dragonapp',
     'django.contrib.sites',
+    # andrews auth collection. needs to be cleaned up
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # ... include the providers you want to enable:
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
@@ -76,6 +79,10 @@ WSGI_APPLICATION = 'socialplug.wsgi.application'
 
 POSTMAN_DISALLOW_ANONYMOUS = True  # default is False
 
+# swampdragon stuff
+SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')
+DRAGON_URL = 'http://localhost:9999/'
+SWAMP_DRAGON_HEARTBEAT_ENABLED = True
 
 
 

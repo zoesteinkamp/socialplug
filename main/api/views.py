@@ -1,5 +1,5 @@
 # from rest_framework import viewsets
-# from social.apps.django_app.default.models import UserSocialAuth
+# from apps.django_app.default.models import UserSocialAuth
 # from main.api.serializers import UserSocialAuthSerializer
 #
 #
