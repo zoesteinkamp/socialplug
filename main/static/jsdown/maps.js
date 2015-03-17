@@ -203,20 +203,22 @@
 //google.maps.event.addDomListener(window, 'load', initialize);
 
 var newlocation;
-if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      newlocation = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
+ var currentlocation = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            newlocation = new google.maps.LatLng(position.coords.latitude,
+                position.coords.longitude);
 
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
-
-
+        }, function () {
+            handleNoGeolocation(true);
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleNoGeolocation(false);
+    }
+    return newlocation;
+}
+currentlocation();
 
 
 swampdragon.ready(function () {
@@ -236,13 +238,20 @@ swampdragon.ready(function () {
         }, function (context, data) {
             // unsubscribe failed
         });
-        var data = {'user.username': 'Holly', location: newlocation };
-        swampdragon.create('locationcurrent',{}, function (context, data) {
+
+
+
+        var data2 = {user: 'Holly', location: 'for' };
+        swampdragon.create('locationcurrent', { user: 'Holly', location: 'for'} , 4, function (context, data) {
             console.log("data created")
+            console.log(data)
         }, function (context, data) {
             console.log("You may not be created")
         } );
-        swampdragon.getList('locationcurrent', {id:1}, function (context, data) {
+
+
+
+        swampdragon.getList('locationcurrent', {id:1}, function (context, data) { // this fully works
             var datanew = data;
             console.log(datanew);
             location();

@@ -24,9 +24,9 @@ class Migration(migrations.Migration):
                 ('date', models.DateField()),
                 ('time', models.TimeField()),
                 ('email', models.EmailField(max_length=75, blank=True)),
-                ('phonenumber', models.IntegerField(blank=True)),
+                ('phonenumber', models.CharField(max_length=70, blank=True)),
                 ('description', models.TextField()),
-                ('category', models.CharField(max_length=3, choices=[(b'Buisness', b'Buisness'), (b'Crafts', b'Crafts'), (b'Education', b'Education'), (b'Family', b'Family'), (b'Fashion', b'Fashion'), (b'Fitness', b'Fitness'), (b'Food', b'Food'), (b'Learning', b'Learning'), (b'Literature', b'Literature'), (b'Gaming', b'Gaming'), (b'Music', b'Music'), (b'Outdoor', b'Outdoor'), (b'Pets', b'Pets'), (b'Photography', b'Photography'), (b'Politics', b'Politics'), (b'Technology', b'Technology'), (b'Television', b'Television'), (b'Special', b'Special'), (b'Spiritual', b'Spiritual'), (b'Sports', b'Sports'), (b'Writing', b'Writing')])),
+                ('category', models.CharField(max_length=90, choices=[(b'Business', b'Business'), (b'Crafts', b'Crafts'), (b'Education', b'Education'), (b'Family', b'Family'), (b'Fashion', b'Fashion'), (b'Fitness', b'Fitness'), (b'Food', b'Food'), (b'Learning', b'Learning'), (b'Literature', b'Literature'), (b'Gaming', b'Gaming'), (b'Music', b'Music'), (b'Outdoor', b'Outdoor'), (b'Pets', b'Pets'), (b'Photography', b'Photography'), (b'Politics', b'Politics'), (b'Technology', b'Technology'), (b'Television', b'Television'), (b'Special', b'Special'), (b'Spiritual', b'Spiritual'), (b'Sports', b'Sports'), (b'Writing', b'Writing')])),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={

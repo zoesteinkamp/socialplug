@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main',
     # messaging system
-    'postman',
+    'django_messages',
     # the best thing eva
     'swampdragon',
     'dragonapp',
@@ -75,9 +75,6 @@ WSGI_APPLICATION = 'socialplug.wsgi.application'
 
 
 
-# Postman settings
-
-POSTMAN_DISALLOW_ANONYMOUS = True  # default is False
 
 # swampdragon stuff
 SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')
@@ -116,6 +113,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'django_messages.context_processors.inbox',
     'django.contrib.auth.context_processors.auth',
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -157,6 +155,8 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
+
+
 )
 
 
