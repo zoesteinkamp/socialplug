@@ -18,23 +18,32 @@ urlpatterns = patterns('',
 
 
     #main page url
-    url(r'^main/', 'main.views.main', name='home'),
-
-    # search people
-    url(r'^search1/', 'main.views.searchpeople', name='search1'),
-
-    #search events
-    url(r'^search2/', 'main.views.searchevent', name='search2'),
-
-    #admin
-    url(r'^admin/', include(admin.site.urls)),
+    # url(r'^$', 'main.views.home', name='home'),
     # url(r'^login/', LoginView.as_view(), name='view_login'),
     # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': reverse_lazy('view_login')}, name='logout'),
     # url(r'^secret', SecretView.as_view(), name='view_secret'),
-    # url('', include('social.apps.django_app.urls', namespace='social')),
+    #
+    # #main page url
+    url(r'^main/', 'main.views.main', name='home'),
+    #
+    # # search people
+    url(r'^search1/', 'main.views.searchpeople', name='search1'),
+    #
+    # #search events
+    url(r'^search2/', 'main.views.searchevent', name='search2'),
+    url(r'^basemessage/', 'main.views.message'),
+    url(r'^route/', 'main.views.route'),
+    url(r'^test/', 'main.views.test', name='test'),
+    url(r'^eventpost/', 'main.views.event_post', name='event'),
+    # #admin
+    url(r'^admin/', include(admin.site.urls)),
+
+    #postman urls
+    url(r'^messages/', include('django_messages.urls')),
 
 
-    # url(r'^message/', 'main.views.message', name='message')
+    #swamp dragon urls
+    # url(r'^swampdragon/', include('main.swampdragon.urls')),
 
 
     # url('', include('django.contrib.auth.urls', namespace='auth')),

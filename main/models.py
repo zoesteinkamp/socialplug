@@ -205,3 +205,42 @@ def user_logged_in_(request, user, sociallogin=None, **kwargs):
     p, created = UserProfile.objects.get_or_create(user=user)   # 'created' will be true or false
     p.set_avatar_url(p)
 
+class Event(models.Model):
+    CATEGORY_CHOICES = (
+        ('Business', 'Business'),
+        ('Crafts', 'Crafts'),
+        ('Education', 'Education'),
+        ('Family','Family'),
+        ('Fashion','Fashion'),
+        ('Fitness','Fitness'),
+        ('Food','Food'),
+        ('Learning','Learning'),
+        ('Literature','Literature'),
+        ('Gaming','Gaming'),
+        ('Music','Music'),
+        ('Outdoor','Outdoor'),
+        ('Pets','Pets'),
+        ('Photography','Photography'),
+        ('Politics','Politics'),
+        ('Technology','Technology'),
+        ('Television','Television'),
+        ('Special','Special'),
+        ('Spiritual','Spiritual'),
+        ('Sports','Sports'),
+        ('Writing','Writing')
+    )
+    user = models.ForeignKey(User, null=True)
+    title = models.CharField(max_length=100)
+    city = models.CharField(max_length=60)
+    street = models.CharField(max_length=90)
+    address = models.CharField(max_length=100)
+    country = models.CharField(max_length=70)
+    date = models.DateField()
+    time = models.TimeField()
+    email = models.EmailField(blank=True) #optional
+    phonenumber = models.CharField(max_length=70, blank=True)  # optional
+    description = models.TextField()
+    category = models.CharField(max_length=90, choices=CATEGORY_CHOICES)
+
+    def __unicode__(self):
+        return self.title

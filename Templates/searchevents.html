@@ -2,11 +2,26 @@
 {% load staticfiles %}
 
 {% block main %}
-
+          <style>
+      html, body, #map-canvas {
+        height: 400px;
+        margin: 0;
+        padding: 0;
+      }
+          #panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+    </style>
 
 
 <div class="col-md-8" style="margin-left: -50px">
-    <div class="jumbotron">
 
         <!-- Search bar -- >
 <!-- The Start of the Header Nav Bar -->
@@ -87,19 +102,23 @@
     </ul>
         </div>
       <!-- Distnace end -->
-
-
-
   </ul>
-</div>
+    </div>
+<div>
+        {% for event in events %}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ event.title }}</h3>
+                <div></div>
+            </div>
+        </div>
+{% endfor %}
+    </div>
   </div><!-- /.container-fluid -->
 </nav>
-
   <!-- end of search bar -->
-    </div>
+
 </div>
-
-
 <!-- script for category -->
  <script type="text/javascript">
     var config = {
@@ -108,7 +127,7 @@
       '.chosen-select-no-single' : {disable_search_threshold:10},
       '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
       '.chosen-select-width'     : {width:"95%"}
-    }
+    };
     for (var selector in config) {
       $(selector).chosen(config[selector]);
     }

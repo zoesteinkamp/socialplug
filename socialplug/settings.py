@@ -38,12 +38,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-
+    # messaging system
+    'django_messages',
+    # the best thing eva
+    'swampdragon',
+    'dragonapp',
     'django.contrib.sites',
+    # andrews auth collection. needs to be cleaned up
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # ... include the providers you want to enable:
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
@@ -68,7 +72,12 @@ WSGI_APPLICATION = 'socialplug.wsgi.application'
 
 
 
-# Postman settings
+
+
+# swampdragon stuff
+SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')
+DRAGON_URL = 'http://localhost:9999/'
+SWAMP_DRAGON_HEARTBEAT_ENABLED = True
 
 
 
@@ -101,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
+    'django_messages.context_processors.inbox',
     'django.contrib.auth.context_processors.auth',
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -164,6 +174,8 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
+
+
 )
 
 
