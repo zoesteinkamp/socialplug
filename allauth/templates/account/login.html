@@ -1,0 +1,49 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load url from future %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+
+    <div class="social-login" style="padding-top: 40px">
+        <div class="row col-lg-4 col-md-offset-4">
+            <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-block btn-social btn-facebook"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+        </div>
+        <div class="row col-lg-4 col-md-offset-4" style="padding-top: 10px">
+            <a href="{% provider_login_url "spotify" method="oauth2" %}" class="btn btn-block btn-social btn-github"><i class="fa fa-spotify"></i> Sign in with Spotify</a>
+        </div>
+        <div class="row col-lg-4 col-md-offset-4" style="padding-top: 10px">
+            <a href="{% provider_login_url "google" method="oauth2" %}" class="btn btn-block btn-social btn-google-plus"><i class="fa fa-youtube"></i> Sign in with Google & Youtube</a>
+        </div>
+        <div class="row col-lg-4 col-md-offset-4" style="padding-top: 10px">
+            <a href="{% provider_login_url "instagram" method="oauth2" %}" class="btn btn-block btn-social btn-instagram"><i class="fa fa-instagram"></i> Sign in with Instagram</a>
+        </div>
+    </div>
+
+    <div class="row omb_row-sm-offset-3 omb_loginOr">
+        <div class="col-xs-12 col-sm-6">
+            <hr class="omb_hrOr">
+        </div>
+    </div>
+
+    <div class="row col-md-offset-4">
+        <div class="col-xs-12 col-sm-6">
+            <form class="login omb_loginForm" method="POST" action="{% url 'account_login' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+              {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+              <button class="primaryAction btn btn-lg btn-primary btn-block" type="submit">{% trans "Sign In" %}</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
-from main.views import LoginView, SecretView
 from django.contrib import admin
 from django.views.generic import TemplateView
 
@@ -9,11 +8,14 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # api urls
-    # url(r'^api/', include('main.api.urls')),
+    url(r'^api/', include('main.api.urls')),
 
     #login url
     # url(r'^$', 'main.views.home', name='home'),
-    url(r'^$', LoginView.as_view(), name='view_login'),
+    url(r'^$', 'main.views.index', name='index'),
+    url(r'^users/(?P<user_id>\d+)/$', 'main.views.profile', name='profile'),
+    url(r'^users/(?P<username>[\w.@+-]+)/$', 'main.views.profile', name='profile'),
+
 
     #main page url
     url(r'^main/', 'main.views.main', name='home'),
@@ -31,8 +33,6 @@ urlpatterns = patterns('',
     # url(r'^secret', SecretView.as_view(), name='view_secret'),
     # url('', include('social.apps.django_app.urls', namespace='social')),
 
-    #postman urls
-    (r'^message/', include('postman.urls')),
 
     # url(r'^message/', 'main.views.message', name='message')
 

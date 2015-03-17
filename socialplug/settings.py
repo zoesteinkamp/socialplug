@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'postman',
 
     'django.contrib.sites',
     'allauth',
@@ -46,13 +45,10 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
-    'allauth.socialaccount.providers.linkedin',
-    'allauth.socialaccount.providers.soundcloud',
-    'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.spotify',
+    'django_extensions',
 
 )
 
@@ -73,9 +69,6 @@ WSGI_APPLICATION = 'socialplug.wsgi.application'
 
 
 # Postman settings
-
-POSTMAN_DISALLOW_ANONYMOUS = True  # default is False
-
 
 
 
@@ -104,7 +97,6 @@ LOGGING = {
 }
 
 
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
@@ -124,10 +116,32 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+SOCIALACCOUNT_QUERY_EMAIL = True
+# social login scopes
+SOCIALACCOUNT_PROVIDERS = \
+    {
+        'facebook':
+            {'SCOPE': ['email', 'public_profile', 'user_activities', 'user_likes', 'user_interests', 'user_actions.books',
+                       'user_actions.music'],
+             'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+             'METHOD': 'js_sdk'},
 
+    'google':
+        {'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email',
+                   'https://www.googleapis.com/auth/youtube.readonly']
+            , 'AUTH_PARAMS': {}},
+    'instagram':
+        {'SCOPE': ['basic']
+            , 'AUTH_PARAMS': {}},
+    'spotify':
+        {'SCOPE': ['user-library-read', 'user-read-email']
+            , 'AUTH_PARAMS': {}},
+
+    }
 
 
 SITE_ID = 1
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

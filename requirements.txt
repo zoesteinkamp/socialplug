@@ -3,5 +3,4 @@ psycopg2
 pillow
 djangorestframework
 django-postman
-django-allauth
 facebook-sdk
