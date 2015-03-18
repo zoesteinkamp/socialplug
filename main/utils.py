@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from allauth.socialaccount.models import SocialAccount
 from allauth.socialaccount.signals import social_account_added
-from main.models import Interest, Category, Music
+from main.models import Interest, Category, Music, UserPhotos, Subscription
 
 
 def grab_fb():
@@ -33,7 +33,7 @@ def grab_fb():
 
 grab_fb()
 
-@receiver(social_account_added)
+@receiver(social_account_added, sender=SocialAccount)
 def grab_fb_music():
     accounts = SocialAccount.objects.filter(provider='facebook')
     try:
@@ -242,14 +242,20 @@ def grab_instagram():
         for person in accounts:
             for items in person.extra_data['insta_info']['data']:
                 images = {k:v for (k, v) in items.iteritems() if 'images' in k}
-                for k, d in images.iteritems():
-                    img = d
+                for key, value in images.iteritems():
+                    img = value
 
-                    img_links = img['standard_resolution']['url']
-                    print img_links
+                    img_link = img['standard_resolution']['url']
+                    print img_link
 
+                    # check if interest exists and add user or all interest
+                    if UserPhotos.objects.filter(photo=img_link).exists():
+                        pass
+                    else:
+                        user = User.objects.get(pk=person.user.id)
+                        UserPhotos.objects.create(photo=img_link, user=user)
     except:
-        pass
+        print 'nah'
 
 grab_instagram()
 
@@ -267,8 +273,22 @@ def grab_youtube():
 
                     title = sub['title']
 
-                    print title
-                    print image
+                    # put music category if not in database
+                    if Category.objects.filter(name='Subscriptions').exists():
+                        pass
+                    else:
+                        Category.objects.create(name='Subscriptions')
+
+                    # check if interest exists and add user or all interest
+                    if Subscription.objects.filter(title=title).exists():
+                        user = User.objects.get(pk=person.user.id)
+                        subscriptions = Subscription.objects.get(title=title)
+                        subscriptions.user.add(user)
+                    else:
+                        user = User.objects.get(pk=person.user.id)
+                        category = Category.objects.get(name='Subscriptions')
+                        create = Subscription.objects.create(title=title, image=image, category=category)
+                        create.user.add(user)
     except:
         pass
 

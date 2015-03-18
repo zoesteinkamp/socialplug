@@ -13,8 +13,8 @@ from main.models import UserProfile
 
 
 
-class LoginView(TemplateView):
-    template_name = "home.html"
+# class LoginView(TemplateView):
+#     template_name = "home.html"
 
 def index(request):
     return render(request, "home.html")
@@ -37,8 +37,8 @@ class SecretView(TemplateView):
     template_name = "secret.html"
 
 
-def home(request, template='page1.html'):
-    return render(request, template)
+# def home(request, template='page1.html'):
+#     return render(request, template)
 
 def eventpost(request, template='event_post.html'):
     return render(request, template)
