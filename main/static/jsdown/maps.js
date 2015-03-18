@@ -239,14 +239,24 @@ swampdragon.ready(function () {
             // unsubscribe failed
         });
 
+        // neither user, username, 'user.username' work, i can update location but something weird is
+        // happening with the user.
 
+        var values = {username: "holly", location: "SF"};
 
-        var data2 = {user: 'Holly', location: 'for' };
-        swampdragon.create('locationcurrent', { user: 'Holly', location: 'for'} , 4, function (context, data) {
-            console.log("data created")
+        swampdragon.create('locationcurrent', values, 1, function (context, data) {
+            console.log("data created");
             console.log(data)
+            console.log(context)
         }, function (context, data) {
             console.log("You may not be created")
+        } );
+
+        var data2 = {'user.username': "zoe", location: 'hi world', id: 1};
+        swampdragon.update( 'locationcurrent', data2, function (context, data) {
+            console.log("Yay I work!")
+        }, function (context, data) {
+            console.log("No updates for you")
         } );
 
 

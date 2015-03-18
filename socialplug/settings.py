@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'swampdragon',
     'dragonapp',
     'django.contrib.sites',
-    # andrews auth collection. needs to be cleaned up
+    # auth collection
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.instagram',
     'allauth.socialaccount.providers.spotify',
+    # extensions?
     'django_extensions',
 
 )

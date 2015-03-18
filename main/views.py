@@ -1,20 +1,14 @@
-
 from django.contrib.auth.models import User
-
 from main import forms
-from main.forms import EventForm
 from main.models import Event
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-import facebook
-from allauth.socialaccount.models import SocialAccount
 from main.models import UserProfile
 
 
+class LoginView(TemplateView):
+    template_name = "home.html"
 
-# class LoginView(TemplateView):
-#     template_name = "home.html"
 
 def index(request):
     return render(request, "home.html")
@@ -33,9 +27,6 @@ def profile(request, user_id=None):
     return render(request, 'profile.html', data)
 
 
-class SecretView(TemplateView):
-    template_name = "secret.html"
-
 
 # def home(request, template='page1.html'):
 #     return render(request, template)
@@ -46,25 +37,29 @@ def eventpost(request, template='event_post.html'):
 def searchpeople(request, template='searchpeople.html'):
         return render(request, template)
 
-def main(request, template='main.html'):
+def nav_bar(request, template='main.html'):
     return render(request, template)
 
 
-def message(request, template='postman/base_main.html'):
+def test(request, template='test.html'):
     return render(request, template)
-
 
 def route(request, template='base.html'):
     return render(request, template)
-
 
 def searchevent(request):
     return render(request, 'searchevents.html', {
         'events': Event.objects.all()
     })
 
-def test(request, template='test.html'):
-    return render(request, template)
+# Debatable
+
+class SecretView(TemplateView):
+    template_name = "secret.html"
+
+
+
+
 
 
 def event_post(request):

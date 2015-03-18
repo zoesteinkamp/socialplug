@@ -35,7 +35,7 @@ grab_fb()
 
 @receiver(social_account_added, sender=SocialAccount)
 def grab_fb_music():
-    accounts = SocialAccount.objects.filter(provider='facebook')
+    accounts = SocialAccount.objects.filter(provider='facebook', user=user.id)
     try:
         for person in accounts:
             for items in person.extra_data['fb_info']['music']['data']:
