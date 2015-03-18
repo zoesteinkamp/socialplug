@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import User
 from main import forms
 from main.models import Event
@@ -7,7 +6,13 @@ from django.views.generic import TemplateView
 from main.models import UserProfile
 
 
-#good to go
+class LoginView(TemplateView):
+    template_name = "home.html"
+
+
+def index(request):
+    return render(request, "home.html")
+
 
 def profile(request, user_id=None):
     user = User.objects.get(id=user_id)
@@ -21,8 +26,7 @@ def profile(request, user_id=None):
     }
     return render(request, 'profile.html', data)
 
-def index(request):
-    return render(request, "home.html")
+
 
 # def home(request, template='page1.html'):
 #     return render(request, template)
@@ -52,9 +56,6 @@ def searchevent(request):
 
 class SecretView(TemplateView):
     template_name = "secret.html"
-
-# class LoginView(TemplateView):
-#     template_name = "home.html"
 
 
 

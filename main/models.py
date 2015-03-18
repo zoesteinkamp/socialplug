@@ -42,9 +42,20 @@ class Subscription(models.Model):
         return self.title
 
 
+class UserPhotos(models.Model):
+    photo = models.CharField(max_length=300)
+    user = models.ForeignKey(User)
+
+    class Meta:
+        db_table = 'photos'
+
+    def __unicode__(self):
+        return self.user.username
+
+
 class Music(models.Model):
     artist = models.CharField(max_length=60, unique=True)
-    image = models.CharField(max_length=200)
+    image = models.CharField(max_length=500)
     user = models.ManyToManyField(User)
     category = models.ForeignKey(Category)
 
