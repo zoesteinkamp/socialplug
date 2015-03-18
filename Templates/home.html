@@ -1,4 +1,4 @@
-{% extends "page1.html" %}
+{% extends "base.html" %}
 
 {% load url from future %}
 {% load i18n %}
@@ -6,7 +6,7 @@
 {% providers_media_js %}
 
 
-{% block content %}
+{% block hugepage %}
     {% if user.is_authenticated %}
         <p>you in</p>
     {% else %}

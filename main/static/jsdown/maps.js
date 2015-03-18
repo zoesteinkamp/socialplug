@@ -244,7 +244,7 @@ swampdragon.ready(function () {
 
         var values = {username: "holly", location: "SF"};
 
-        swampdragon.create('locationcurrent', values, function (context, data) {
+        swampdragon.create('locationcurrent', values, 1, function (context, data) {
             console.log("data created");
             console.log(data)
             console.log(context)

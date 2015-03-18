@@ -1,54 +1,51 @@
 from django.conf.urls import patterns, include, url
-from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from django.contrib import admin
-from django.views.generic import TemplateView
+
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # api urls
-    url(r'^api/', include('main.api.urls')),
 
-    #login url
-    # url(r'^$', 'main.views.home', name='home'),
-    url(r'^$', 'main.views.index', name='index'),
+    # Urls that need to be gone through
+
+    # url(r'^secret', SecretView.as_view(), name='view_secret'),
+    # url(r'^login/', LoginView.as_view(), name='view_login'),
+    # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': reverse_lazy('view_login')}, name='logout'),
+    # url('', include('django.contrib.auth.urls', namespace='auth')),
+    # url(r'^facebook_profile/$', 'main.views.get_facebook_profile', name='get_facebook_profile'),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^users/(?P<user_id>\d+)/$', 'main.views.profile', name='profile'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', 'main.views.profile', name='profile'),
 
 
-    #main page url
-    # url(r'^$', 'main.views.home', name='home'),
-    # url(r'^login/', LoginView.as_view(), name='view_login'),
-    # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': reverse_lazy('view_login')}, name='logout'),
-    # url(r'^secret', SecretView.as_view(), name='view_secret'),
-    #
-    # #main page url
-    url(r'^main/', 'main.views.main', name='home'),
-    #
-    # # search people
-    url(r'^search1/', 'main.views.searchpeople', name='search1'),
-    #
-    # #search events
-    url(r'^search2/', 'main.views.searchevent', name='search2'),
-    url(r'^basemessage/', 'main.views.message'),
-    url(r'^route/', 'main.views.route'),
-    url(r'^test/', 'main.views.test', name='test'),
-    url(r'^eventpost/', 'main.views.event_post', name='event'),
-    # #admin
-    url(r'^admin/', include(admin.site.urls)),
 
-    #postman urls
+    #Urls that are accounted for and good to go
+    # main login page, base.html
+    url(r'^$', 'main.views.index', name='index'),   # <- the same thing
+    # url(r'^$', 'main.views.home', name='home'),     # <- the same thing
+
+    # the main profile and nav bar pages
+    url(r'^nav_bar/', 'main.views.nav_bar', name='home'),
+
+    # the auth pages.
+
+
+    # the event pages
+    url(r'^eventpost/', 'main.views.event_post', name='event'),
+    url(r'^search2/', 'main.views.searchevent', name='search2'),
+
+    #the search people pages
+    url(r'^search1/', 'main.views.searchpeople', name='search1'),
+
+    # the messaging system
+    url(r'^route/', 'main.views.route'),
     url(r'^messages/', include('django_messages.urls')),
 
-
-    #swamp dragon urls
-    # url(r'^swampdragon/', include('main.swampdragon.urls')),
-
-
-    # url('', include('django.contrib.auth.urls', namespace='auth')),
-    # url(r'^facebook_profile/$', 'main.views.get_facebook_profile', name='get_facebook_profile'),
-    (r'^accounts/', include('allauth.urls')),
+    # the include, admin, and test files
+    url(r'^test/', 'main.views.test', name='test'),
+    url(r'^api/', include('main.api.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 
 )
 
