@@ -53,8 +53,8 @@ def searchevent(request):
 class SecretView(TemplateView):
     template_name = "secret.html"
 
-class LoginView(TemplateView):
-    template_name = "home.html"
+# class LoginView(TemplateView):
+#     template_name = "home.html"
 
 
 

@@ -8,8 +8,8 @@ from dragonapp.serializers import LocationCurrentSerializer
 
 class LocationCurrent(SelfPublishModel, models.Model):
     serializer_class = LocationCurrentSerializer
-    user = models.OneToOneField(User)
+    user = models.CharField(max_length=50)
     location = models.CharField(max_length=300)
 
     def __str__(self):
-        return '{}'.format(self.user.username)
+        return '{}'.format(self.user)
