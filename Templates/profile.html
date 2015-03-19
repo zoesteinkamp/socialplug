@@ -6,70 +6,18 @@
 {% load account %}
 {% load socialaccount %}
 
-{% block head_title %}{% trans "Account Connections" %}{% endblock %}
-
-{% block hugepage %}
-<h1>{% trans "Account Connections" %}</h1>
-
-{% if form.accounts %}
-<p>{% blocktrans %}You can sign in to your account using any of the following third party accounts:{% endblocktrans %}</p>
 
 
-<form method="post" action="{% url 'socialaccount_connections' %}">
-{% csrf_token %}
+{% block head_title %}Profile{% endblock %}
 
-<fieldset>
-{% if form.non_field_errors %}
-<div id="errorMsg">{{form.non_field_errors}}</div>
-{% endif %}
-
-{% for base_account in form.accounts %}
-{% with base_account.get_provider_account as account %}
-<div>
-<label for="id_account_{{base_account.id}}">
-<input id="id_account_{{base_account.id}}" type="radio" name="account" value="{{base_account.id}}"/>
-<span class="socialaccount_provider {{base_account.provider}} {{account.get_brand.id}}">{{account.get_brand.name}}</span>
-{{account}}
-</label>
-</div>
-{% endwith %}
-{% endfor %}
-
-<div>
-<button type="submit">{% trans 'Remove' %}</button>
-</div>
-
-</fieldset>
-
-</form>
-
-{% else %}
-<p>{% trans 'You currently have no social network accounts connected to this account.' %}</p>
-{% endif %}
-
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-    {{ user }}{{ user.bio }}
-    <img src="{{ userprofile.avatar_url }}">
-    {{ userprofile.id }}
-    {{ socialaccount.extra_data }}
+{% block content %}
+    <h1>{{ user }}</h1>
 
 
 
     <div class="social-login" style="padding-top: 40px">
         <div class="row col-lg-4 col-md-offset-4">
-            <a href="{% provider_login_url "facebook" process="connect" %}" class="btn btn-block btn-social btn-facebook"><i class="fa fa-facebook"></i> Connect Facebook</a>
-        </div>
-        <div class="row col-lg-4 col-md-offset-4" style="padding-top: 10px">
-            <a href="{% provider_login_url "spotify" process="connect" %}" class="btn btn-block btn-social btn-github"><i class="fa fa-spotify"></i> Connect Spotify</a>
-        </div>
-        <div class="row col-lg-4 col-md-offset-4" style="padding-top: 10px">
-            <a href="{% provider_login_url "google" process="connect" %}" class="btn btn-block btn-social btn-google-plus"><i class="fa fa-youtube"></i> Connect Google & Youtube</a>
-        </div>
-        <div class="row col-lg-4 col-md-offset-4" style="padding-top: 10px">
-            <a href="{% provider_login_url "instagram" process="connect" %}" class="btn btn-block btn-social btn-instagram"><i class="fa fa-instagram"></i> Connect Instagram</a>
-        </div>
+            <a href="{% url 'socialaccount_connections'%}" class="btn btn-block btn-success"><i class="fa fa-plug"></i> Connect & Disconnect Accounts</a>
     </div>
 
 {% endblock %}

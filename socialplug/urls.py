@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     # url('', include('django.contrib.auth.urls', namespace='auth')),
     # url(r'^facebook_profile/$', 'main.views.get_facebook_profile', name='get_facebook_profile'),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^users/(?P<user_id>\d+)/$', 'main.views.profile', name='profile'),
+    # url(r'^users/(?P<user_id>\d+)/$', 'main.views.profile', name='profile'),
     url(r'^users/(?P<username>[\w.@+-]+)/$', 'main.views.profile', name='profile'),
 
 

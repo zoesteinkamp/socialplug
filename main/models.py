@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from allauth.account.models import EmailAddress
 from django.db.models import signals
-from main.signals import create_profile
+from main.utils import create_profile
 
 
 class Category(models.Model):
