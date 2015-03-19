@@ -60,8 +60,6 @@ class SecretView(TemplateView):
 
 
 
-
-
 def event_post(request):
     # EventForm = modelformset_factory(Event, fields=('title', 'city','street','address','country',
     #                                                 'date','time','email','phonenumber','description', 'category'))

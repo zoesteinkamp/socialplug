@@ -242,11 +242,11 @@ swampdragon.ready(function () {
         // neither user, username, 'user.username' work, i can update location but something weird is
         // happening with the user.
 
-        var values = {username: "holly", location: "SF"};
+        var values = {userid: "holly", location: "SF"};
 
-        swampdragon.create('locationcurrent', values, 1, function (context, data) {
+        swampdragon.create('locationcurrent', values, function (context, data) {
             console.log("data created");
-            console.log(data)
+            console.log(data);
             console.log(context)
         }, function (context, data) {
             console.log("You may not be created")
