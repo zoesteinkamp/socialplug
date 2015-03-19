@@ -7,6 +7,6 @@ from models import Event
 class EventForm(ModelForm):
     class Meta:
         model = Event
-        fields = ('title', 'city','street','address','country','date','time','email','phonenumber',
+        fields = ('title', 'zipcode', 'state','address','country','date','time','email','phonenumber',
                  'description', 'category')
         exclude = ['user']

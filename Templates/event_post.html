@@ -5,10 +5,54 @@
 <div class="col-md-8" style="margin-left: -50px">
     <div class="jumbotron">
         <h3>Create a new event</h3>
-<form method="post">
+<form role="form" method="post">
     {% csrf_token %}
+{#  <div class="form-group">#}
+{#    <label for="id_title" >Title:</label>#}
+{#    <input type="text" class="form-control" id="id_title" placeholder="Enter Title For Post">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_description" >Description:</label>#}
+{#    <input type="text" class="form-control" id="id_description" placeholder="Description">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_country" >Country:</label>#}
+{#    <input type="text" class="form-control" id="id_country" placeholder="Country">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_state" >State:</label>#}
+{#    <input type="text" class="form-control" id="id_state" placeholder="state">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_address" >Address:</label>#}
+{#    <input type="text" class="form-control" id="id_address" placeholder="Address">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_zipcode" >Zip-Code:</label>#}
+{#    <input type="number" class="form-control" id="id_zipcode" placeholder="zipcode">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_date" >Date:</label>#}
+{#    <input type="date" class="form-control" id="id_date" placeholder="">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_time" >Time:</label>#}
+{#    <input type="datetime" class="form-control" id="id_time" placeholder="">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_phonenumber" >Phone number:</label>#}
+{#    <input type="tel" class="form-control" id="id_phonenumber" placeholder="Optional Phone Number">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#    <label for="id_email" >Email address:</label>#}
+{#    <input type="email" class="form-control" id="id_email" placeholder="Optional Email">#}
+{#  </div>#}
+{#  <div class="form-group">#}
+{#{{formset.category}}#}
+{#  </div>#}
+
     {{ formset.as_p }}
-    <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
 </form>
     </div>
 </div>

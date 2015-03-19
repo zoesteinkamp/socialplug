@@ -23,23 +23,22 @@ urlpatterns = patterns('',
     #Urls that are accounted for and good to go
     # main login page, base.html
     url(r'^$', 'main.views.index', name='index'),   # <- the same thing
-    # url(r'^$', 'main.views.home', name='home'),     # <- the same thing
 
     # the main profile and nav bar pages
-    url(r'^nav_bar/', 'main.views.nav_bar', name='home'),
+    url(r'^nav_bar/', 'main.views.nav_bar', name='nav_bar'),
 
     # the auth pages.
 
 
     # the event pages
-    url(r'^eventpost/', 'main.views.event_post', name='event'),
-    url(r'^search2/', 'main.views.searchevent', name='search2'),
+    url(r'^eventpost/', 'main.views.event_post', name='event_post'),
+    url(r'^search2/', 'main.views.searchevent', name='search_event'),
 
     #the search people pages
-    url(r'^search1/', 'main.views.searchpeople', name='search1'),
+    url(r'^search1/', 'main.views.searchpeople', name='search_human'),
 
     # the messaging system
-    url(r'^route/', 'main.views.route'),
+    url(r'^route/', 'main.views.route', name='message_route'),
     url(r'^messages/', include('django_messages.urls')),
 
     # the include, admin, and test files

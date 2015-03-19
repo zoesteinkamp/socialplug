@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from main import forms
 from main.models import Event
 from django.shortcuts import render, redirect
@@ -27,10 +28,6 @@ def profile(request, user_id=None):
     return render(request, 'profile.html', data)
 
 
-
-# def home(request, template='page1.html'):
-#     return render(request, template)
-
 def eventpost(request, template='event_post.html'):
     return render(request, template)
 
@@ -44,15 +41,13 @@ def nav_bar(request, template='main.html'):
 def test(request, template='test.html'):
     return render(request, template)
 
-def route(request, template='base.html'):
+def route(request, template='messagebase.html'):
     return render(request, template)
 
 def searchevent(request):
     return render(request, 'searchevents.html', {
         'events': Event.objects.all()
     })
-
-# Debatable
 
 class SecretView(TemplateView):
     template_name = "secret.html"
@@ -71,8 +66,8 @@ def event_post(request):
             # formset.save(commit=False)
             user = request.user
             title = formset.cleaned_data['title']
-            city = formset.cleaned_data['city']
-            street= formset.cleaned_data['street']
+            zipcode = formset.cleaned_data['zipcode']
+            state = formset.cleaned_data['state']
             address = formset.cleaned_data['address']
             country = formset.cleaned_data['country']
             date = formset.cleaned_data['date']
@@ -81,10 +76,12 @@ def event_post(request):
             phonenumber = formset.cleaned_data['phonenumber']
             description = formset.cleaned_data['description']
             category = formset.cleaned_data['category']
-            Event.objects.create(title=title, city=city, street=street, user=user, address=address, country=country,
+            Event.objects.create(title=title, zipcode=zipcode, state=state, user=user, address=address, country=country,
                                  date=date, time=time, email=email, phonenumber=phonenumber, description=description,
                                  category=category)
-            return redirect('/search1')
+            return HttpResponseRedirect('test.html')
             # do something.
+        else:
+            return render(request, "event_post.html", data)
     else:
         return render(request, "event_post.html", data)

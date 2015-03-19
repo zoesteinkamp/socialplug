@@ -3,7 +3,7 @@
 
 {% block main %}
           <style>
-      html, body, #map-canvas {
+      html, body, #map{
         height: 400px;
         margin: 0;
         padding: 0;
@@ -104,21 +104,23 @@
       <!-- Distnace end -->
   </ul>
     </div>
+
 <div>
         {% for event in events %}
         <div class="row">
             <div class="col-md-12">
                 <h3>{{ event.title }}</h3>
-                <div></div>
+
             </div>
         </div>
 {% endfor %}
+ <div id="map"></div>
     </div>
   </div><!-- /.container-fluid -->
 </nav>
   <!-- end of search bar -->
-
 </div>
+
 <!-- script for category -->
  <script type="text/javascript">
     var config = {
