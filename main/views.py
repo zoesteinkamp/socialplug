@@ -14,14 +14,14 @@ def index(request):
     return render(request, "home.html")
 
 
-def profile(request, user_id=None):
-    user = User.objects.get(id=user_id)
-    userprofile = UserProfile.objects.get(id=user_id)
+def profile(request, username=None):
+    user = User.objects.get(username=username)
+    # userprofile = UserProfile.objects.get(user_id=username)
     # socialaccount = SocialAccount.objects.filter(uid=user_id)
 
     data = {
         'user': user,
-        'userprofile': userprofile,
+        # 'userprofile': userprofile,
         # 'socialaccount': socialaccount
     }
     return render(request, 'profile.html', data)

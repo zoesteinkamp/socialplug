@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.spotify',
     # extensions?
     'django_extensions',
+    'django_forms_bootstrap'
 
 )
 
@@ -152,7 +153,7 @@ SOCIALACCOUNT_PROVIDERS = \
 
 
 SITE_ID = 1
-
+AUTH_PROFILE_MODULE = 'main.UserProfile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -185,7 +186,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, *MEDIA_URL.strip('/').split('/'))
 STATIC_ROOT = os.path.join(BASE_DIR, 'main/static')
 LOGIN_REDIRECT_URL = '/'
-
+LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_USERNAME_MIN_LENGTH = 2
+ACCOUNT_PASSWORD_MIN_LENGTH = 6
+SOCIALACCOUNT_AUTO_SIGNUP = True
+# SOCIALACCOUNT_ADAPTER = 'main.adapter.MySocialAccountAdapter'
 
 try:
     from local_settings import *

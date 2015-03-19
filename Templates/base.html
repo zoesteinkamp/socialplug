@@ -105,10 +105,11 @@
                         <li class="dropdown">
                           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                              <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="{% url 'profile' user.id %}">Profile</a></li>
+                              <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="{% url 'profile'  user.username %}">Profile</a></li>
                                 <li role="presentation" class="divider"></li>
                               <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
                                 <li role="presentation" class="divider"></li>
+                              <li role="presentation" class="text-center">
                               <li role="presentation" class="text-center">
                                   <a role="menuitem" tabindex="-1" id='logout_submit' onclick="document.getElementById('logout_form').submit()">
                                   <form method="post" id="logout_form" action="{% url 'account_logout' %}">
@@ -116,9 +117,10 @@
                                       {% if redirect_field_value %}
                                       <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
                                       {% endif %}
-                                      <a>Log Out</a>
+                                      Log Out
                                   </form>
                                   </a>
+                            </li>
                               </li>
                             </ul>
                         </li>
