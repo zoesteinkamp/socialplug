@@ -65,9 +65,6 @@ def searchevent(request):
         'list': list(Event.objects.all()),
     })
 
-class SecretView(TemplateView):
-    template_name = "secret.html"
-
 
 
 

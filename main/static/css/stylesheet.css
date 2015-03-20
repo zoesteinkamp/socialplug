@@ -59,3 +59,8 @@
 .container {
     margin-top: 10px;
 }
+
+.nav.navbar-nav li a {
+    color: #1EBE39;
+}
+ul.nav a:hover { color: #fff !important; }

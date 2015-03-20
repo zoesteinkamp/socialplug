@@ -5,50 +5,8 @@
 {% block hugepage %}
 
 
-<!--sidebar-->
-
-<div class="col-md-3">
-    <ul class="sidebar-nav" >
-       <div class="span3">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>
-                        <div class="media-body">
-                        <h2 class="media-heading"> <a href="{% url 'messages_redirect' %}"> Messages</a> <span class="badge">{% inbox_count %}</span>
-                        </h2>
-                        </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                        <div class="media-body">
-                        <h2 class="media-heading"><a href="{% url 'search_human' %}">Find people near you</a></h2>
-                        </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                        <div class="media-body">
-                        <h2 class="media-heading"><a href="{% url 'search_event' %}">Find Personal Events</a></h2>
-                        </div>
-                  </td>
-                </tr><tr>
-                  <td>
-                        <div class="media-body">
-                        <h2 class="media-heading"><a href="{% url 'event_post' %}">Create an Event</a></h2>
-
-                        </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-    </ul>
-</div>
-<!---sidebar end-->
 {% block main %}
-<div class="col-md-9" style="margin-left: -50px">
+<div class="col-sm-7">
     <div class="jumbotron">
          <h1>Profile</h1>
 
