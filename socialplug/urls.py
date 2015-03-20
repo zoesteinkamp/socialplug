@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^$', 'main.views.index', name='index'),   # <- the same thing
 
     # the main profile and nav bar pages
-    url(r'^nav_bar/', 'main.views.nav_bar', name='nav_bar'),
+    url(r'^nav_bar/(?P<id>[\w.@+-]+)/$', 'main.views.nav_bar', name='nav_bar'),
 
     # the auth pages.
 

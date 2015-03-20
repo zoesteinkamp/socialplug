@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.utils.encoding import smart_str
 from main import forms
 from main.models import Event, Interest, UserPhotos, Music, Subscription
 from django.shortcuts import render, redirect
@@ -34,6 +35,7 @@ def profile(request, username=None):
     }
     return render(request, 'profile.html', data)
 
+@login_required
 def postit(request, id=None):
     posts = Event.objects.get(id=id)
     data={
@@ -41,14 +43,20 @@ def postit(request, id=None):
     }
     return render(request,'postit.html', data)
 
+def nav_bar(request, id=None):
+    user = User.objects.get(id=id)
+    data={
+        'user': user,
+    }
+    return render(request, "main.html", data)
+
 def eventpost(request, template='event_post.html'):
     return render(request, template)
 
 def searchpeople(request, template='searchpeople.html'):
         return render(request, template)
 
-def nav_bar(request, template='main.html'):
-    return render(request, template)
+
 
 
 def test(request, template='test.html'):
