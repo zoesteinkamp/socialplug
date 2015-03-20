@@ -7,10 +7,10 @@
         <h3>Create a new event</h3>
 <form role="form" method="post">
     {% csrf_token %}
-{#  <div class="form-group">#}
-{#    <label for="id_title" >Title:</label>#}
-{#    <input type="text" class="form-control" id="id_title" placeholder="Enter Title For Post">#}
-{#  </div>#}
+  <div class="form-group">
+    <label for="id_title" >Title:</label>
+    <input type="text" class="form-control" id="id_title" placeholder="Enter Title For Post">
+  </div>
 {#  <div class="form-group">#}
 {#    <label for="id_description" >Description:</label>#}
 {#    <input type="text" class="form-control" id="id_description" placeholder="Description">#}
@@ -50,9 +50,19 @@
 {#  <div class="form-group">#}
 {#{{formset.category}}#}
 {#  </div>#}
+    <p>title : {{ formset.title }} </p>
+    <p>zipcode : {{ formset.zipcode }} </p>
+    <p>Description : {{ formset.description }} </p>
+    <p>state : {{ formset.state }} </p>
+    <p>country : {{ formset.country }} </p>
+    <p>address : {{ formset.address }} </p>
+    <p>phonenumber : {{ formset.phonenumber }} </p>
+    <p>date : {{ formset.date }} </p>
+    <p>time : {{ formset.time }} </p>
+    <p>email : {{ formset.email }} </p>
+    <p>category : {{ formset.category }} </p>
 
-    {{ formset.as_p }}
-        <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" />
 </form>
     </div>
 </div>

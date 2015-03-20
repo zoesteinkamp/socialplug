@@ -46,7 +46,8 @@ def route(request, template='messagebase.html'):
 
 def searchevent(request):
     return render(request, 'searchevents.html', {
-        'events': Event.objects.all()
+        'events': Event.objects.all(),
+        'list': list(Event.objects.all()),
     })
 
 class SecretView(TemplateView):

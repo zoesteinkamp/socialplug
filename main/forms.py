@@ -8,5 +8,5 @@ class EventForm(ModelForm):
     class Meta:
         model = Event
         fields = ('title', 'zipcode', 'state','address','country','date','time','email','phonenumber',
-                 'description', 'category')
-        exclude = ['user']
+                 'description', 'category',)
+        exclude = ['user','latitude','longitude']
