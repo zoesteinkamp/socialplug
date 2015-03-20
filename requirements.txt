@@ -24,3 +24,4 @@ wsgiref==0.1.2
 django-forms-bootstrap
 djangorestframework-filters
 django-filters
+swampdragon-auth
