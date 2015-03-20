@@ -109,18 +109,19 @@
         {% for event in events %}
         <div class="row">
             <div class="col-md-12">
-                <h3>{{ event.title }}</h3>
-
-
+                <h3><a href="{% url 'postit' event.id %}">{{ event.title }}</a> </h3>
+                <p> {{ event.description }}</p>
             </div>
         </div>
+
 {% endfor %}
- <div id="map"></div>
+{#<div id="map"></div>#}
     </div>
   </div><!-- /.container-fluid -->
 </nav>
   <!-- end of search bar -->
 </div>
+
 
 <!-- script for category -->
  <script type="text/javascript">
@@ -135,7 +136,7 @@
       $(selector).chosen(config[selector]);
     }
   </script>
-
+<script src="{% static "js/events.js" %}"></script>
 <!-- script for date picker -->
 
 

@@ -10,6 +10,10 @@ class LocationCurrentRouter(ModelRouter):
     serializer_class = LocationCurrentSerializer
     model = LocationCurrent
 
+    # def user(self):
+    #     print self.connection.get_user()
+
+
     # def create(self, **kwargs):
     #     import ipdb;ipdb.set_trace()
         # print kwargs

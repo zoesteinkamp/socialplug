@@ -76,14 +76,16 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'rest_framework_filters.backends.DjangoFilterBackend',
     ),
+}
 
 
 
 # swampdragon stuff
 SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')
+SWAMP_DRAGON_CONNECTION = ('swampdragon_auth.socketconnection.HttpDataConnection', '/data')
 DRAGON_URL = 'http://localhost:9999/'
 SWAMP_DRAGON_HEARTBEAT_ENABLED = True
-
+SESSION_COOKIE_DOMAIN = "http://127.0.0.1:8000/"
 
 
 LOGGING = {

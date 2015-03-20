@@ -3,8 +3,9 @@ from rest_framework import routers
 from main.api import views
 
 router = routers.DefaultRouter()
-router.register(r'user', views.SocialAccountViewSet)
+router.register(r'socialaccount', views.SocialAccountViewSet)
 router.register(r'event', views.EventViewSet)
+router.register(r'user', views.UserViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),

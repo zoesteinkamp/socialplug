@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     # the event pages
     url(r'^eventpost/', 'main.views.event_post', name='event_post'),
     url(r'^search2/', 'main.views.searchevent', name='search_event'),
+    url(r'^events/(?P<id>[\w.@+-]+)/$', 'main.views.postit', name='postit'),
 
     #the search people pages
     url(r'^search1/', 'main.views.searchpeople', name='search_human'),

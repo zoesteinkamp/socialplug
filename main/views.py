@@ -27,6 +27,12 @@ def profile(request, username=None):
     }
     return render(request, 'profile.html', data)
 
+def postit(request, id=None):
+    posts = Event.objects.get(id=id)
+    data={
+        'posts':posts,
+    }
+    return render(request,'postit.html', data)
 
 def eventpost(request, template='event_post.html'):
     return render(request, template)
@@ -43,6 +49,8 @@ def test(request, template='test.html'):
 
 def route(request, template='messagebase.html'):
     return render(request, template)
+
+
 
 def searchevent(request):
     return render(request, 'searchevents.html', {
