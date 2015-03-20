@@ -105,6 +105,7 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
               {% if user.is_authenticated %}
+<<<<<<< HEAD
                         <li class="dropdown">
                           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -126,10 +127,10 @@
                             </li>
                             </ul>
                               </li>
-
+                              <li><a href="{% url 'profile'  request.user.username%}">Profile</a></li>
+                              <li><a href="#">Settings</a></li>
+                                <li><a href="{% url 'account_logout' %}">Log out</a></li>
                             </ul>
-                        </li>
-
               {% else %}
                   <li><a href="{% url 'account_login' %}">Sign In</a></li>
                   <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
