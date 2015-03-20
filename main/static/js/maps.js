@@ -202,108 +202,29 @@
 //
 //google.maps.event.addDomListener(window, 'load', initialize);
 
-var newlocation;
- var currentlocation = function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            newlocation = new google.maps.LatLng(position.coords.latitude,
-                position.coords.longitude);
 
-        }, function () {
-            handleNoGeolocation(true);
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleNoGeolocation(false);
-    }
-    return newlocation;
-}
-currentlocation();
-
-
-swampdragon.ready(function () {
-     var locations = [];
-    swampdragon.open(function() {
-        // Subscribing to all channels provided by the foo-router
-        swampdragon.subscribe('locationcurrent', 'local-channel', null, function (context, data) {
-            this.dataMapper = new DataMapper(data);
-            console.log(data)
-        }, function (context, data) {
-            // subscription failed
-        });
-
-        // Unsubscribe
-        swampdragon.unsubscribe('locationcurrent', 'local-channel', null, function (context, data) {
-            // successfully unsubscribed
-        }, function (context, data) {
-            // unsubscribe failed
-        });
-
-        // neither user, username, 'user.username' work, i can update location but something weird is
-        // happening with the user.
-
-        var values = {userid: "holly", location: "SF"};
-
-        swampdragon.create('locationcurrent', values, function (context, data) {
-            console.log("data created");
-            console.log(data);
-            console.log(context)
-        }, function (context, data) {
-            console.log("You may not be created")
-        } );
-
-        var data2 = {'user.username': "zoe", location: 'hi world', id: 1};
-        swampdragon.update( 'locationcurrent', data2, function (context, data) {
-            console.log("Yay I work!")
-        }, function (context, data) {
-            console.log("No updates for you")
-        } );
-
-
-
-        swampdragon.getList('locationcurrent', {id:1}, function (context, data) { // this fully works
-            var datanew = data;
-            console.log(datanew);
-            location();
-            function location(){
-            for (key in datanew) {
-
-                locations.push([datanew[key]['user.username'], datanew[key].location]);
-                console.log(datanew[key])
-            }
-                mapsearch(locations);
-            }
-
-        }, function (context, data) {
-            console.log("help no more data, it failed!")
-        });
-    });
-});
-
-
-
-            function mapsearch(locations) {
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
-                    center: new google.maps.LatLng(37.767711, -122.446803),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                });
-                var infowindow = new google.maps.InfoWindow();
-
-                var marker, i;
-
-                for (i = 0; i < locations.length; i++) {
-                    marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                        map: map
-                    });
-
-                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                        return function () {
-                            infowindow.setContent(locations[i][0]);
-                            infowindow.open(map, marker);
-                        }
-                    })(marker, i));
-
-                }
-            }
+            //function mapsearch(locations) {
+            //    var map = new google.maps.Map(document.getElementById('map'), {
+            //        zoom: 15,
+            //        center: new google.maps.LatLng(37.767711, -122.446803),
+            //        mapTypeId: google.maps.MapTypeId.ROADMAP
+            //    });
+            //    var infowindow = new google.maps.InfoWindow();
+            //
+            //    var marker, i;
+            //
+            //    for (i = 0; i < locations.length; i++) {
+            //        marker = new google.maps.Marker({
+            //            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            //            map: map
+            //        });
+            //
+            //        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            //            return function () {
+            //                infowindow.setContent(locations[i][0]);
+            //                infowindow.open(map, marker);
+            //            }
+            //        })(marker, i));
+            //
+            //    }
+            //}

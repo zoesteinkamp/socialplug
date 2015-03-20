@@ -4,7 +4,7 @@ from main.api import views
 
 router = routers.DefaultRouter()
 router.register(r'user', views.SocialAccountViewSet)
-
+router.register(r'event', views.EventViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),

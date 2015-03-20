@@ -33,7 +33,9 @@
           type="text/javascript"></script>
     <script type="text/javascript" src="{% static 'swampdragon/js/dist/swampdragon.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'swampdragon/js/dist/datamapper.min.js' %}"></script>
-    <script src="{% static "jsdown/maps.js" %}"></script>
+    <script src="{% static "js/maps.js" %}"></script>
+    <script src="{% static "js/swamp.js" %}"></script>
+    <script src="{% static "js/events.js" %}"></script>
     <script src="{% static "jsdown/dropdown.js" %}"></script>
     <script src="{% static "jsdown/chosen.jquery.min.js" %}"></script>
     <script src="{% static "jsdown/chosen.proto.min.js" %}"></script>
@@ -59,10 +61,10 @@
         var map;
         function initialize() {
           var mapOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(-34.397, 150.644)
+            zoom: 14,
+            center: new google.maps.LatLng(37.767711, -122.446803)
           };
-          map = new google.maps.Map(document.getElementById('map-canvas'),
+          map = new google.maps.Map(document.getElementById('map'),
               mapOptions);
         }
 
@@ -133,28 +135,4 @@
 
   </body>
 </html>
-{#=======#}
-{##}
-{#{% extends 'main.html' %}#}
-{##}
-{#{% block main %}#}
-{#<div class="col-md-2" style="margin-left: -50px">#}
-{#    <div class="jumbotron">#}
-{#        <h3>Your messages</h3>#}
-{#        {%  block sidebar %}#}
-{#        {% endblock sidebar %}#}
-{#    </div>#}
-{#</div>#}
-{##}
-{#<div class="col-md-6" style="margin-left: -50px">#}
-{#    <div class="jumbotron">#}
-{#        <h3>Your messages</h3>#}
-{#        {% block content %}#}
-{#        {% endblock content %}#}
-{#    </div>#}
-{#</div>#}
-{##}
-{##}
-{##}
-{#{% endblock main %}#}
-{#>>>>>>> 50848e0d6c1cbd25ed5d65bef179fd88c84717de#}
+

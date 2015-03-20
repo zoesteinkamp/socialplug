@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block main %}
+
+<div class="col-md-6" style="margin-left: -50px">
+    <div class="jumbotron">
+
+    <h2> Your messages</h2>
+        {% block message %}
+        {% endblock %}
+    </div>
+</div>
+
+<div class="col-md-2" style="margin-left: -50px">
+    <div class="jumbotron">
+        {% block sidebar %}
+        {% endblock %}
+    </div>
+</div>
+
+{% endblock %}

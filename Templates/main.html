@@ -1,7 +1,9 @@
 
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load inbox %}
 {% block hugepage %}
+
 
 <!--sidebar-->
 
@@ -13,8 +15,7 @@
                 <tr>
                   <td>
                         <div class="media-body">
-                        <h2 class="media-heading">
-                          Messages <span class="badge">4</span>
+                        <h2 class="media-heading"> <a href="{% url 'messages_redirect' %}"> Messages</a> <span class="badge">{% inbox_count %}</span>
                         </h2>
                         </div>
                   </td>
@@ -22,29 +23,22 @@
                 <tr>
                   <td>
                         <div class="media-body">
-                        <h2 class="media-heading"><a href="">Find people near you</a></h2>
+                        <h2 class="media-heading"><a href="{% url 'search_human' %}">Find people near you</a></h2>
                         </div>
                   </td>
                 </tr>
                 <tr>
                   <td>
                         <div class="media-body">
-                        <h2 class="media-heading"><a href="">Find Personal Events</a></h2>
+                        <h2 class="media-heading"><a href="{% url 'search_event' %}">Find Personal Events</a></h2>
                         </div>
                   </td>
                 </tr><tr>
                   <td>
                         <div class="media-body">
-                        <h2 class="media-heading"><a href="">Create an Event</a></h2>
+                        <h2 class="media-heading"><a href="{% url 'event_post' %}">Create an Event</a></h2>
 
                         </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                        <div class="media-body">
-                        <h2 class="media-heading"> <a href="">Find Events Near you</a></h2>
-                     </div>
                   </td>
                 </tr>
               </tbody>

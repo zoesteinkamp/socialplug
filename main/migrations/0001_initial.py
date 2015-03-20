@@ -28,8 +28,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=100)),
-                ('city', models.CharField(max_length=60)),
-                ('street', models.CharField(max_length=90)),
+                ('zipcode', models.IntegerField(max_length=60)),
+                ('state', models.CharField(max_length=70)),
                 ('address', models.CharField(max_length=100)),
                 ('country', models.CharField(max_length=70)),
                 ('date', models.DateField()),
@@ -38,7 +38,9 @@ class Migration(migrations.Migration):
                 ('phonenumber', models.CharField(max_length=70, blank=True)),
                 ('description', models.TextField()),
                 ('category', models.CharField(max_length=90, choices=[(b'Business', b'Business'), (b'Crafts', b'Crafts'), (b'Education', b'Education'), (b'Family', b'Family'), (b'Fashion', b'Fashion'), (b'Fitness', b'Fitness'), (b'Food', b'Food'), (b'Learning', b'Learning'), (b'Literature', b'Literature'), (b'Gaming', b'Gaming'), (b'Music', b'Music'), (b'Outdoor', b'Outdoor'), (b'Pets', b'Pets'), (b'Photography', b'Photography'), (b'Politics', b'Politics'), (b'Technology', b'Technology'), (b'Television', b'Television'), (b'Special', b'Special'), (b'Spiritual', b'Spiritual'), (b'Sports', b'Sports'), (b'Writing', b'Writing')])),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
+                ('latitude', models.FloatField(null=True)),
+                ('longitude', models.FloatField(null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -63,7 +65,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('artist', models.CharField(unique=True, max_length=60)),
-                ('image', models.CharField(max_length=200)),
+                ('image', models.CharField(max_length=500)),
                 ('category', models.ForeignKey(to='main.Category')),
                 ('user', models.ManyToManyField(to=settings.AUTH_USER_MODEL)),
             ],
@@ -83,6 +85,18 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'subscriptions',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='UserPhotos',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('photo', models.CharField(max_length=300)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'db_table': 'photos',
             },
             bases=(models.Model,),
         ),

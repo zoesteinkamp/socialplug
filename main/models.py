@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
+from geopy.exc import GeocoderTimedOut
 from allauth.account.models import EmailAddress
 from django.db.models import signals
 from main.utils import create_profile
-
+from geopy.geocoders import Nominatim
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -240,10 +241,10 @@ class Event(models.Model):
         ('Sports','Sports'),
         ('Writing','Writing')
     )
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User)
     title = models.CharField(max_length=100)
-    city = models.CharField(max_length=60)
-    street = models.CharField(max_length=90)
+    zipcode = models.IntegerField(max_length=60)
+    state = models.CharField(max_length=70)
     address = models.CharField(max_length=100)
     country = models.CharField(max_length=70)
     date = models.DateField()
@@ -252,6 +253,26 @@ class Event(models.Model):
     phonenumber = models.CharField(max_length=70, blank=True)  # optional
     description = models.TextField()
     category = models.CharField(max_length=90, choices=CATEGORY_CHOICES)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __unicode__(self):
         return self.title
+
+    def location(self):
+        if self.address and self.country and self.zipcode and self.state:
+            geocoder = Nominatim()
+            try:
+                place = ''
+                place += self.address + ' ' + str(self.zipcode)
+                location = geocoder.geocode(place)
+            except GeocoderTimedOut:
+                print("Error")
+            else:
+                print location
+                self.latitude = location.latitude
+                self.longitude = location.longitude
+
+    def save(self, *args, **kwargs):
+        self.location()
+        super(Event, self).save(*args, **kwargs)

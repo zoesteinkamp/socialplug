@@ -72,7 +72,10 @@ ROOT_URLCONF = 'socialplug.urls'
 
 WSGI_APPLICATION = 'socialplug.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_filters.backends.DjangoFilterBackend',
+    ),
 
 
 
