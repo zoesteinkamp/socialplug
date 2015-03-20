@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from main import forms
-from main.models import Event
+from main.models import Event, Interest, UserPhotos, Music, Subscription
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from main.models import UserProfile
@@ -13,16 +14,22 @@ class LoginView(TemplateView):
 def index(request):
     return render(request, "home.html")
 
-
+@login_required
 def profile(request, username=None):
     user = User.objects.get(username=username)
-    # userprofile = UserProfile.objects.get(user_id=username)
-    # socialaccount = SocialAccount.objects.filter(uid=user_id)
+    userprofile = UserProfile.objects.get(user_id=user)
+    interests = Interest.objects.filter(user=user)
+    userphotos = UserPhotos.objects.filter(user=user)
+    music = Music.objects.filter(user=user)
+    subscriptions = Subscription.objects.filter(user=user)
 
     data = {
         'user': user,
-        # 'userprofile': userprofile,
-        # 'socialaccount': socialaccount
+        'userprofile': userprofile,
+        'interests': interests,
+        'userphotos': userphotos,
+        'music': music,
+        'subscriptions': subscriptions,
     }
     return render(request, 'profile.html', data)
 
