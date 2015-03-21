@@ -95,42 +95,6 @@
               </button>
               <a class="navbar-brand" style=" color: #1EBE39" href="/"><i class="fa fa-plug"></i>Socialplug</a>
             </div>
-
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav navbar-right">
-              {% if user.is_authenticated %}
-                        <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="{% url 'profile'  user.username %}">Profile</a></li>
-                                <li role="presentation" class="divider"></li>
-                              <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
-                                <li role="presentation" class="divider"></li>
-                              <li role="presentation" class="text-center">
-                              <li role="presentation" class="text-center">
-                                  <a role="menuitem" tabindex="-1" id='logout_submit' onclick="document.getElementById('logout_form').submit()">
-                                  <form method="post" id="logout_form" action="{% url 'account_logout' %}">
-                                      {% csrf_token %}
-                                      {% if redirect_field_value %}
-                                      <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
-                                      {% endif %}
-                                      Log Out
-                                  </form>
-                                  </a>
-                            </li>
-                            </ul>
-                              </li>
-                              <li><a href="{% url 'profile'  request.user.username %}">Profile</a></li>
-                              <li><a href="#">Settings</a></li>
-                                <li><a href="{% url 'account_logout' %}">Log out</a></li>
-                            </ul>
-              {% else %}
-                  <li><a href="{% url 'account_login' %}">Sign In</a></li>
-                  <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-              {% endif %}
-                </ul>
-              </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
