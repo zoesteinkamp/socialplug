@@ -54,7 +54,8 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.spotify',
     # extensions?
     'django_extensions',
-    'django_forms_bootstrap'
+    'django_forms_bootstrap',
+    'datetimewidget',
 
 )
 
@@ -66,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'socialplug.urls'
@@ -159,6 +161,7 @@ SOCIALACCOUNT_PROVIDERS = \
 
 SITE_ID = 2
 AUTH_PROFILE_MODULE = 'main.UserProfile'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

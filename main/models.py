@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.forms import widgets
 from geopy.exc import GeocoderTimedOut
 from allauth.account.models import EmailAddress
 from django.db.models import signals
@@ -246,11 +247,8 @@ class Event(models.Model):
     zipcode = models.IntegerField(max_length=60)
     state = models.CharField(max_length=70)
     address = models.CharField(max_length=100)
-    country = models.CharField(max_length=70)
     date = models.DateField()
     time = models.TimeField()
-    email = models.EmailField(blank=True) #optional
-    phonenumber = models.CharField(max_length=70, blank=True)  # optional
     description = models.TextField()
     category = models.CharField(max_length=90, choices=CATEGORY_CHOICES)
     latitude = models.FloatField(null=True, blank=True)
