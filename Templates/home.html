@@ -16,9 +16,13 @@ var user = "{{ user.id }}";
 
     <div class="row">
       <div class="col-sm-2">
-          <ul id="sidebar" class="nav nav-stacked affix">
-            <li><a href="{% url 'messages_redirect' %}">Messages<i class="badge" style="float: right">{% inbox_count %}</i></a></li>
-            <li><a href="{% url 'search_human' %}">Find people near you</a></li>
+          <ul id="sidebar" class="nav nav-stacked affix" style="border-right: 1px solid">
+            <li>
+                <a href="{% url 'messages_redirect' %}">Messages
+                    <i class="badge" style="float: right">{% inbox_count %}</i>
+                </a>
+            </li>
+            <li><a href="{% url 'search_people' %}">Find people near you</a></li>
             <li><a href="{% url 'search_event' %}">Find Personal Events</a></li>
             <li><a href="{% url 'event_post' %}">Create an Event</a></li>
         </ul>

@@ -1,24 +1,27 @@
 
-{% extends 'main.html' %}
+{% extends 'home.html' %}
 
 {% block main %}
-              <style>
-      html, body, #map-canvas2 {
-        height: 400px;
-        margin: 0;
-        padding: 0;
-      }
+      <style>
+          html, body, #map-canvas {
+            height: 400px;
+            margin: 0;
+            padding: 0;
+          }
     </style>
 
 
-<div class="col-md-8" style="margin-left: -50px">
-    <div class="jumbotron">
-        <h3>Search people near you</h3>
+      <div class="col-sm-7">
+          <div class="row">
+                <div class="col col-sm-12"><h2>People near you</h2>
+                    <div id="map-canvas"></div>
+                </div>
+        	    <hr>
+          </div>
+      </div>
 
-     <div id="map-canvas2"></div>
-
-
-
+    <div class="col-sm-3">
+        <div id="midCol" data-spy="affix" data-offset-top="300">
+        <div>test</div>
     </div>
-</div>
 {% endblock main %}

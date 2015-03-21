@@ -10,9 +10,6 @@ from django.views.generic import TemplateView
 from main.models import UserProfile
 
 
-class LoginView(TemplateView):
-    template_name = "home.html"
-
 
 
 
@@ -54,8 +51,10 @@ def index(request):
 def eventpost(request, template='event_post.html'):
     return render(request, template)
 
-def searchpeople(request, template='searchpeople.html'):
-        return render(request, template)
+
+def searchpeople(request):
+    # id = request.user.id
+    return render(request, 'searchpeople.html')
 
 
 def test(request):
@@ -86,7 +85,7 @@ def event_post(request):
     # EventForm = modelformset_factory(Event, fields=('title', 'city','street','address','country',
     #                                                 'date','time','email','phonenumber','description', 'category'))
     EventForm = forms.EventForm
-    data = {'formset': EventForm}
+    data = {'form': EventForm}
     if request.method == 'POST':
         formset = EventForm(request.POST)
         if formset.is_valid():
