@@ -13,5 +13,5 @@ class LocationCurrentSerializer(ModelSerializer):
     # user = UserSerializer
     class Meta:
         model = 'dragonapp.LocationCurrent'
-        publish_fields =('location', 'user')
-        update_fields = ('location', 'user')
+        publish_fields =('latitude', 'longititude', 'user')
+        update_fields = ('latitude', 'longititude', 'user')

@@ -38,8 +38,8 @@ class Migration(migrations.Migration):
                 ('phonenumber', models.CharField(max_length=70, blank=True)),
                 ('description', models.TextField()),
                 ('category', models.CharField(max_length=90, choices=[(b'Business', b'Business'), (b'Crafts', b'Crafts'), (b'Education', b'Education'), (b'Family', b'Family'), (b'Fashion', b'Fashion'), (b'Fitness', b'Fitness'), (b'Food', b'Food'), (b'Learning', b'Learning'), (b'Literature', b'Literature'), (b'Gaming', b'Gaming'), (b'Music', b'Music'), (b'Outdoor', b'Outdoor'), (b'Pets', b'Pets'), (b'Photography', b'Photography'), (b'Politics', b'Politics'), (b'Technology', b'Technology'), (b'Television', b'Television'), (b'Special', b'Special'), (b'Spiritual', b'Spiritual'), (b'Sports', b'Sports'), (b'Writing', b'Writing')])),
-                ('latitude', models.FloatField(null=True)),
-                ('longitude', models.FloatField(null=True)),
+                ('latitude', models.FloatField(null=True, blank=True)),
+                ('longitude', models.FloatField(null=True, blank=True)),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={

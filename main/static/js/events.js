@@ -1,5 +1,5 @@
 $( "#help" ).click(function() {
-    $.get( "/api/event/", function( data ) {
+    $.get( "/api/event/?category=foo", function( data ) {
         $.each(data[3], function( key, value ){
             console.log(key + ": " + value);
         });

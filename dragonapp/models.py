@@ -9,7 +9,8 @@ from dragonapp.serializers import LocationCurrentSerializer
 class LocationCurrent(SelfPublishModel, models.Model):
     serializer_class = LocationCurrentSerializer
     user = models.CharField(max_length=50)
-    location = models.CharField(max_length=300)
+    latitude = models.FloatField()
+    longititude = models.FloatField()
 
     def __str__(self):
         return '{}'.format(self.user)

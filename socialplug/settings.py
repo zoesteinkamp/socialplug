@@ -157,7 +157,7 @@ SOCIALACCOUNT_PROVIDERS = \
     }
 
 
-SITE_ID = 1
+SITE_ID = 2
 AUTH_PROFILE_MODULE = 'main.UserProfile'
 
 # Internationalization

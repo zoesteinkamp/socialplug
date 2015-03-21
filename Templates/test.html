@@ -2,19 +2,24 @@
 {% load static swampdragon_tags %}
 {% block main %}
               <style>
-      html, body, #map {
+      html, body, #test {
         height: 400px;
         margin: 0;
         padding: 0;
       }
     </style>
 
-
+<script>
+var user = "{{ user.id }}";
+var swamp = "{{ swamp.id }}";
+console.log(user);
+console.log(swamp);
+</script>
 <div class="col-md-8" style="margin-left: -50px">
     <div class="jumbotron">
         <h3> Hi im a test</h3>
-{##}
-{#     <div id="map"></div>#}
+
+     <div id=test></div>
 
 
 
@@ -24,6 +29,5 @@
 
 
 
- <script src="{% static "js/swampcreate.js" %}"></script>
 
 {% endblock main %}

@@ -2,7 +2,7 @@
 //    console.log(user);
 //    swampdragon.open(function() {
 //        // Subscribing to all channels provided by the foo-router
-//        swampdragon.subscribe('locationcurrent', 'local-channel', null, function (context, data) {
+//        swampdragon.subscribe('locationcurrent', 'create-channel', null, function (context, data) {
 //            this.dataMapper = new DataMapper(data);
 //            console.log("we are subscribed")
 //        }, function (context, data) {
@@ -10,10 +10,11 @@
 //        });
 //
 //        function swampy(locationc) {
-//            swampdragon.create('locationcurrent', {user: user, location: locationc}, function (context, data) {
-//                console.log("data created");
-//                console.log(data);
-//                getdata();
+//            var latitudenew = locationc.latitude;
+//            var longitudenew = locationc.longitude;
+//            console.log("location", latitudenew, longitudenew);
+//            swampdragon.create('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew }, function (context, data) {
+//                console.log("data created", data);
 //            }, function (context, data) {
 //                console.log("You may not be created")
 //            });
@@ -22,10 +23,10 @@
 //        var currentlocation = function() {
 //            if (navigator.geolocation) {
 //                navigator.geolocation.getCurrentPosition(function (position) {
-//                    var newlocation = new google.maps.LatLng(position.coords.latitude,
+//                    var newlocation = (position.coords.latitude + "," +
 //                        position.coords.longitude);
 //                    console.log(newlocation);
-//                    swampy(newlocation);
+//                    swampy(position.coords);
 //                }, function() {
 //
 //                });
@@ -33,10 +34,9 @@
 //                // Browser doesn't support Geolocation
 //                handleNoGeolocation(false);
 //            }
-//            return newlocation;
+//            return null;
 //        };
 //        currentlocation();
 //    });
 //
 //});
-console.log("booo")

@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.utils.encoding import smart_str
+from dragonapp.models import LocationCurrent
 from main import forms
 from main.models import Event, Interest, UserPhotos, Music, Subscription
 from django.shortcuts import render, redirect
@@ -13,8 +14,7 @@ class LoginView(TemplateView):
     template_name = "home.html"
 
 
-def index(request):
-    return render(request, "home.html")
+
 
 @login_required
 def profile(request, username=None):
@@ -43,12 +43,13 @@ def postit(request, id=None):
     }
     return render(request,'postit.html', data)
 
-def nav_bar(request, id=None):
+def index(request):
+    id = request.user.id
     user = User.objects.get(id=id)
     data={
         'user': user,
     }
-    return render(request, "main.html", data)
+    return render(request, "home.html", data)
 
 def eventpost(request, template='event_post.html'):
     return render(request, template)
@@ -57,10 +58,15 @@ def searchpeople(request, template='searchpeople.html'):
         return render(request, template)
 
 
-
-
-def test(request, template='test.html'):
-    return render(request, template)
+def test(request):
+    id = request.user.id
+    user = User.objects.get(id=id)
+    swamp = LocationCurrent.objects.get(user=user.id)
+    data={
+        'user': user,
+        'swamp': swamp
+    }
+    return render(request,'test.html', data)
 
 def route(request, template='messagebase.html'):
     return render(request, template)
@@ -72,9 +78,6 @@ def searchevent(request):
         'events': Event.objects.all(),
         'list': list(Event.objects.all()),
     })
-
-class SecretView(TemplateView):
-    template_name = "secret.html"
 
 
 

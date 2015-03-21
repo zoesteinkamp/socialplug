@@ -20,5 +20,7 @@ class EventViewSet(viewsets.ModelViewSet):
     permission_classes = []
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+    #self.query_params: {'category': 'foo'}
     filter_fields = ('title', 'category', 'date', )
 

@@ -56,14 +56,14 @@
   </tbody>
 </table>
 
-<div class="form-actions">
-<button class="btn btn-danger col-lg-6 col-md-offset-3" type="submit">{% trans 'Remove' %}</button>
+    <div class="form-actions">
+        <button class="btn btn-danger col-lg-6 col-md-offset-3" type="submit">{% trans 'Remove' %}</button>
+    </div>
 </div>
-
 </fieldset>
 
 </form>
-</div>
+
 
 {% else %}
 <p class="text-center">{% trans 'You currently have no social network accounts connected to this account.' %}</p>
@@ -86,10 +86,5 @@
         </div>
     </div>
 
-{#    <script>#}
-{#function myFunction() {#}
-{#    var x = document.getElementById("id_account_{{base_account.id}}").value;#}
-{#}#}
-{#</script>#}
 
 {% endblock %}
