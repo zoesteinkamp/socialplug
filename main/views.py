@@ -45,8 +45,10 @@ def index(request):
     if request.user.is_authenticated():
         id = request.user.id
         user = User.objects.get(id=id)
+        swamp = LocationCurrent.objects.get(user=user.id)
         data={
             'user': user,
+            'swamp': swamp
         }
     else:
         data= {}

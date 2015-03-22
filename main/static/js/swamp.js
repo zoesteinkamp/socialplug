@@ -1,8 +1,6 @@
 swampdragon.ready(function () {
-    //console.log(user);
-    //console.log(swamp);
     swampdragon.open(function() {
-        // Subscribing to all channels provided by the foo-router
+        // Subscribing to all channels provided by locationcurrent-router
         swampdragon.subscribe('locationcurrent', 'swampy-channel', null, function (context, data) {
             this.dataMapper = new DataMapper(data);
             console.log("we are subscribed")
@@ -151,37 +149,6 @@ swampdragon.ready(function () {
 
             google.maps.event.addDomListener(window, 'load', getUser);
 
-            //Unsubscribe
-            //swampdragon.unsubscribe('locationcurrent', 'local-channel', null, function (context, data) {
-            //    console.log("We succesfully unsubsrcibed")
-            //}, function (context, data) {
-            //    console.log("Unsubscribed failed")
-            //});
-
-
-            //var data2 = {'user': "zoe", location: 'die', id: 1};
-            //swampdragon.update( 'locationcurrent', data2, function (context, data) {
-            //    console.log("Yay I work!")
-            //}, function (context, data) {
-            //    console.log("No updates for you")
-            //} );
-
-            //function getdata() {
-            //    swampdragon.getList('locationcurrent', {id: 1}, function (context, data) { // this fully works
-            //        var datanew = data;
-            //        console.log(datanew);
-            //        location();
-            //        function location() {
-            //            for (key in datanew) {
-            //
-            //                //locations.push([datanew[key]['user.username'], datanew[key].location]);
-            //                console.log(datanew[key])
-            //            }
-            //        }
-            //    }, function (context, data) {
-            //        console.log("help no more data, it failed!")
-            //    });
-            //};
             //getdata();
             //var deletedata = {id: 4};
             //swampdragon.delete('locationcurrent', deletedata, function (context, data) {
