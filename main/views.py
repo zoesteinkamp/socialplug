@@ -12,8 +12,10 @@ def index(request):
     if request.user.is_authenticated():
         id = request.user.id
         user = User.objects.get(id=id)
+        swamp = LocationCurrent.objects.get(user=user.id)
         data={
             'user': user,
+            'swamp': swamp
         }
     else:
         data= {}
@@ -82,9 +84,6 @@ def searchevent(request):
         'events': Event.objects.all(),
         'list': list(Event.objects.all()),
     })
-
-
-
 
 def event_post(request):
     # EventForm = modelformset_factory(Event, fields=('title', 'city','street','address','country',
