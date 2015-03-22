@@ -2,16 +2,9 @@ from django.contrib.auth.models import User
 from swampdragon.serializers.model_serializer import ModelSerializer
 
 
-class UserSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        publish_fields = ['username']
-        update_fields = ['username']
-
-
 class LocationCurrentSerializer(ModelSerializer):
     # user = UserSerializer
     class Meta:
         model = 'dragonapp.LocationCurrent'
-        publish_fields =('latitude', 'longititude', 'user')
-        update_fields = ('latitude', 'longititude', 'user')
+        publish_fields =('latitude', 'longititude', 'user', 'username')
+        update_fields = ('latitude', 'longititude', 'user', 'username')

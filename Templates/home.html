@@ -12,6 +12,8 @@
     {% if user.is_authenticated %}
 <script>
 var user = "{{ user.id }}";
+var username = "{{ user.username }}"
+console.log(username)
 </script>
 
     <div class="row">

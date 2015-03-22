@@ -258,7 +258,7 @@ class Event(models.Model):
         return self.title
 
     def location(self):
-        if self.address and self.country and self.zipcode and self.state:
+        if self.address and self.zipcode and self.state:
             geocoder = Nominatim()
             try:
                 place = ''

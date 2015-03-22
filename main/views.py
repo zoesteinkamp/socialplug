@@ -53,8 +53,14 @@ def eventpost(request, template='event_post.html'):
 
 
 def searchpeople(request):
-    # id = request.user.id
-    return render(request, 'searchpeople.html')
+    id = request.user.id
+    user = User.objects.get(id=id)
+    swamp = LocationCurrent.objects.get(user=user.id)
+    data={
+        'user': user,
+        'swamp': swamp
+    }
+    return render(request, 'searchpeople.html', data)
 
 
 def test(request):
@@ -95,15 +101,12 @@ def event_post(request):
             zipcode = formset.cleaned_data['zipcode']
             state = formset.cleaned_data['state']
             address = formset.cleaned_data['address']
-            country = formset.cleaned_data['country']
             date = formset.cleaned_data['date']
             time = formset.cleaned_data['time']
-            email = formset.cleaned_data['email']
-            phonenumber = formset.cleaned_data['phonenumber']
             description = formset.cleaned_data['description']
             category = formset.cleaned_data['category']
-            Event.objects.create(title=title, zipcode=zipcode, state=state, user=user, address=address, country=country,
-                                 date=date, time=time, email=email, phonenumber=phonenumber, description=description,
+            Event.objects.create(title=title, zipcode=zipcode, state=state, user=user, address=address,
+                                 date=date, time=time, description=description,
                                  category=category)
             return HttpResponseRedirect('test.html')
             # do something.

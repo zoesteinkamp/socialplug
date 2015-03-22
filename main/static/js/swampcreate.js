@@ -9,11 +9,14 @@
 //            console.log("Failure to subscribe")
 //        });
 //
+//        swampdragon.getList('locationcurrent', {id:1}, function(context,data){
+//            console.log(data)
+//        });
 //        function swampy(locationc) {
 //            var latitudenew = locationc.latitude;
 //            var longitudenew = locationc.longitude;
 //            console.log("location", latitudenew, longitudenew);
-//            swampdragon.create('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew }, function (context, data) {
+//            swampdragon.create('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew , username: username }, function (context, data) {
 //                console.log("data created", data);
 //            }, function (context, data) {
 //                console.log("You may not be created")
