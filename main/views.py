@@ -12,10 +12,8 @@ def index(request):
     if request.user.is_authenticated():
         id = request.user.id
         user = User.objects.get(id=id)
-        swamp = LocationCurrent.objects.get(user=user.id)
         data={
             'user': user,
-            'swamp': swamp
         }
     else:
         data= {}
@@ -48,11 +46,11 @@ def postit(request, id=None):
     }
     return render(request,'postit.html', data)
 
-
+@login_required
 def eventpost(request, template='event_post.html'):
     return render(request, template)
 
-
+@login_required
 def searchpeople(request):
     id = request.user.id
     user = User.objects.get(id=id)
@@ -63,7 +61,7 @@ def searchpeople(request):
     }
     return render(request, 'searchpeople.html', data)
 
-
+@login_required
 def test(request):
     id = request.user.id
     user = User.objects.get(id=id)
@@ -74,17 +72,19 @@ def test(request):
     }
     return render(request,'test.html', data)
 
+@login_required
 def route(request, template='messagebase.html'):
     return render(request, template)
 
 
-
+@login_required
 def searchevent(request):
     return render(request, 'searchevents.html', {
         'events': Event.objects.all(),
         'list': list(Event.objects.all()),
     })
 
+@login_required
 def event_post(request):
     # EventForm = modelformset_factory(Event, fields=('title', 'city','street','address','country',
     #                                                 'date','time','email','phonenumber','description', 'category'))
