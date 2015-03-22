@@ -1,17 +1,23 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.utils.encoding import smart_str
 from dragonapp.models import LocationCurrent
 from main import forms
 from main.models import Event, Interest, UserPhotos, Music, Subscription
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
 from main.models import UserProfile
 
 
-
-
+def index(request):
+    if request.user.is_authenticated():
+        id = request.user.id
+        user = User.objects.get(id=id)
+        data={
+            'user': user,
+        }
+    else:
+        data= {}
+    return render(request, "home.html", data)
 
 @login_required
 def profile(request, username=None):
@@ -40,17 +46,6 @@ def postit(request, id=None):
     }
     return render(request,'postit.html', data)
 
-
-def index(request):
-    if request.user.is_authenticated():
-        id = request.user.id
-        user = User.objects.get(id=id)
-        data={
-            'user': user,
-        }
-    else:
-        data= {}
-    return render(request, "home.html", data)
 
 def eventpost(request, template='event_post.html'):
     return render(request, template)
@@ -118,3 +113,49 @@ def event_post(request):
             return render(request, "event_post.html", data)
     else:
         return render(request, "event_post.html", data)
+
+
+# def settings(request):
+#     Userform = forms.UserForm
+#     data = {
+#         'userform': Userform
+#     }
+#
+#     if request.method == 'POST':
+#         formset = Userform(request.POST)
+#         if formset.is_valid():
+#             user = request.user
+#             username = formset.cleaned_data['username']
+#             first_name = formset.cleaned_data['first_name']
+#             last_name = formset.cleaned_data['last_name']
+#             password1 = formset.cleaned_data['password1']
+#             password2 = formset.cleaned_data['password2']
+#
+#             User.objects.filter(id=user).update(username=username, first_name=first_name, last_name=last_name,
+#                                                 password1=password1, password2=password2)
+#
+#             return HttpResponseRedirect('profile.html')
+#         else:
+#             return render(request, 'settings.html', data)
+#     else:
+#         return render(request, 'settings.html', data)
+
+def bio(request):
+    Profileform = forms.ProfileForm
+    data = {
+        'form': Profileform
+    }
+
+    if request.method == 'POST':
+        formset = Profileform(request.POST)
+        if formset.is_valid():
+            user = request.user.id
+            bio = formset.cleaned_data['bio']
+
+            UserProfile.objects.filter(user=user).update(bio=bio)
+
+            return HttpResponseRedirect('profile')
+        else:
+            return render(request, 'bio.html', data)
+    else:
+        return render(request, 'bio.html', data)

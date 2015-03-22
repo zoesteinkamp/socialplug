@@ -38,11 +38,22 @@
                      <i style="color:red" class="fa fa-exclamation-circle"></i>
                     {% endif %}
                 </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Full name</strong></span>{{ user.first_name }} {{ user.last_name }}</li>
+                    <li class="list-group-item text-right"><span class="pull-left">
+                        <strong class="">Full name</strong>
+                    </span>{{ user.first_name }} {{ user.last_name }}
+                    {% if userprofile.user_id  == request.user.id %}
+                    <a href="#"><i class="fa fa-plus"></i></a>
+                    {% else %}
+                    {% endif %}
+                    </li>
             </ul>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Social Media<a href="{% url 'socialaccount_connections' %}" style="float: right">Change</a></div>
+                <div class="panel-heading">Social Media
+                    {% if userprofile.user_id  == request.user.id %}
+                    <a href="{% url 'socialaccount_connections' %}" style="float: right">Change</a></div>
+                        {% else %}
+                    {% endif %}
                 <div class="panel-body">	<i class="fa fa-facebook fa-2x"></i>  <i class="fa fa-github fa-2x"></i>
                     <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i>  <i class="fa fa-google-plus fa-2x"></i>
 
@@ -52,16 +63,20 @@
                 <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i>
 
                 </li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Shares</strong></span> 125</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Events Attended</strong></span> 125</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Likes</strong></span> 13</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Posts</strong></span> 37</li>
-                        <li class="list-group-item text-right"><span class="pull-left"><strong class="">Followers</strong></span> 78</li>
             </ul>
         </div>
         <!--/col-3-->
         <div class="col-sm-9" style="" contenteditable="false">
             <div class="panel panel-default">
-                <div class="panel-heading"> Bio</div>
+                <div class="panel-heading"> Bio
+                    {% if userprofile.user_id  == request.user.id %}
+                    <a href="{% url 'bio'%}" style="float: right">Change</a>
+                        {% else %}
+                    {% endif %}
+                </div>
                 <div class="panel-body"> {{ userprofile.bio }}
 
                 </div>
