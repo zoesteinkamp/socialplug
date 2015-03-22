@@ -30,24 +30,25 @@ swampdragon.ready(function () {
                         contentString = "";
 
 
-                        data2.forEach(function (item) {
+                        data2.forEach(function(item){
+                            var myloc = null;
                             if (item.user === user) {
-                                console.log("found user")
+                                myloc = new google.maps.LatLng(item.latitude, item.longititude)
                             }
-                            else {
-                                prettyarray = [];
-                                prettyarray.push("<h1>" + item.username + "</h1>", item.latitude, item.longititude, item.id);
-                                otheruser.push(prettyarray)
+                            else{
+                                var compare = new google.maps.LatLng(item.latitude, item.longititude);
+                                var distance = google.maps.geometry.spherical.computeDistanceBetween (myLatlng, compare);
+                                if( distance > 8046.72 ){
+                                    console.log("Your too damn far away!")
+                                }
+                                else{
+                                    prettyarray = [];
+                                    prettyarray.push("<h1>" + item.username + "</h1>", item.latitude, item.longititude, item.id);
+                                    otheruser.push(prettyarray);
+                                }
                             }
                         });
-                        console.log(contentString);
-                        console.log(otheruser);
 
-
-
-                        function createMarker() {
-                            console.log("Im alivE!")
-                        }
 
                         var infowindow = new google.maps.InfoWindow({
                             maxWidth: 160
@@ -79,11 +80,18 @@ swampdragon.ready(function () {
                         var long = message.data.longititude;
                         var dragonuser = message.data.user;
                         if (message.action === "created") {
-                            var uglyarray = []
-                            uglyarray.push("<h1>" + username + "</h1>", lat, long , dragonid);
-                            otheruser.push(uglyarray);
-                            console.log(uglyarray);
-                            setMarkers(map, otheruser);
+                            var compare = new google.maps.LatLng( lat, long);
+                            var distance = google.maps.geometry.spherical.computeDistanceBetween (myLatlng, compare);
+                            if( distance > 8046.72 ){
+                               console.log("Your new marker is too damn far away!")
+                            }
+                            else {
+                                var uglyarray = [];
+                                uglyarray.push("<h1>" + username + "</h1>", lat, long, dragonid);
+                                otheruser.push(uglyarray);
+                                console.log(uglyarray);
+                                setMarkers(map, otheruser);
+                            }
 
                             //var array = []
                             //for (var i = 0; i < otheruser.length; i++) {
@@ -120,17 +128,17 @@ swampdragon.ready(function () {
                         //    }
 
 
-                            setMarkers(map, otheruser);
-
+        //                    setMarkers(map, otheruser);
+        //
+        //                }
+        //                else if (message.action === "updated") {
+        //
+        //
+        //                }
+        //                else {
+        //                    console.log("Send help, the ship is sinking! SOS!")
                         }
-                        else if (message.action === "updated") {
-
-
-                        }
-                        else {
-                            console.log("Send help, the ship is sinking! SOS!")
-                        }
-
+        //
         });
 
                     }, function (context, data) {
