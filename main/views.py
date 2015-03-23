@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from dragonapp.models import LocationCurrent
 from main import forms
@@ -170,3 +171,11 @@ def bio(request):
             return render(request, 'bio.html', data)
     else:
         return render(request, 'bio.html', data)
+
+
+# def search(request):
+#
+#     Event.objects.get(
+#         Q(category= ),
+#         Q(date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))
+# )

@@ -10,6 +10,14 @@
 
 {% block content %}
     {% if user.is_authenticated %}
+<script src="{% static "js/swamp.js" %}"></script>
+<script>
+var user = "{{ user.id }}";
+var name = "{{ user.username }}";
+console.log(user);
+console.log(name);
+</script>
+
 <script>
 var user = "{{ user.id }}";
 var username = "{{ user.username }}";
@@ -17,7 +25,6 @@ var swamp = "{{ swamp.id }}";
 console.log(swamp);
 console.log(username);
 </script>
-        <script src="{% static "js/swampcreate.js" %}"></script>
 
       <div class="col-sm-2">
           <ul id="sidebar" class="nav nav-stacked affix" style="border-right: 1px solid">
