@@ -1,6 +1,6 @@
 
 {% extends 'home.html' %}
-
+{%  load staticfiles %}
 {% block main %}
       <style>
           html, body, #map-canvas {
@@ -9,13 +9,12 @@
             padding: 0;
           }
     </style>
+    <script src="{% static "js/swamp.js" %}"></script>
 <script>
 var user = "{{ user.id }}";
 var name = "{{ user.username }}";
-var swamp = "{{ swamp.id }}";
 console.log(user);
 console.log(name);
-console.log(swamp);
 </script>
 
       <div class="col-sm-7">

@@ -9,72 +9,202 @@ swampdragon.ready(function () {
             console.log("Failure to subscribe")
         });
 
+        //getUser();
+        //function getUser() {
+        //        swampdragon.getSingle('locationcurrent', {id: swamp}, function (context, data) {
+        //            swampdragon.getList('locationcurrent', {id:1}, function (context, data2) {
+        //
+        //                var myLatlng = new google.maps.LatLng(data.latitude, data.longititude);
+        //                var mapOptions = {
+        //                    zoom: 15,
+        //                    center: myLatlng
+        //                };
+        //                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        //
+        //
+        //                console.log(data2);
+        //                console.log(data);
+        //                otheruser = [];
+        //                contentString = "";
+        //
+        //
+        //                data2.forEach(function(item){
+        //                    var myloc = null;
+        //                    if (item.user === user) {
+        //                        myloc = new google.maps.LatLng(item.latitude, item.longititude)
+        //                    }
+        //                    else{
+        //                        var compare = new google.maps.LatLng(item.latitude, item.longititude);
+        //                        var distance = google.maps.geometry.spherical.computeDistanceBetween (myLatlng, compare);
+        //                        if( distance > 8046.72 ){
+        //                            console.log("Your too damn far away!")
+        //                        }
+        //                        else{
+        //                            prettyarray = [];
+        //                            prettyarray.push("<h1>" + item.username + "</h1>", item.latitude, item.longititude, item.id);
+        //                            otheruser.push(prettyarray);
+        //                        }
+        //                    }
+        //                });
+        //
+        //
+        //                var infowindow = new google.maps.InfoWindow({
+        //                    maxWidth: 160
+        //                });
+        //
+        //                var markers = new Array();
+        //                setMarkers(map, otheruser);
+        //                function setMarkers(map, locations) {
+        //                    for (var i = 0; i < locations.length; i++) {
+        //                        var marker = new google.maps.Marker({
+        //                            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        //                            map: map
+        //                        });
+        //
+        //                        markers.push(marker);
+        //
+        //                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        //                            return function () {
+        //                                infowindow.setContent(locations[i][0]);
+        //                                infowindow.open(map, marker);
+        //                            }
+        //                        })(marker, i));
+        //                    }
+        //                }
+        //                swampdragon.onChannelMessage(function (channels, message) {
+        //                var dragonid = message.data.id;
+        //                var lat = message.data.latitude;
+        //                var username = message.data.username;
+        //                var long = message.data.longititude;
+        //                var dragonuser = message.data.user;
+        //                if (message.action === "created") {
+        //                    var compare = new google.maps.LatLng( lat, long);
+        //                    var distance = google.maps.geometry.spherical.computeDistanceBetween (myLatlng, compare);
+        //                    if( distance > 8046.72 ){
+        //                       console.log("Your new marker is too damn far away!")
+        //                    }
+        //                    else {
+        //                        var uglyarray = [];
+        //                        uglyarray.push("<h1>" + username + "</h1>", lat, long, dragonid);
+        //                        otheruser.push(uglyarray);
+        //                        console.log(uglyarray);
+        //                        setMarkers(map, otheruser);
+        //                    }
+        //
+        //                    //var array = []
+        //                    //for (var i = 0; i < otheruser.length; i++) {
+        //                    //     array.push(otheruser[i][3])
+        //                    //}
+        //                    //console.log(array)
+        //
+        //                    //if (dragonid === array ){
+        //                    //    console.log("You found me!")
+        //                    //}
+        //                //}
+        //                //else if (message.action === "deleted") {
+        //                //    var deletearray = [];
+        //                //    var originarray = [];
+        //                //    originarray.push(["<h1>" + username + "</h1>", lat, long , dragonid]);
+        //                //    console.log(originarray);
+        //                //
+        //                //    for (var i = 0; i < otheruser.length; i++) {
+        //                //        for (var j = 0; j < originarray.length; j++){
+        //                //            if (otheruser[i] === originarray[j]){
+        //                //                var help = otheruser.remove(otheruser[i]);
+        //                //                Array.prototype.remove = function(value) {
+        //                //                       this.splice(this.indexOf(value), 1);
+        //                //                       return true;
+        //                //                };
+        //                //                console.log(help)
+        //                //                console.log(otheruser)
+        //                //            }
+        //                //            else{
+        //                //                console.log("Fuck")
+        //                //            }
+        //                //        }
+        //                //
+        //                //    }
+        //
+        //
+        ////                    setMarkers(map, otheruser);
+        ////
+        ////                }
+        ////                else if (message.action === "updated") {
+        ////
+        ////
+        ////                }
+        ////                else {
+        ////                    console.log("Send help, the ship is sinking! SOS!")
+        //                }
+        ////
+        //});
+        //
+        //            }, function (context, data) {
+        //                console.log("No user with that id? Oh no!")
+        //            });
+        //        }, function (context, data) {
+        //            console.log("no list to return, death to the users!")
+        //        });
+        //    }
+        //
+        //    google.maps.event.addDomListener(window, 'load', getUser);
 
-        swampdragon.getList('locationcurrent', {}, function(context,data){
-            swampdragon.getSingle('locationcurrent', {id: swamp}, function (context, person) {
-                    console.log(data);
+        function swampy(locationc) {
+            swampdragon.getList('locationcurrent', {id:1}, function(context,person){
+            var latitudenew = locationc.latitude;
+            var longitudenew = locationc.longitude;
+            console.log("location", latitudenew, longitudenew);
 
-                var newlocation= null;
+            for(key in person){
+                var per = person[key];
+            }
 
-                var currentlocation = function() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            newlocation = (position.coords.latitude + "," +
-                                position.coords.longitude);
-                            console.log(newlocation);
-                            patience(newlocation);
-
-                        });
-                    } else {
-                        // Browser doesn't support Geolocation
-                        handleNoGeolocation(false);
-                    }
-                };
-                currentlocation();
-
-
-
-                function patience(newlocation){
-                    data.forEach(function (item) {
-                        if (item.id == swamp) {
-                            if (item.latitude == person.latitude && item.longititude == person.longititude) {
-                                console.log("All good to go, we have you here");
-                            }
-                            else {
-                                update(newlocation);
-                            }
-                        }
-                        else {
-                             swampy(newlocation);
-                        }
-                    });
-                }
-
-                function update(locationup){
-                    var latitudenew = locationup.latitude;
-                    var longitudenew = locationup.longitude;
-                    console.log("location", latitudenew, longitudenew);
-                    swampdragon.update('locationcurrent', {user: user, latitude: latitudenew, longititude: longitudenew, username: username}, function (context, data) {
-                        console.log("data created", data);
+            if (per.user == user && per.username == username){
+                console.log(per.latitude + " " + per.longititude);
+                if(per.latitude == latitudenew && per.longititude != longitudenew ||
+                per.latitude != latitudenew && per.longititude == longitudenew ||
+                per.latitude != latitudenew && per.longititude != longitudenew){
+                    var id = per.id;
+                    swampdragon.update('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew, username: username, id: id}, function (context, data) {
+                        console.log("data updated", data);
+                        //swampdragon.unsubscribe('locationcurrent', 'create-channel', null, function (context, data){
+                        //    console.log("Im out for now")
+                        //})
                     }, function (context, data) {
                         console.log("You may not be updated")
                     });
                 }
-
-                function swampy(locationc) {
-                    var latitudenew = locationc.latitude;
-                    var longitudenew = locationc.longitude;
-                    console.log("location", latitudenew, longitudenew);
-                    swampdragon.create('locationcurrent', {user: user, latitude: latitudenew, longititude: longitudenew, username: username}, function (context, data) {
-                        console.log("data created", data);
-                    }, function (context, data) {
-                        console.log("You may not be created")
-                    });
+                else{
+                    console.log("No location change")
                 }
-
-
+            }
+            else{
+                swampdragon.create('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew , username: username}, function (context, data) {
+                console.log("data created", data);
+            }, function (context, data) {
+                console.log("You may not be created")
             });
-    });
+            }
+           });
+        }
+        var currentlocation = function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var newlocation = (position.coords.latitude + "," +
+                        position.coords.longitude);
+                    console.log(newlocation);
+                    swampy(position.coords);
+                }, function() {
+
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleNoGeolocation(false);
+            }
+            return null;
+        };
+        currentlocation();
+
     });
 
 });

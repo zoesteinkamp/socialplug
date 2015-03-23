@@ -17,6 +17,7 @@ var swamp = "{{ swamp.id }}";
 console.log(swamp);
 console.log(username);
 </script>
+        <script src="{% static "js/swampcreate.js" %}"></script>
 
     <div class="row">
       <div class="col-sm-2">
@@ -86,9 +87,10 @@ console.log(username);
       </div>
     </div>
 
- <script src="{% static "js/swampcreate.js" %}"></script>
+
         {% endblock %}
     {% else %}
 
     {% endif %}
+
 {% endblock %}
