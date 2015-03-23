@@ -64,6 +64,13 @@ def eventpost(request, template='event_post.html'):
     return render(request, template)
 
 @login_required
+def bigsearch(request, template='bigsearch.html'):
+    return render(request, template)
+
+def privacypolicy(request, template='privacypolicy.htm'):
+    return render(request, template)
+
+@login_required
 def searchpeople(request):
     id = request.user.id
     user = User.objects.get(id=id)

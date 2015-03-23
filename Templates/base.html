@@ -87,16 +87,17 @@
               <a class="navbar-brand" style=" color: #1EBE39" href="/"><i class="fa fa-user-plus" style="padding-right: 4px"></i>
                   <span style="color: white">Go</span>Friend</a>
             </div>
+          {% if user.is_authenticated %}
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
               </ul>
-            {% if user.is_authenticated %}
+
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="User or Event">
                 </div>
-                <button type="submit" class="btn btn-success" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></button>
+                <a href="{% url 'bigsearch' %}" type="submit" class="btn btn-success" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></a>
               </form>
             {% else %}
             {% endif %}
@@ -120,6 +121,7 @@
         {% endblock %}
 
             {% block hugepage %}
+                <h4><a href="{% url 'privacypolicy'%}">Privacy Policy</a></h4>
             {% endblock %}
     </div>
 
