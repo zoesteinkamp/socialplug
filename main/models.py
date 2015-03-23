@@ -71,7 +71,7 @@ class Music(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
     bio = models.TextField(help_text='Tell us about You', blank=True)
-    avatar_url = models.CharField(default='/main/static/img/user-avatar.png', max_length=255, blank=True, null=True)
+    avatar_url = models.CharField(default='static/img/user-avatar.png', max_length=255, blank=True, null=True)
     # setting avatar url based on social or local auth
 
     def set_avatar_url(self, request):

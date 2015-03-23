@@ -1,4 +1,3 @@
-facebook-sdk
 Django==1.7.5
 Pillow==2.7.0
 PyJWT==0.4.1
@@ -26,3 +25,4 @@ djangorestframework-filters
 django-filters
 swampdragon-auth
 django-datetime-widget
+django-extensions

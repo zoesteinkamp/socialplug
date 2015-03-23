@@ -19,7 +19,6 @@ console.log(username);
 </script>
         <script src="{% static "js/swampcreate.js" %}"></script>
 
-    <div class="row">
       <div class="col-sm-2">
           <ul id="sidebar" class="nav nav-stacked affix" style="border-right: 1px solid">
             <li>
@@ -34,25 +33,25 @@ console.log(username);
       </div>
 
         {% block main %}
-      <div class="col-sm-3">
-        <div id="midCol" data-spy="affix" data-offset-top="300">
-        <div class="well"><h3><a href="http://getbootstrap.com">Bootstrap 3 is Here.</a></h3>
-          		In simple terms, a responsive web design figures out what resolution of
-                device it's being served on. Flexible grids then size correctly to fit
-                the screen.</div>
-        <div class="well">
-        		<img class="img-responsive" src="//placehold.it/300x300">
-        </div>
-        <div class="well">The new Bootstrap 3 is a smaller build. The separate Bootstrap
-                base and responsive.css files have now been merged into one. There is no
-                more fixed grid, only fluid..</div>
-        <div class="well">Well, that's it for now Jim.</div>
-        <div class="well">A big design trend for 2013 is "flat" design. Gone are the days of excessive
-                gradients and shadows. Designers are producing cleaner flat designs, and
-                Bootstrap 3 takes advantage of this minimalist trend.
-        Aliquam in felis sit amet augue.</div>
-         </div>
-      </div>
+{#      <div class="col-sm-3">#}
+{#        <div id="midCol" data-spy="affix" data-offset-top="300">#}
+{#        <div class="well"><h3><a href="http://getbootstrap.com">Bootstrap 3 is Here.</a></h3>#}
+{#          		In simple terms, a responsive web design figures out what resolution of#}
+{#                device it's being served on. Flexible grids then size correctly to fit#}
+{#                the screen.</div>#}
+{#        <div class="well">#}
+{#        		<img class="img-responsive" src="//placehold.it/300x300">#}
+{#        </div>#}
+{#        <div class="well">The new Bootstrap 3 is a smaller build. The separate Bootstrap#}
+{#                base and responsive.css files have now been merged into one. There is no#}
+{#                more fixed grid, only fluid..</div>#}
+{#        <div class="well">Well, that's it for now Jim.</div>#}
+{#        <div class="well">A big design trend for 2013 is "flat" design. Gone are the days of excessive#}
+{#                gradients and shadows. Designers are producing cleaner flat designs, and#}
+{#                Bootstrap 3 takes advantage of this minimalist trend.#}
+{#        Aliquam in felis sit amet augue.</div>#}
+{#         </div>#}
+{#      </div>#}
       <div class="col-sm-7">
           <div class="row">
             <div class="col col-sm-12"><h2>Responsive</h2><p>In simple terms, a responsive web design figures out what resolution of
