@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from dragonapp.models import LocationCurrent
 from main import forms
+from main.forms import UserForm, ProfileForm
 from main.models import Event, Interest, UserPhotos, Music, Subscription
 from django.shortcuts import render, redirect
 from main.models import UserProfile
@@ -126,30 +128,41 @@ def event_post(request):
         return render(request, "event_post.html", data)
 
 
-# def settings(request):
-#     Userform = forms.UserForm
-#     data = {
-#         'userform': Userform
-#     }
-#
-#     if request.method == 'POST':
-#         formset = Userform(request.POST)
-#         if formset.is_valid():
-#             user = request.user
-#             username = formset.cleaned_data['username']
-#             first_name = formset.cleaned_data['first_name']
-#             last_name = formset.cleaned_data['last_name']
-#             password1 = formset.cleaned_data['password1']
-#             password2 = formset.cleaned_data['password2']
-#
-#             User.objects.filter(id=user).update(username=username, first_name=first_name, last_name=last_name,
-#                                                 password1=password1, password2=password2)
-#
-#             return HttpResponseRedirect('profile.html')
-#         else:
-#             return render(request, 'settings.html', data)
-#     else:
-#         return render(request, 'settings.html', data)
+def settings(request):
+    form_class = UserForm
+    second_form = ProfileForm
+    user = request.user
+    userdata = User.objects.get(username=user)
+    profiledata = UserProfile.objects.get(user=user)
+    data = {
+        'userform': form_class(instance=userdata),
+        'profileform': second_form(instance=profiledata),
+    }
+    if request.method == 'POST':
+        form = form_class(request.POST, instance=userdata)
+        sub_form = second_form(request.POST, instance=profiledata)
+        if form.is_valid() and sub_form.is_valid():
+            username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+
+            if User.objects.filter(username=user).exists():
+                User.objects.filter(username=user).update(username=username, first_name=first_name, last_name=last_name)
+            else:
+                pass
+
+            # after updateing change bio
+            newuser = User.objects.get(username=username)
+
+            bio = sub_form.cleaned_data['bio']
+
+            UserProfile.objects.filter(user=newuser).update(bio=bio)
+
+            return redirect('/users/{}'.format(newuser))
+        else:
+            return render(request, 'settings.html', data)
+    else:
+        return render(request, 'settings.html', data)
 
 def bio(request):
     Profileform = forms.ProfileForm
@@ -165,7 +178,7 @@ def bio(request):
 
             UserProfile.objects.filter(user=user).update(bio=bio)
 
-            return HttpResponseRedirect('profile')
+            return redirect('/users/{}'.format(newuser))
         else:
             return render(request, 'bio.html', data)
     else:

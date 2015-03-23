@@ -45,7 +45,7 @@ urlpatterns = patterns('',
     url(r'^api/', include('main.api.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
-    # url(r'^settings/', 'main.views.settings', name='settings'),
+    url(r'^settings/', 'main.views.settings', name='settings'),
     url(r'^changebio/', 'main.views.bio', name='bio'),
 
 )

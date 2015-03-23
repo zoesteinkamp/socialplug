@@ -33,7 +33,6 @@
     <script type="text/javascript" src="{% static 'swampdragon/js/dist/swampdragon.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'swampdragon/js/dist/datamapper.min.js' %}"></script>
     <script src="{% static "js/maps.js" %}"></script>
-    <script src="{% static "js/swamp.js" %}"></script>
     <script src="{% static "js/events.js" %}"></script>
     <script src="{% static "jsdown/dropdown.js" %}"></script>
     <script src="{% static "jsdown/chosen.jquery.min.js" %}"></script>
@@ -89,10 +88,10 @@
                   <span style="color: white">Go</span>Friend</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if user.is_authenticated %}
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
               </ul>
-            {% if user.is_authenticated %}
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="User or Event">
@@ -105,7 +104,7 @@
                 {% if user.is_authenticated %}
                                       </li>
                                       <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
-                                      <li><a href="#"><i class="fa fa-wrench"></i>Settings</a></li>
+                                      <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
                                         <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
                                     </ul>
                       {% else %}
@@ -129,4 +128,3 @@
 
   </body>
 </html>
-

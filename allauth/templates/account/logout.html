@@ -2,21 +2,28 @@
 
 {% load url from future %}
 {% load i18n %}
+{% load bootstrap_tags %}
+
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
+
 {% block content %}
-<h1>{% trans "Sign Out" %}</h1>
+    <div class="col-md-offset-4">
+        <h1>{% trans "Sign Out" %}</h1>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+        <p>{% trans 'Are you sure you want to sign out?' %}</p>
+    </div>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
+<div class="col-md-offset-4">
+    <form method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{redirect_field_name|as_bootstrap}}" value="{{redirect_field_value|as_bootstrap}}"/>
+      {% endif %}
+      <button type="submit" class="btn btn-danger col-lg-6">{% trans 'Sign Out' %}</button>
+    </form>
+</div>
 
 
 {% endblock %}
