@@ -64,7 +64,6 @@
 
   </head>
   <body>
-  <div id="wrap">
     {% if messages %}
     <div>
       <strong>Messages:</strong>
@@ -102,7 +101,6 @@
             {% endif %}
               <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                                      </li>
                                       <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
                                       <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
                                         <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
@@ -114,23 +112,28 @@
             </div>
           </div>
         </nav>
-    <div class="containter">
-        {% block content %}
 
+    <div id="wrap" style="padding-top: 50px">
+        <div class="container">
+
+        {% block content %}
         {% endblock %}
 
-            {% block hugepage %}
-            {% endblock %}
+        {% block hugepage %}
+        {% endblock %}
 
-    {% block extra_body %}
-    {% endblock %}
+        {% block extra_body %}
+        {% endblock %}
+
         </div>
-  </div>
+    </div>
 
-  <div id="footer" class="navbar-inverse">
-      <div class="container text-center">
-          <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
-      </div>
-  </div>
+
+    <div id="footer">
+          <div class="container text-center">
+             <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+          </div>
+    </div>
+
   </body>
 </html>

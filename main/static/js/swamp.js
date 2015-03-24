@@ -62,6 +62,7 @@ swampdragon.ready(function () {
                 getUser();
             }, function (context, data) {
                 console.log("You may not be created")
+                    getUser();
             });
             }
            });

@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+from main.api.views import GlobalSearchList
 
 
 admin.autodiscover()
@@ -14,7 +15,7 @@ urlpatterns = patterns('',
     # url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': reverse_lazy('view_login')}, name='logout'),
     # url('', include('django.contrib.auth.urls', namespace='auth')),
     # url(r'^facebook_profile/$', 'main.views.get_facebook_profile', name='get_facebook_profile'),
-    
+
     url(r'^accounts/', include('allauth.urls')),
     # url(r'^users/(?P<user_id>\d+)/$', 'main.views.profile', name='profile'),
     # url(r'^users/(?P<username>[\w.@+-]+)/(?P<user>[\w.@+-]+)/$', 'main.views.profile', name='profile'),
@@ -40,7 +41,7 @@ urlpatterns = patterns('',
     url(r'^messages/', include('django_messages.urls')),
 
     # the include, admin, search, and privacy policy
-    url(r'^bigsearch/', 'main.views.bigsearch', name='bigsearch'),
+    url(r'^bigsearch/foobar', GlobalSearchList.as_view(), name='bigsearch'),
     url(r'^privacypolicy/', 'main.views.privacypolicy', name='privacypolicy'),
     url(r'^api/', include('main.api.urls')),
     url(r'^admin/', include(admin.site.urls)),

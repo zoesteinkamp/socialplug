@@ -81,16 +81,6 @@ def searchpeople(request):
     }
     return render(request, 'searchpeople.html', data)
 
-@login_required
-def test(request):
-    id = request.user.id
-    user = User.objects.get(id=id)
-    swamp = LocationCurrent.objects.get(user=user.id)
-    data={
-        'user': user,
-        'swamp': swamp
-    }
-    return render(request,'test.html', data)
 
 @login_required
 def route(request, template='messagebase.html'):
