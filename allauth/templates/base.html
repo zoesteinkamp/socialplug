@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block head_title %}{% endblock %}</title>
+    <title>{% block head_title %}GoFriend{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
 
@@ -64,6 +64,7 @@
 
   </head>
   <body>
+  <div id="wrap">
     {% if messages %}
     <div>
       <strong>Messages:</strong>
@@ -74,7 +75,6 @@
       </ul>
     </div>
     {% endif %}
-
         <nav class="navbar navbar-inverse navbar-fixed-top navstuff">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -96,7 +96,7 @@
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="User or Event">
                 </div>
-                <button type="submit" class="btn btn-success" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></button>
+                <a href="{% url 'bigsearch' %}" type="submit" class="btn btn-success" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></a>
               </form>
             {% else %}
             {% endif %}
@@ -106,7 +106,6 @@
                                       <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
                                       <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
                                         <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
-                                    </ul>
                       {% else %}
                           <li><a href="{% url 'account_login' %}">Sign In</a></li>
                           <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
@@ -115,16 +114,23 @@
             </div>
           </div>
         </nav>
-    <div class="container" style="padding-top: 100px">
+    <div class="containter">
         {% block content %}
+
         {% endblock %}
 
             {% block hugepage %}
             {% endblock %}
-    </div>
 
     {% block extra_body %}
     {% endblock %}
+        </div>
+  </div>
 
+  <div id="footer" class="navbar-inverse">
+      <div class="container text-center">
+          <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+      </div>
+  </div>
   </body>
 </html>

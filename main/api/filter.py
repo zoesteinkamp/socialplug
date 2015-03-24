@@ -6,6 +6,7 @@ class UserFilter(filters.FilterSet):
 
 
 class PostFilter(filters.FilterSet):
+
     title = filters.CharFilter(name='title')
     category = filters.ChoiceFilter(name='category')
     date = filters.DateFilter(name='date')

@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from dragonapp.models import LocationCurrent
 from main import forms
@@ -62,6 +61,13 @@ def index(request):
 
 @login_required
 def eventpost(request, template='event_post.html'):
+    return render(request, template)
+
+@login_required
+def bigsearch(request, template='bigsearch.html'):
+    return render(request, template)
+
+def privacypolicy(request, template='privacypolicy.htm'):
     return render(request, template)
 
 @login_required
@@ -183,3 +189,11 @@ def bio(request):
             return render(request, 'bio.html', data)
     else:
         return render(request, 'bio.html', data)
+
+
+# def search(request):
+#
+#     Event.objects.get(
+#         Q(category= ),
+#         Q(date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))
+# )
