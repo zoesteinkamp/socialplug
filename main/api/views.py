@@ -42,16 +42,18 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     paginate_by = 50
-    # filter_class = PostFilter
+    filter_class = PostFilter
 
-    def get_queryset(self):
-        queryset = Event.objects.all()
-        title= self.request.QUERY_PARAMS.get('title', None)
-        if title is not None:
-            queryset = queryset.filter(title=title)
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Event.objects.all()
+    #     title= self.request.QUERY_PARAMS.get('title', None)
+    #     if title is not None:
+    #         queryset = queryset.filter(title=title)
+    #     return queryset
 
 
     #self.query_params: {'category': 'foo'}
-    filter_fields = ('title', 'category', 'date', )
+    # filter_fields = ('title', 'category', 'date', )
+
+
 

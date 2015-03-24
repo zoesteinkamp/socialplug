@@ -47,18 +47,6 @@ def postit(request, id=None):
     }
     return render(request,'postit.html', data)
 
-
-def index(request):
-    if request.user.is_authenticated():
-        id = request.user.id
-        user = User.objects.get(id=id)
-        data={
-            'user': user,
-        }
-    else:
-        data= {}
-    return render(request, "home.html", data)
-
 @login_required
 def eventpost(request, template='event_post.html'):
     return render(request, template)

@@ -10,7 +10,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-<script src="{% static "js/swamp.js" %}"></script>
+
 <script>
 var user = "{{ user.id }}";
 var name = "{{ user.username }}";
