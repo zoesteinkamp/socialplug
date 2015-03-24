@@ -37,7 +37,8 @@ swampdragon.ready(function () {
                 var per = person[key];
             }
 
-            if (per.user == user && per.username == username){
+            if (per.user === user && per.username === username){
+
                 console.log(per.latitude + " " + per.longititude);
                 if(per.latitude == latitudenew && per.longititude != longitudenew ||
                 per.latitude != latitudenew && per.longititude == longitudenew ||
@@ -55,6 +56,14 @@ swampdragon.ready(function () {
                     console.log("No location change")
                     getUser();
                 }
+            }
+            else if(per.user=== null && per.username===null ){
+                swampdragon.create('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew , username: username}, function (context, data) {
+                console.log("data created", data);
+                getUser();
+            }, function (context, data) {
+                console.log("You may not be created")
+            });
             }
             else{
                 swampdragon.create('locationcurrent', {user: user, latitude: latitudenew , longititude: longitudenew , username: username}, function (context, data) {
