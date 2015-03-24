@@ -116,12 +116,16 @@
             </div>
           </div>
         </nav>
+    <div>
+        <h4><a href="{% url 'privacypolicy'%}">Privacy Policy</a></h4>
+    </div>
     <div class="container" style="padding-top: 100px">
+
         {% block content %}
         {% endblock %}
 
             {% block hugepage %}
-                <h4><a href="{% url 'privacypolicy'%}">Privacy Policy</a></h4>
+
             {% endblock %}
     </div>
 
