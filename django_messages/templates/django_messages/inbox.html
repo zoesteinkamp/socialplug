@@ -27,5 +27,28 @@
 </table>
 {% else %}
 <p>{% trans "No messages." %}</p>
-{% endif %}  
+{% endif %}
+
+<div class="col-md-10 col-md-offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+        {% trans 'Sender' %}
+          </th>
+          <th>
+        {% trans 'Message' %}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for message in message_list|slice:":5" %}
+        <tr>
+          <td>{{ message.sender }}</td>
+          <td>{{ message.body }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+</div>
 {% endblock %}

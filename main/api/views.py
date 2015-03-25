@@ -5,9 +5,9 @@ from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from main.api.filter import UserFilter, PostFilter
-from main.api.serializers import SocialAccountSerializer, EventSerializer, UserSerializer
+from main.api.serializers import SocialAccountSerializer, EventSerializer, UserSerializer, UserProfileSerializer
 from allauth.socialaccount.models import SocialAccount
-from main.models import Event
+from main.models import Event, UserProfile
 
 
 # class GlobalSearchList(generics.ListAPIView):
@@ -30,11 +30,17 @@ class SocialAccountViewSet(viewsets.ModelViewSet):
     serializer_class = SocialAccountSerializer
     paginate_by = 50
 
+class UserProfileViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    paginate_by = 50
+
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    filter_class = UserFilter
+    # filter_class = UserFilter
     paginate_by = 50
 
 class EventViewSet(viewsets.ModelViewSet):

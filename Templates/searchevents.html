@@ -1,122 +1,138 @@
 {% extends 'home.html' %}
 {% load staticfiles %}
+{% load app_filters %}
 
 {% block main %}
-          <style>
-      html, body, #map{
-        height: 400px;
-        margin: 0;
-        padding: 0;
-      }
-          #panel {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        margin-left: -180px;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-      }
-    </style>
 
-  <div class="col-sm-7">
+      <div class="col-sm-9">
       <div class="row">
           <h2>Find Events</h2><p>
       </div>
-      <div class="row">
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
 
-{#        <div class="col col-sm-5 col-sm-offset-2">#}
-{#            <div class="form-group">#}
-{#                <div class='input-group date'  id='datetimepicker9'>#}
-{#                    <input type='text' class="form-control" placeholder="Date" />#}
-{#                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-           <form class="col-sm-8 col-sm-offset-1" role="search">
-                <div class="form-group">
-                  <input type="number" class="form-control" id="datesearch" placeholder="Date Search">
-                </div>
-              </form>
-
-
-
-          <!-- Distance dropdown -->
-           <form class="col-sm-8 col-sm-offset-1" role="search">
-                <div class="form-group">
-                  <input type="number" class="form-control" id="distancesearch" placeholder="Miles Search">
-                </div>
-              </form>
-              <!-- Distnace end -->
-      </div>
-
-
-
-      <div class="row">
-        <div class="col-sm-10 col-sm-offset-2">
-            <select id="categorysearch" data-placeholder="Choose a Category" class="chosen-select" style="width:350px;" tabindex="2">
-            <option value=""></option>
-            <option value="Buisness">Buisness</option>
-            <option value="Crafts">Crafts</option>
-            <option value="Education">Education</option>
-            <option value="Family">Family</option>
-            <option value="Fashion">Fashion</option>
-            <option value="Fitness"> Fitness</option>
-            <option value="Food"> Food </option>
-            <option value="Learning">Learning</option>
-            <option value="Literature">Literature</option>
-            <option value="Gaming"> Gaming</option>
-            <option value="Music">Music</option>
-            <option value="Outdoor">Outdoors</option>
-            <option value="Pets">Pets</option>
-            <option value="Photography">Photography</option>
-            <option value="Politics">Politics</option>
-            <option value="Technology"> Technology</option>
-            <option value="Television">Television</option>
-            <option value="Special">Special Occasion</option>
-            <option value="Spiritual">Spiritual</option>
-            <option value="Sports"> Sports</option>
-            <option value="Writing">Writing</option>
-          </select>
-        </div >
-      </div>
-      <!-- Category End -->
-
-
-        <!-- Search -->
-        <div class="row"  style="padding-top: 10px">
-            <div class="col-sm-12">
-               <form class="col-sm-8 col-sm-offset-1" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="textsearch" placeholder="Title Search">
-                </div>
-              </form>
-                <button type="submit" class="btn btn-default col-sm-2" id="target" >Search</button>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><form class="col-sm-12" role="search">
+            <div class="form-group">
+              <input type="datetime" class="form-control" id="datesearch" placeholder="YYYY-MM-DD">
             </div>
+        </form></li>
+        <li class="dropdown">
+          <div class="row">
+                <div class="col-sm-12">
+                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="distancesearch"> Distance <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                          <li><input type="radio" id="1" name="1mile" value="1"><label for="1"> 1 Mile </label></li>
+                          <li><input type="radio" id="5" name="5mile" value="5"><label for="5"> 5 Miles </label></li>
+                          <li><input type="radio" id="10" name="10mile" value="10"><label for="10"> 10 Miles </label></li>
+                          <li><input type="radio" id="50" name="50mile" value="50"><label for="50"> 50 Miles </label></li>
+                        </ul>
+                </div>
+              </div>
+          </li>
+          <li class="dropdown">
+              <div class="row">
+            <div class="col-sm-12">
+                <select id="categorysearch" data-placeholder="Category" class="chosen-select" tabindex="4">
+                <option value=""></option>
+                <option value="Buisness">Buisness</option>
+                <option value="Crafts">Crafts</option>
+                <option value="Education">Education</option>
+                <option value="Family">Family</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Fitness"> Fitness</option>
+                <option value="Food"> Food </option>
+                <option value="Learning">Learning</option>
+                <option value="Literature">Literature</option>
+                <option value="Gaming"> Gaming</option>
+                <option value="Music">Music</option>
+                <option value="Outdoor">Outdoors</option>
+                <option value="Pets">Pets</option>
+                <option value="Photography">Photography</option>
+                <option value="Politics">Politics</option>
+                <option value="Technology"> Technology</option>
+                <option value="Television">Television</option>
+                <option value="Special">Special Occasion</option>
+                <option value="Spiritual">Spiritual</option>
+                <option value="Sports"> Sports</option>
+                <option value="Writing">Writing</option>
+              </select>
+            </div >
+          </div>
+          </li>
+          <li>
+       <form class="col-sm-8" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" id="textsearch" placeholder="Title Search">
         </div>
-        <!-- end search-->
-        <hr>
-      <div class="row">
-        <div class="col-sm-8"><h2>Lighweight</h2><p>The new Bootstrap 3 is a smaller build. The separate Bootstrap
-            base and responsive.css files have now been merged into one. There is no
-            more fixed grid, only fluid.</p></div>
-        <div class="col-sm-4"><img class="img-responsive" src="{{ userprofile.avatar_url }}"></div>
-      </div>
-        <hr>
-      <div class="row">
-        <div class="col-sm-8"><h2>Lighweight</h2><p>The new Bootstrap 3 is a smaller build. The separate Bootstrap
-            base and responsive.css files have now been merged into one. There is no
-            more fixed grid, only fluid.</p></div>
-        <div class="col-sm-4"><img class="img-responsive" src="//placehold.it/220x180/666666/FFF"></div>
-      </div>
-        <hr>
+      </form>
+        <div class="row">
+        <button type="submit" class="btn btn-default col-sm-4" id="target" >Search</button>
+        </div>
+          </li>
+          </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
+{#      <div class="col-sm-8" id="post">#}
+{#          <ul>#}
+{#        {% for event in events %}#}
+{#            <li>#}
+{#            <h2>{{ event.title }}</h2>#}
+{#            <p>{{ event.description }}</p>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#        </ul>#}
+{#      </div>#}
+<div class="col-sm-8" id="post">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <div class="media-body">
+    <h4 class="media-heading">Media heading</h4>
+           </div>
+
+             <div class="media">
+        <div class="media-right">
+        <img class="media-object" src="..." alt="...">
+        </div>
+              </div>
+
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
   </div>
+</div>
+</div>
+
+
+
+
+
+</div>
 
 
 <!-- script for category -->
- <script type="text/javascript">
+<script type="text/javascript">
     var config = {
       '.chosen-select'           : {},
       '.chosen-select-deselect'  : {allow_single_deselect:true},

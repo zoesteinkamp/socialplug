@@ -6,6 +6,7 @@ router = routers.DefaultRouter()
 router.register(r'socialaccount', views.SocialAccountViewSet)
 router.register(r'event', views.EventViewSet)
 router.register(r'user', views.UserViewSet)
+router.register(r'userprofile', views.UserProfileViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),

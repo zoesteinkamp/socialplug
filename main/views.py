@@ -2,10 +2,11 @@ from user import username
 import user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Q
 from django.http import HttpResponseRedirect
+from geopy.distance import great_circle
 from dragonapp.models import LocationCurrent
 from main import forms
+from main.forms import UserForm, ProfileForm
 from main.models import Event, Interest, UserPhotos, Music, Subscription
 from django.shortcuts import render, redirect
 from main.models import UserProfile
@@ -13,13 +14,47 @@ from main.models import UserProfile
 
 def index(request):
     if request.user.is_authenticated():
+
         id = request.user.id
         user = User.objects.get(id=id)
-        data={
+
+        # username = LocationCurrent.objects.get(user=request.user.id)
+        # user_location = (username.latitude, username.longititude)
+        # events = Event.objects.all()
+        # events_in_five = []
+        # events_in_50 = []
+        # events_over_50 = []
+        #
+        # for event in events:
+        #     event_location = (event.latitude, event.longitude)
+        #     distance = great_circle(user_location, event_location).miles
+        #
+        #     if distance < 5:
+        #         event_in_distance = Event.objects.get(title=event)
+        #         events_in_five.append(event_in_distance)
+        #     else:
+        #         pass
+        #
+        #     if 5 < distance < 50:
+        #         event_in_distance = Event.objects.get(title=event)
+        #         events_in_50.append(event_in_distance)
+        #     else:
+        #         pass
+        #
+        #     if distance > 50:
+        #         event_in_distance = Event.objects.get(title=event)
+        #         events_over_50.append(event_in_distance)
+        #     else:
+        #         pass
+
+        data = {
+            # 'events_in_five': events_in_five,
+            # 'events_in_50': events_in_50,
+            # 'events_over_50': events_over_50,
             'user': user,
         }
     else:
-        data= {}
+        data = {}
     return render(request, "home.html", data)
 
 @login_required
@@ -53,6 +88,7 @@ def postit(request, id=None):
 def bigsearch(request, template='bigsearch.html'):
     return render(request, template)
 
+@login_required
 def privacypolicy(request, template='privacypolicy.htm'):
     return render(request, template)
 
@@ -75,12 +111,12 @@ def route(request, template='messagebase.html'):
 
 @login_required
 def searchevent(request):
-
     return render(request, 'searchevents.html', {
         'userprofile' : UserProfile.objects.all(),
         'events': Event.objects.all(),
         'list': list(Event.objects.all()),
     })
+
 
 @login_required
 def event_post(request):
@@ -104,39 +140,51 @@ def event_post(request):
             Event.objects.create(title=title, zipcode=zipcode, state=state, user=user, address=address,
                                  date=date, time=time, description=description,
                                  category=category)
-            return HttpResponseRedirect('test.html')
+            return redirect('/event/')
             # do something.
         else:
             return render(request, "event_post.html", data)
     else:
         return render(request, "event_post.html", data)
 
+@login_required
+def settings(request):
+    form_class = UserForm
+    second_form = ProfileForm
+    user = request.user
+    userdata = User.objects.get(username=user)
+    profiledata = UserProfile.objects.get(user=user)
+    data = {
+        'userform': form_class(instance=userdata),
+        'profileform': second_form(instance=profiledata),
+    }
+    if request.method == 'POST':
+        form = form_class(request.POST, instance=userdata)
+        sub_form = second_form(request.POST, instance=profiledata)
+        if form.is_valid() and sub_form.is_valid():
+            username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
 
-# def settings(request):
-#     Userform = forms.UserForm
-#     data = {
-#         'userform': Userform
-#     }
-#
-#     if request.method == 'POST':
-#         formset = Userform(request.POST)
-#         if formset.is_valid():
-#             user = request.user
-#             username = formset.cleaned_data['username']
-#             first_name = formset.cleaned_data['first_name']
-#             last_name = formset.cleaned_data['last_name']
-#             password1 = formset.cleaned_data['password1']
-#             password2 = formset.cleaned_data['password2']
-#
-#             User.objects.filter(id=user).update(username=username, first_name=first_name, last_name=last_name,
-#                                                 password1=password1, password2=password2)
-#
-#             return HttpResponseRedirect('profile.html')
-#         else:
-#             return render(request, 'settings.html', data)
-#     else:
-#         return render(request, 'settings.html', data)
+            if User.objects.filter(username=user).exists():
+                User.objects.filter(username=user).update(username=username, first_name=first_name, last_name=last_name)
+            else:
+                pass
 
+            # after updateing change bio
+            newuser = User.objects.get(username=username)
+
+            bio = sub_form.cleaned_data['bio']
+
+            UserProfile.objects.filter(user=newuser).update(bio=bio)
+
+            return redirect('/users/{}'.format(newuser))
+        else:
+            return render(request, 'settings.html', data)
+    else:
+        return render(request, 'settings.html', data)
+
+@login_required
 def bio(request):
     Profileform = forms.ProfileForm
     data = {
@@ -146,12 +194,12 @@ def bio(request):
     if request.method == 'POST':
         formset = Profileform(request.POST)
         if formset.is_valid():
-            user = request.user.id
+            user = request.user
             bio = formset.cleaned_data['bio']
 
-            UserProfile.objects.filter(user=user).update(bio=bio)
+            UserProfile.objects.filter(username=user).update(bio=bio)
 
-            return HttpResponseRedirect('profile')
+            return redirect('/users/{}'.format(user))
         else:
             return render(request, 'bio.html', data)
     else:

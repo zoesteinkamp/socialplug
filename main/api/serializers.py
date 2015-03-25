@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from allauth.socialaccount.models import SocialAccount
-from main.models import Event
+from main.models import Event, UserProfile
 
 # class GlobalSearchSerializer(serializers.ModelSerializer):
 #
@@ -26,6 +26,10 @@ class SocialAccountSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
 
 class StashStateSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,30 +1,39 @@
 {% load url from future %}
 {% load staticfiles %}
 {% load i18n %}
+{% load static swampdragon_tags %}
+{% swampdragon_settings %}
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block head_title %}{% endblock %}</title>
+    <title>{% block head_title %}GoFriend{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
 
   <!-- css -->
-    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/flatly/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-theme.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/simple-sidebar.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/dropdown.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/chosen.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/datepicker.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "css/stylesheet.css" %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-social.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}">
     <!-- js -->
     <script src="{% static "jsdown/jquery.js" %}"></script>
     <script src="{% static "jsdown/bootstrap.min.js" %}"></script>
     <script src="{% static "jsdown/jquery.easing.min.js" %}"></script>
     <script src="{% static "jsdown/JqueryDropdown.js" %}"></script>
     <script src="{% static "jsdown/carousel.js" %}"></script>
-    <script src="{% static "jsdown/../../main/static/js/maps.js" %}"></script>
+  <!--   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvNUqhQ0uveRp4BlIEY8VofD3xbDFT28U"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script> -->
+    {% swampdragon_settings %}
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
+    <script type="text/javascript" src="{% static 'swampdragon/js/dist/swampdragon.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'swampdragon/js/dist/datamapper.min.js' %}"></script>
+    <script src="{% static "js/maps.js" %}"></script>
+    <script src="{% static "js/events.js" %}"></script>
     <script src="{% static "jsdown/dropdown.js" %}"></script>
     <script src="{% static "jsdown/chosen.jquery.min.js" %}"></script>
     <script src="{% static "jsdown/chosen.proto.min.js" %}"></script>
@@ -38,32 +47,23 @@
             $('#datetimepicker9').datetimepicker();
         });
     </script>
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script>
-        var map;
-        function initialize() {
-          var mapOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(-34.397, 150.644)
-          };
-          map = new google.maps.Map(document.getElementById('map-canvas'),
-              mapOptions);
-        }
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+{#    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>#}
+{#    <script>#}
+{#        var map;#}
+{#        function initialize() {#}
+{#          var mapOptions = {#}
+{#            zoom: 14,#}
+{#            center: new google.maps.LatLng(37.767711, -122.446803)#}
+{#          };#}
+{#          map = new google.maps.Map(document.getElementById('map-canvas'),#}
+{#              mapOptions);#}
+{#        }#}
+{##}
+{#        google.maps.event.addDomListener(window, 'load', initialize);#}
+{#    </script>#}
 
   </head>
   <body>
-    {% block body %}
-
     {% if messages %}
     <div>
       <strong>Messages:</strong>
@@ -74,12 +74,8 @@
       </ul>
     </div>
     {% endif %}
-
-        {% block home_link %}
-        <!-- The Start of the Header Nav Bar -->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse navbar-fixed-top navstuff">
           <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -87,54 +83,54 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand">Social Plug</a>
+              <a class="navbar-brand" style=" color: #1EBE39; padding-left: 40px" href="/"><i class="fa fa-user-plus" style="padding-right: 4px"></i>
+                  <span style="color: white">Go</span>Friend</a>
             </div>
-
-
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav navbar-right">
-              {% if user.is_authenticated %}
-                        <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
-                                <li role="presentation" class="divider"></li>
-                              <li role="presentation" class="text-center"><a role="menuitem" tabindex="-1" href="#">Settings</a></li>
-                                <li role="presentation" class="divider"></li>
-                              <li role="presentation" class="text-center">
-                                  <a role="menuitem" tabindex="-1" id='logout_submit' onclick="document.getElementById('logout_form').submit()">
-                                  <form method="post" id="logout_form" action="{% url 'account_logout' %}">
-                                      {% csrf_token %}
-                                      {% if redirect_field_value %}
-                                      <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
-                                      {% endif %}
-                                      Log Out
-                                  </form>
-                                  </a>
-                              </li>
-                            </ul>
-                        </li>
-
-              {% else %}
-                  <li><a href="{% url 'account_login' %}">Sign In</a></li>
-                  <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-              {% endif %}
-                </ul>
-              </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if user.is_authenticated %}
+              <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+              </ul>
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="User or Event">
+                </div>
+                <a href="{% url 'bigsearch' %}" type="submit" class="btn btn-success" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></a>
+              </form>
+            {% else %}
+            {% endif %}
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                                      <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
+                                      <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
+                                        <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
+                      {% else %}
+                          <li><a href="{% url 'account_login' %}">Sign In</a></li>
+                          <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                      {% endif %}
+              </ul>
+            </div>
+          </div>
         </nav>
 
-        <!-- The end of the nav header -->
+    <div id="wrap" style="padding-top: 50px">
+        <div class="container">
 
+        {% block content %}
         {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+        {% block hugepage %}
+        {% endblock %}
 
-    {% endblock %}<!--end body block-->
+        </div>
+    </div>
 
-    {% block extra_body %}
-    {% endblock %}
+
+    <div id="footer">
+          <div class="container text-center">
+             <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+          </div>
+    </div>
 
   </body>
 </html>

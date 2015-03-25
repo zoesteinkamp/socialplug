@@ -56,7 +56,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_forms_bootstrap',
     'datetimewidget',
-
 )
 
 MIDDLEWARE_CLASSES = (
@@ -200,6 +199,17 @@ ACCOUNT_USERNAME_MIN_LENGTH = 2
 ACCOUNT_PASSWORD_MIN_LENGTH = 6
 SOCIALACCOUNT_AUTO_SIGNUP = True
 # SOCIALACCOUNT_ADAPTER = 'main.adapter.MySocialAccountAdapter'
+
+AWESOME_AVATAR = {
+    'width': 200,
+    'height': 200,
+
+    'select_area_width': 400,
+    'select_area_height': 300,
+
+    'save_quality': 90,
+    'save_format': 'png',
+    }
 
 try:
     from local_settings import *

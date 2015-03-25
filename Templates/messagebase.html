@@ -13,7 +13,13 @@
       </div>
 
 
-      <div class="col-sm-3">
-            <div>{% block sidebar %}{% endblock %}</div>
-      </div>
+
+<div class="col-sm-2 sidebar">
+    <div class="list-group">
+        <span class="list-group-item btn-success">
+            Messages
+        </span>
+        {% block sidebar %}{% endblock %}
+    </div>
+</div>
 {% endblock %}

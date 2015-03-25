@@ -125,7 +125,7 @@ $( "#target" ).click(function() {
               console.log(items)
           });
 
-    }else if(title === "" && distance != "" && category!="" && date===""){ // only category and distance
+    }else if(title === "" && distance != "" && category!= "" && date===""){ // only category and distance
         var paramed = {'category': category, 'distance': distance};
         var param = jQuery.param( paramed );
         $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
@@ -309,21 +309,20 @@ $( "#target" ).click(function() {
     }else if(title === "" && distance === "" && category !="" && date===""){ // only category
         var paramed = { 'category': category};
         var param = jQuery.param( paramed );
+        var useful;
+        var go;
         console.log(param);
           $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
               console.log(data)
-          var items = [];
-          for (key in data) {
-              var hi = data[key]
-              var user = hi.user;
-
-              //$.each(data[key], function (id, val) {
-              //    items.push(id + val);
-
-              //});
-          }
-              console.log(items)
+              var items = [];
+              $.each(data, function (i) {
+                  useful = data[i];
+                  go = data[i].user;
+                  console.log(go);
+                      $("#post").replaceWith('<div class="col-sm-8">' + '<h2 >' + data[i].title + '</h2>' + '<p>' + data[i].description + '</p>' + '</div>');
+              });
           });
+                  //console.log(items)
 
 
     }else if(title === "" && distance === "" && category==="" && date!=""){ //only date

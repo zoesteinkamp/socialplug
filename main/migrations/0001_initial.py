@@ -102,7 +102,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('bio', models.TextField(help_text=b'Tell us about You', blank=True)),
-                ('avatar_url', models.CharField(default=b'/main/static/img/user-avatar.png', max_length=255, null=True, blank=True)),
+                ('avatar_url', models.CharField(default=b'main/static/img/user-avatar.png', max_length=255, null=True, blank=True)),
                 ('user', models.OneToOneField(related_name='profile', to=settings.AUTH_USER_MODEL)),
             ],
             options={

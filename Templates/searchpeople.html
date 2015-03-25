@@ -1,14 +1,7 @@
-
 {% extends 'home.html' %}
 {%  load staticfiles %}
+
 {% block main %}
-      <style>
-          html, body, #map-canvas {
-            height: 400px;
-            margin: 0;
-            padding: 0;
-          }
-    </style>
 
       <div class="col-sm-7">
           <div class="row">
@@ -24,4 +17,12 @@
         <div>test</div>
     </div>
     </div>
+
+      <style>
+          #map-canvas {
+            height: 400px;
+            margin: 0;
+            padding: 0;
+          }
+    </style>
 {% endblock main %}

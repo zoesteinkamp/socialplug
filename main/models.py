@@ -7,6 +7,8 @@ from allauth.account.models import EmailAddress
 from django.db.models import signals
 from main.utils import create_profile
 from geopy.geocoders import Nominatim
+from socialplug.settings import STATIC_URL
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -71,7 +73,7 @@ class Music(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
     bio = models.TextField(help_text='Tell us about You', blank=True)
-    avatar_url = models.CharField(default='static/img/user-avatar.png', max_length=255, blank=True, null=True)
+    avatar_url = models.CharField(default=STATIC_URL +'img/user-avatar.png', max_length=255, blank=True, null=True)
     # setting avatar url based on social or local auth
 
     def set_avatar_url(self, request):
@@ -244,9 +246,9 @@ class Event(models.Model):
     )
     user = models.ForeignKey(User)
     title = models.CharField(max_length=100)
-    zipcode = models.IntegerField(max_length=60)
-    state = models.CharField(max_length=70)
     address = models.CharField(max_length=100)
+    state = models.CharField(max_length=70)
+    zipcode = models.IntegerField(max_length=60)
     date = models.DateField()
     time = models.TimeField()
     description = models.TextField()

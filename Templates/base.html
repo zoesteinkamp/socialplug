@@ -41,40 +41,9 @@
     <script src="{% static "jsdown/moment.js" %}"></script>
     <script src="{% static "jsdown/bootstrap-datepicker.js" %}"></script>
 
-
-    <!-- date picker script -->
-     <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker9').datetimepicker();
-        });
-    </script>
-{#    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>#}
-{#    <script>#}
-{#        var map;#}
-{#        function initialize() {#}
-{#          var mapOptions = {#}
-{#            zoom: 14,#}
-{#            center: new google.maps.LatLng(37.767711, -122.446803)#}
-{#          };#}
-{#          map = new google.maps.Map(document.getElementById('map-canvas'),#}
-{#              mapOptions);#}
-{#        }#}
-{##}
-{#        google.maps.event.addDomListener(window, 'load', initialize);#}
-{#    </script>#}
-
   </head>
   <body>
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-	{% for message in messages %}
-	<li>{{message}}</li>
-	{% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+
 
         <nav class="navbar navbar-inverse navbar-fixed-top navstuff">
           <div class="container-fluid">
@@ -85,30 +54,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" style=" color: #1EBE39" href="/"><i class="fa fa-user-plus" style="padding-right: 4px"></i>
+              <a class="navbar-brand inline-object" style="color: #1EBE39;" href="/"><img src="{% static 'favicon/favicon-32x32.png' %}" style="float: left">
                   <span style="color: white">Go</span>Friend</a>
             </div>
-          {% if user.is_authenticated %}
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if user.is_authenticated %}
               <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
+                <li><a href="/" >Home</a></li>
               </ul>
-
               <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="User or Event">
                 </div>
-                <a href="" type="submit" class="btn btn-success" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></a>
+                <a href="" type="submit" class="btn btn-success" id="logout" style="padding: 14px; margin-top: -1px"><i class="fa fa-search"></i></a>
               </form>
             {% else %}
             {% endif %}
               <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                                      </li>
                                       <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
-                                      <li><a href="#"><i class="fa fa-wrench"></i>Settings</a></li>
-                                        <li><a href="{% url 'account_logout' %}" id="logout"><i class="fa fa-sign-out"></i>Log out</a></li>
-                                    </ul>
+                                      <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
+                                        <li><a href="{% url 'account_logout' %}" id="logout" ><i class="fa fa-sign-out"></i>Log out</a></li>
                       {% else %}
                           <li><a href="{% url 'account_login' %}">Sign In</a></li>
                           <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
@@ -117,22 +83,24 @@
             </div>
           </div>
         </nav>
-    <div>
-        <h4><a href="{% url 'privacypolicy'%}">Privacy Policy</a></h4>
-    </div>
-    <div class="container" style="padding-top: 100px">
+
+    <div id="wrap" style="padding-top: 50px">
+        <div class="container">
 
         {% block content %}
         {% endblock %}
 
-            {% block hugepage %}
+        {% block hugepage %}
+        {% endblock %}
 
-            {% endblock %}
+        </div>
     </div>
 
-    {% block extra_body %}
-    {% endblock %}
 
+    <div id="footer">
+          <div class="container text-center">
+             <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+          </div>
+    </div>
   </body>
 </html>
-
