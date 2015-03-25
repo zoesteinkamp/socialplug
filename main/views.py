@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
 from geopy.distance import great_circle
 from dragonapp.models import LocationCurrent
 from main import forms
@@ -16,39 +15,39 @@ def index(request):
         id = request.user.id
         user = User.objects.get(id=id)
 
-        username = LocationCurrent.objects.get(user=request.user.id)
-        user_location = (username.latitude, username.longititude)
-        events = Event.objects.all()
-        events_in_five = []
-        events_in_50 = []
-        events_over_50 = []
-
-        for event in events:
-            event_location = (event.latitude, event.longitude)
-            distance = great_circle(user_location, event_location).miles
-
-            if distance < 5:
-                event_in_distance = Event.objects.get(title=event)
-                events_in_five.append(event_in_distance)
-            else:
-                pass
-
-            if 5 < distance < 50:
-                event_in_distance = Event.objects.get(title=event)
-                events_in_50.append(event_in_distance)
-            else:
-                pass
-
-            if distance > 50:
-                event_in_distance = Event.objects.get(title=event)
-                events_over_50.append(event_in_distance)
-            else:
-                pass
+        # username = LocationCurrent.objects.get(user=request.user.id)
+        # user_location = (username.latitude, username.longititude)
+        # events = Event.objects.all()
+        # events_in_five = []
+        # events_in_50 = []
+        # events_over_50 = []
+        #
+        # for event in events:
+        #     event_location = (event.latitude, event.longitude)
+        #     distance = great_circle(user_location, event_location).miles
+        #
+        #     if distance < 5:
+        #         event_in_distance = Event.objects.get(title=event)
+        #         events_in_five.append(event_in_distance)
+        #     else:
+        #         pass
+        #
+        #     if 5 < distance < 50:
+        #         event_in_distance = Event.objects.get(title=event)
+        #         events_in_50.append(event_in_distance)
+        #     else:
+        #         pass
+        #
+        #     if distance > 50:
+        #         event_in_distance = Event.objects.get(title=event)
+        #         events_over_50.append(event_in_distance)
+        #     else:
+        #         pass
 
         data = {
-            'events_in_five': events_in_five,
-            'events_in_50': events_in_50,
-            'events_over_50': events_over_50,
+            # 'events_in_five': events_in_five,
+            # 'events_in_50': events_in_50,
+            # 'events_over_50': events_over_50,
             'user': user,
         }
     else:
@@ -95,9 +94,36 @@ def searchpeople(request):
     id = request.user.id
     user = User.objects.get(id=id)
     swamp = LocationCurrent.objects.get(user=user.id)
-    data={
+
+    username = LocationCurrent.objects.get(username=user)
+    user_location = (username.latitude, username.longititude)
+    people = LocationCurrent.objects.all().exclude(username=request.user)
+    people_in_five = []
+    people_with_interests = {}
+
+    for person in people:
+
+        person_location = (person.latitude, person.longititude)
+        distance = great_circle(user_location, person_location).miles
+
+        if distance < 5:
+            people_in_distance = LocationCurrent.objects.get(user=person)
+            people_in_five.append(people_in_distance)
+
+    for person in people_in_five:
+        person_username = User.objects.get(username=person.username)
+        similar_interests = Interest.objects.filter(user=person_username).filter(user=user)
+        user_profile = UserProfile.objects.get(user_id=person.user)
+        people_with_interests[user_profile] = similar_interests
+
+
+    print people_with_interests
+
+
+    data = {
         'user': user,
-        'swamp': swamp
+        'swamp': swamp,
+        'people_with_interests': people_with_interests,
     }
     return render(request, 'searchpeople.html', data)
 

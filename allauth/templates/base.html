@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block head_title %}GoFriend{% endblock %}</title>
+    <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
 
@@ -32,6 +32,7 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3&libraries=geometry"></script>
     <script type="text/javascript" src="{% static 'swampdragon/js/dist/swampdragon.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'swampdragon/js/dist/datamapper.min.js' %}"></script>
+    <script src="{% static "js/swamp.js" %}"></script>
     <script src="{% static "js/maps.js" %}"></script>
     <script src="{% static "js/events.js" %}"></script>
     <script src="{% static "jsdown/dropdown.js" %}"></script>
@@ -64,16 +65,8 @@
 
   </head>
   <body>
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-	{% for message in messages %}
-	<li>{{message}}</li>
-	{% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+    <div id="wrap">
+
         <nav class="navbar navbar-inverse navbar-fixed-top navstuff">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -83,7 +76,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" style=" color: #1EBE39; padding-left: 40px" href="/"><i class="fa fa-user-plus" style="padding-right: 4px"></i>
+              <a class="navbar-brand inline-object" style="color: #1EBE39;" href="/"><img src="{% static 'favicon/favicon-32x32.png' %}" style="float: left">
                   <span style="color: white">Go</span>Friend</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -103,7 +96,7 @@
                 {% if user.is_authenticated %}
                                       <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
                                       <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
-                                        <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
+                                        <li><a href="{% url 'account_logout' %}" id="logout"><i class="fa fa-sign-out"></i>Log out</a></li>
                       {% else %}
                           <li><a href="{% url 'account_login' %}">Sign In</a></li>
                           <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
@@ -113,8 +106,8 @@
           </div>
         </nav>
 
-    <div id="wrap" style="padding-top: 50px">
-        <div class="container">
+
+    <div style="padding-top: 80px">
 
         {% block content %}
         {% endblock %}
@@ -122,13 +115,15 @@
         {% block hugepage %}
         {% endblock %}
 
-        </div>
+    </div>
     </div>
 
 
     <div id="footer">
-          <div class="container text-center">
-             <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+          <div class="container-fuild">
+              <div class="row">
+                    <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+                  </div>
           </div>
     </div>
 

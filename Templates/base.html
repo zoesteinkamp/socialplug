@@ -65,7 +65,7 @@
 
   </head>
   <body>
-
+    <div id="wrap">
 
         <nav class="navbar navbar-inverse navbar-fixed-top navstuff">
           <div class="container-fluid">
@@ -96,7 +96,7 @@
                 {% if user.is_authenticated %}
                                       <li><a href="{% url 'profile'  request.user.username%}"><i class="fa fa-user"></i>Profile</a></li>
                                       <li><a href="{% url 'settings' %}"><i class="fa fa-wrench"></i>Settings</a></li>
-                                        <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i>Log out</a></li>
+                                        <li><a href="{% url 'account_logout' %}" id="logout"><i class="fa fa-sign-out"></i>Log out</a></li>
                       {% else %}
                           <li><a href="{% url 'account_login' %}">Sign In</a></li>
                           <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
@@ -106,8 +106,8 @@
           </div>
         </nav>
 
-    <div id="wrap" style="padding-top: 50px">
-        <div class="container">
+
+    <div style="padding-top: 80px">
 
         {% block content %}
         {% endblock %}
@@ -115,13 +115,15 @@
         {% block hugepage %}
         {% endblock %}
 
-        </div>
+    </div>
     </div>
 
 
     <div id="footer">
-          <div class="container text-center">
-             <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+          <div class="container-fuild">
+              <div class="row">
+                    <a href="{% url 'privacypolicy' %}">Privacy Policy</a>
+                  </div>
           </div>
     </div>
 
