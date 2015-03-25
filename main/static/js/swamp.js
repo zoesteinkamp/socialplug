@@ -1,6 +1,5 @@
-
 swampdragon.ready(function () {
-var  deleteddragon = 0;
+    var  currentdragon;
     swampdragon.open(function() {
         // Subscribing to all channels provided by locationcurrent-router
         swampdragon.subscribe('locationcurrent', 'swampy-channel', null, function (context, data) {
@@ -9,7 +8,6 @@ var  deleteddragon = 0;
         }, function (context, data) {
             console.log("Failure to subscribe")
         });
-
 
           var currentlocation = function() {
             if (navigator.geolocation) {
@@ -47,7 +45,7 @@ var  deleteddragon = 0;
                     });
 
                 if (prevUserFnd) {
-                    deleteddragon = founditem.id;
+                    currentdragon = founditem.id;
                     if ((founditem.latitude !== latitudenew) || (founditem.longitude !== longitudenew)) {
                               var id = founditem.id;
                               swampdragon.update('locationcurrent', {user: user, latitude: latitudenew, longititude: longitudenew, username: username, id: id}, function (context, data) {
@@ -69,7 +67,7 @@ var  deleteddragon = 0;
                             username: username
                         }, function (context, data) {
                             console.log("data created", data);
-                            deleteddragon = data.id;
+                            currentdragon = data.id;
                             getUser()
                         }, function (context, data) {
                             console.log("You may not be created")
@@ -188,23 +186,21 @@ var  deleteddragon = 0;
                         });
                     }
 
-                     $(document).ready(function(){
-                        $('#logout').click( function(){
-                                console.log("Dont show up");
-                                console.log(deleteddragon);
-                                swampdragon.delete('locationcurrent', {id: deleteddragon}, function (context, data) {
-                                    console.log("I am gone" + data)
-                                }, function (context, data) {
-                                    console.log("Could not find user to delete")
-                                });
-                            });
-                            });
 
-
+                    $("#logout").click(function () {
+                        console.log("Dont show up")
+                        swampdragon.delete('locationcurrent', {id: currentdragon}, function (context, data) {
+                        }, function (context, data) {
+                            console.log("Could not find user to delete")
+                        });
+                    });
 
 
                 });
             });
+
+
+
 
 
 

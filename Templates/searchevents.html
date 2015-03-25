@@ -8,7 +8,7 @@
       <div class="row">
           <h2>Find Events</h2><p>
       </div>
-        <nav class="navbar navbar-default">
+          <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -86,48 +86,27 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-{#      <div class="col-sm-8" id="post">#}
-{#          <ul>#}
-{#        {% for event in events %}#}
-{#            <li>#}
-{#            <h2>{{ event.title }}</h2>#}
-{#            <p>{{ event.description }}</p>#}
-{#            </li>#}
-{#        {% endfor %}#}
-{#        </ul>#}
+{#{% for event in events %}#}
+<div class="col-sm-12" id="post">
+{#<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">#}
+{#  <div class="panel panel-default">#}
+{#    <div class="panel-heading">#}
+{#      <h4 class="panel-title">#}
+{#        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">{{ event.title }} </a>#}
+{#         <img class="inline-block float-right" src=""  alt="" style="height: 80px; width: 80px;"/>#}
+{##}
+{#      </h4>#}
+{#    </div>#}
+{#    <div id="collapse{{ event.id }}" class="panel-collapse collapse in">#}
+{#      <div class="panel-body">#}
+{#        <p>{{ event.description }}<p>#}
 {#      </div>#}
-<div class="col-sm-8" id="post">
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <div class="media-body">
-    <h4 class="media-heading">Media heading</h4>
-           </div>
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
 
-             <div class="media">
-        <div class="media-right">
-        <img class="media-object" src="..." alt="...">
-        </div>
-              </div>
-
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
-    </div>
-  </div>
 </div>
-</div>
-
-
-
-
-
+{#{% endfor %}#}
 </div>
 
 

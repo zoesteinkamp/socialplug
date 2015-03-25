@@ -294,7 +294,6 @@ $( "#target" ).click(function() {
         var paramed = {'distance': distance};
         var param = jQuery.param( paramed );
         $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
-
           var items = [];
           for (key in data) {
               $.each(data, function () {
@@ -313,15 +312,22 @@ $( "#target" ).click(function() {
         var go;
         console.log(param);
           $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
-              console.log(data)
-              var items = [];
               $.each(data, function (i) {
                   useful = data[i];
                   go = data[i].user;
-                  console.log(go);
-                      $("#post").replaceWith('<div class="col-sm-8">' + '<h2 >' + data[i].title + '</h2>' + '<p>' + data[i].description + '</p>' + '</div>');
+                  console.log(data[i].image);
+                      $("#post").prepend('<div class="col-sm-12" id="post">'+ '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">'+
+  '<div class="panel panel-default">'+ '<div class="panel-heading">' + '<h4 class="panel-title">' + '<a data-toggle="collapse" data-parent="#accordion" href="#collapse'+ data[i].id + ' "> ' + data[i].title + '</a>'+
+         '<img class="inline-block float-right" src="' + data[i].image +'" alt="" style="height: 80px; width: 80px;"/>'+
+      '</h4>'+ '</div>'+ '<div id="collapse'+ data[i].id + '" class="panel-collapse collapse in">'+
+      '<div class="panel-body">'+ '<p>' + data[i].description + '<p>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>')
+
+
+
               });
           });
+
+
                   //console.log(items)
 
 

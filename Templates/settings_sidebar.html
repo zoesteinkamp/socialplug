@@ -3,23 +3,19 @@
 
 {% block content %}
 
-
     <div class="col-sm-2 sidebar">
         <div class="list-group">
-            <span class="list-group-item btn-success">
-                Settings
-            </span>
-            <a href="{% url 'settings' %}" class="list-group-item">
-                Profile Settings
-            </a>
-            <a href="{% url 'socialaccount_connections' %}" class="list-group-item">
-                Social Accounts Settings
-            </a>
+            <span class="list-group-item btn-success">Settings</span>
+            <a href="{% url 'settings' %}" class="list-group-item">Profile Settings</a>
+            <a href="{% url 'socialaccount_connections' %}" class="list-group-item">Social Accounts Settings</a>
         </div>
     </div>
-        <div class="col-sm-9">
-        {% block main %}
-        {% endblock %}
-        </div>
+
+
+            <div class="container">
+            {% block main %}
+
+            {% endblock main %}
+            </div>
 
 {% endblock  %}

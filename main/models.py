@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.forms import widgets
+
 from geopy.exc import GeocoderTimedOut
 from allauth.account.models import EmailAddress
 from django.db.models import signals
@@ -255,6 +256,7 @@ class Event(models.Model):
     category = models.CharField(max_length=90, choices=CATEGORY_CHOICES)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
 
     def __unicode__(self):
         return self.title
@@ -273,6 +275,16 @@ class Event(models.Model):
                 self.latitude = location.latitude
                 self.longitude = location.longitude
 
+    def images(self):
+        if self.category == 'Crafts':
+            self.image='img/craft.jpg'
+
     def save(self, *args, **kwargs):
         self.location()
+        self.images()
         super(Event, self).save(*args, **kwargs)
+
+
+
+
+

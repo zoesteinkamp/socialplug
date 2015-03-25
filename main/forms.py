@@ -10,7 +10,7 @@ class EventForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        exclude = ['user', 'latitude', 'longitude']
+        exclude = ['user', 'latitude', 'longitude', 'image']
 
 class ProfileForm(forms.ModelForm):
     class Meta:

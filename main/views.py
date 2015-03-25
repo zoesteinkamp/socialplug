@@ -2,7 +2,6 @@ from user import username
 import user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
 from geopy.distance import great_circle
 from dragonapp.models import LocationCurrent
 from main import forms
@@ -97,9 +96,36 @@ def searchpeople(request):
     id = request.user.id
     user = User.objects.get(id=id)
     swamp = LocationCurrent.objects.get(user=user.id)
-    data={
+
+    username = LocationCurrent.objects.get(username=user)
+    user_location = (username.latitude, username.longititude)
+    people = LocationCurrent.objects.all().exclude(username=request.user)
+    people_in_five = []
+    people_with_interests = {}
+
+    for person in people:
+
+        person_location = (person.latitude, person.longititude)
+        distance = great_circle(user_location, person_location).miles
+
+        if distance < 5:
+            people_in_distance = LocationCurrent.objects.get(user=person)
+            people_in_five.append(people_in_distance)
+
+    for person in people_in_five:
+        person_username = User.objects.get(username=person.username)
+        similar_interests = Interest.objects.filter(user=person_username).filter(user=user)
+        user_profile = UserProfile.objects.get(user_id=person.user)
+        people_with_interests[user_profile] = similar_interests
+
+
+    print people_with_interests
+
+
+    data = {
         'user': user,
-        'swamp': swamp
+        'swamp': swamp,
+        'people_with_interests': people_with_interests,
     }
     return render(request, 'searchpeople.html', data)
 
