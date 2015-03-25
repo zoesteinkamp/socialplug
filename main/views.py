@@ -110,14 +110,18 @@ def searchpeople(request):
             people_in_distance = LocationCurrent.objects.get(user=person)
             people_in_five.append(people_in_distance)
 
-    for person in people_in_five:
-        person_username = User.objects.get(username=person.username)
-        similar_interests = Interest.objects.filter(user=person_username).filter(user=user)
-        user_profile = UserProfile.objects.get(user_id=person.user)
-        people_with_interests[user_profile] = similar_interests
+    if people_in_five:
+        for person in people_in_five:
+            person_username = User.objects.get(username=person.username)
+            similar_interests = Interest.objects.filter(user=person_username).filter(user=user)
+            if len(similar_interests) > 0:
+                user_profile = UserProfile.objects.get(user_id=person.user)
+                people_with_interests[user_profile] = similar_interests
+            else:
+                print 'no similar interests'
+    else:
+        print 'people with near you'
 
-
-    print people_with_interests
 
 
     data = {
@@ -216,7 +220,7 @@ def bio(request):
             user = request.user
             bio = formset.cleaned_data['bio']
 
-            UserProfile.objects.filter(username=user).update(bio=bio)
+            UserProfile.objects.filter(user=user).update(bio=bio)
 
             return redirect('/users/{}'.format(user))
         else:
