@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.sites.models import Site
 from django.http import (HttpResponseRedirect, Http404,
@@ -12,6 +13,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import redirect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.utils.decorators import method_decorator
+
+from dragonapp.models import LocationCurrent
 
 from ..exceptions import ImmediateHttpResponse
 from ..utils import get_user_model, get_form_class

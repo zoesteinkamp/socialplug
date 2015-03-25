@@ -12,13 +12,47 @@ from main.models import UserProfile
 
 def index(request):
     if request.user.is_authenticated():
+
         id = request.user.id
         user = User.objects.get(id=id)
-        data={
+
+        username = LocationCurrent.objects.get(user=request.user.id)
+        user_location = (username.latitude, username.longititude)
+        events = Event.objects.all()
+        events_in_five = []
+        events_in_50 = []
+        events_over_50 = []
+
+        for event in events:
+            event_location = (event.latitude, event.longitude)
+            distance = great_circle(user_location, event_location).miles
+
+            if distance < 5:
+                event_in_distance = Event.objects.get(title=event)
+                events_in_five.append(event_in_distance)
+            else:
+                pass
+
+            if 5 < distance < 50:
+                event_in_distance = Event.objects.get(title=event)
+                events_in_50.append(event_in_distance)
+            else:
+                pass
+
+            if distance > 50:
+                event_in_distance = Event.objects.get(title=event)
+                events_over_50.append(event_in_distance)
+            else:
+                pass
+
+        data = {
+            'events_in_five': events_in_five,
+            'events_in_50': events_in_50,
+            'events_over_50': events_over_50,
             'user': user,
         }
     else:
-        data= {}
+        data = {}
     return render(request, "home.html", data)
 
 @login_required
@@ -75,42 +109,7 @@ def route(request, template='messagebase.html'):
 
 @login_required
 def searchevent(request):
-    user = LocationCurrent.objects.get(user=request.user.id)
-    user_location = (user.latitude, user.longititude)
-    events = Event.objects.all()
-    events_in_five = []
-    events_in_50 = []
-    events_over_50 = []
-
-    for event in events:
-        event_location = (event.latitude, event.longitude)
-        distance = great_circle(user_location, event_location).miles
-
-        if distance < 5:
-            event_in_distance = Event.objects.get(title=event)
-            events_in_five.append(event_in_distance)
-        else:
-            pass
-
-        if 5 < distance < 50:
-            event_in_distance = Event.objects.get(title=event)
-            events_in_50.append(event_in_distance)
-            print event_in_distance
-        else:
-            pass
-
-        if distance > 50:
-            event_in_distance = Event.objects.get(title=event)
-            events_over_50.append(event_in_distance)
-        else:
-            pass
-
-    data = {
-        'events_in_five': events_in_five,
-        'events_in_50': events_in_50,
-        'events_over_50': events_over_50,
-    }
-    return render(request, 'searchevents.html', data)
+    return render(request, 'searchevents.html', { 'events': Event.objects.all(), 'list': list(Event.objects.all())})
 
 @login_required
 def event_post(request):
