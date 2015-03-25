@@ -311,6 +311,7 @@ $( "#target" ).click(function() {
         var useful;
         var go;
         console.log(param);
+        $('#startscreen').remove();
           $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
               $.each(data, function (i) {
                   useful = data[i];
