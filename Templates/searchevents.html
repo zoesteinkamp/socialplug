@@ -1,137 +1,165 @@
 {% extends 'home.html' %}
 {% load staticfiles %}
+{% load app_filters %}
 
 {% block main %}
-          <style>
-      html, body, #map{
-        height: 400px;
-        margin: 0;
-        padding: 0;
-      }
-          #panel {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        margin-left: -180px;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-      }
-    </style>
 
-  <div class="col-sm-7">
-      <div class="row">
-          <h2>Find Events</h2><p>
-      </div>
-      <div class="row">
-
-{#        <div class="col col-sm-5 col-sm-offset-2">#}
-{#            <div class="form-group">#}
-{#                <div class='input-group date'  id='datetimepicker9'>#}
-{#                    <input type='text' class="form-control" placeholder="Date" />#}
-{#                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-           <form class="col-sm-8 col-sm-offset-1" role="search">
-                <div class="form-group">
-                  <input type="number" class="form-control" id="datesearch" placeholder="Date Search">
-                </div>
-              </form>
-
-
-
-          <!-- Distance dropdown -->
-           <form class="col-sm-8 col-sm-offset-1" role="search">
-                <div class="form-group">
-                  <input type="number" class="form-control" id="distancesearch" placeholder="Miles Search">
-                </div>
-              </form>
-              <!-- Distnace end -->
-      </div>
-
-
-
-      <div class="row">
-        <div class="col-sm-10 col-sm-offset-2">
-            <select id="categorysearch" data-placeholder="Choose a Category" class="chosen-select" style="width:350px;" tabindex="2">
-            <option value=""></option>
-            <option value="Buisness">Buisness</option>
-            <option value="Crafts">Crafts</option>
-            <option value="Education">Education</option>
-            <option value="Family">Family</option>
-            <option value="Fashion">Fashion</option>
-            <option value="Fitness"> Fitness</option>
-            <option value="Food"> Food </option>
-            <option value="Learning">Learning</option>
-            <option value="Literature">Literature</option>
-            <option value="Gaming"> Gaming</option>
-            <option value="Music">Music</option>
-            <option value="Outdoor">Outdoors</option>
-            <option value="Pets">Pets</option>
-            <option value="Photography">Photography</option>
-            <option value="Politics">Politics</option>
-            <option value="Technology"> Technology</option>
-            <option value="Television">Television</option>
-            <option value="Special">Special Occasion</option>
-            <option value="Spiritual">Spiritual</option>
-            <option value="Sports"> Sports</option>
-            <option value="Writing">Writing</option>
-          </select>
-        </div >
-      </div>
-      <!-- Category End -->
-
-
-        <!-- Search -->
-        <div class="row"  style="padding-top: 10px">
-            <div class="col-sm-12">
-               <form class="col-sm-8 col-sm-offset-1" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="textsearch" placeholder="Title Search">
-                </div>
-              </form>
-                <button type="submit" class="btn btn-default col-sm-2" id="target" >Search</button>
+{#    <div class="row">#}
+        <div class="col-sm-9">
+            <div class="panel-group col-sm-9" id="accordion">
+                {% for event in events_in_five %}
+                  <div class="panel panel-default btn-success">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">
+                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>
+                      </h4>
+                    </div>
+                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">
+                      <div class="panel-body">{{ event.description }}</div>
+                    </div>
+                  </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- end search-->
-        <hr>
-      <div class="row">
-        <div class="col-sm-8"><h2>Lighweight</h2><p>The new Bootstrap 3 is a smaller build. The separate Bootstrap
-            base and responsive.css files have now been merged into one. There is no
-            more fixed grid, only fluid.</p></div>
-        <div class="col-sm-4"><img class="img-responsive" src="//placehold.it/220x180/666666/FFF"></div>
-      </div>
-        <hr>
-      <div class="row">
-        <div class="col-sm-8"><h2>Lighweight</h2><p>The new Bootstrap 3 is a smaller build. The separate Bootstrap
-            base and responsive.css files have now been merged into one. There is no
-            more fixed grid, only fluid.</p></div>
-        <div class="col-sm-4"><img class="img-responsive" src="//placehold.it/220x180/666666/FFF"></div>
-      </div>
-        <hr>
+{#    </div>#}
 
-  </div>
+{#        <div class="row">#}
+        <div class="col-sm-9">
+            <div class="panel-group col-sm-9" id="accordion">
+                {% for event in events_in_50 %}
+                  <div class="panel panel-default btn-warning">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">
+                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>
+                      </h4>
+                    </div>
+                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">
+                      <div class="panel-body">{{ event.description }}</div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+        </div>
+{#    </div>#}
+            <div class="col-sm-9">
+            <div class="panel-group col-sm-9" id="accordion">
+                {% for event in events_over_50 %}
+                  <div class="panel panel-default btn-danger">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">
+                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>
+                      </h4>
+                    </div>
+                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">
+                      <div class="panel-body">{{ event.description }}</div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+        </div>
 
-
-<!-- script for category -->
- <script type="text/javascript">
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-      '.chosen-select-width'     : {width:"95%"}
-    };
-    for (var selector in config) {
-      var j = $(selector).chosen(config[selector]);
-
-        console.log(j)
-    }
-  </script>
-<script src="{% static "js/events.js" %}"></script>
-<!-- script for date picker -->
+{#      <div class="col-sm-3">#}
+{#          <div class="row">#}
+{#              <h3>Find Events</h3><p>#}
+{#          </div>#}
+{#            <div class="row">#}
+{##}
+{#               <form class="col-sm-12" role="search">#}
+{#                    <div class="form-group">#}
+{#                      <input type="number" class="form-control" id="datesearch" placeholder="Date Search">#}
+{#                    </div>#}
+{#                  </form>#}
+{#            </div>#}
+{##}
+{##}
+{##}
+{#              <!-- Distance dropdown -->#}
+{#              <div class="row">#}
+{#                <div class="col-sm-12">#}
+{#                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"> Distance <span class="caret"></span></button>#}
+{#                        <ul class="dropdown-menu">#}
+{#                          <li><input type="radio" id="1" name="1mile" value="1"><label for="1"> 1 Mile </label></li>#}
+{#                          <li><input type="radio" id="5" name="5mile" value="5"><label for="5"> 5 Miles </label></li>#}
+{#                          <li><input type="radio" id="10" name="10mile" value="10"><label for="10"> 10 Miles </label></li>#}
+{#                          <li><input type="radio" id="50" name="50mile" value="50"><label for="50"> 50 Miles </label></li>#}
+{#                        </ul>#}
+{#                </div>#}
+{#              </div>#}
+{#              <!-- Distnace end -->#}
+{##}
+{##}
+{##}
+{#          <div class="row">#}
+{#            <div class="col-sm-12">#}
+{#                <select id="categorysearch" data-placeholder="Category" class="chosen-select" tabindex="2">#}
+{#                <option value=""></option>#}
+{#                <option value="Buisness">Buisness</option>#}
+{#                <option value="Crafts">Crafts</option>#}
+{#                <option value="Education">Education</option>#}
+{#                <option value="Family">Family</option>#}
+{#                <option value="Fashion">Fashion</option>#}
+{#                <option value="Fitness"> Fitness</option>#}
+{#                <option value="Food"> Food </option>#}
+{#                <option value="Learning">Learning</option>#}
+{#                <option value="Literature">Literature</option>#}
+{#                <option value="Gaming"> Gaming</option>#}
+{#                <option value="Music">Music</option>#}
+{#                <option value="Outdoor">Outdoors</option>#}
+{#                <option value="Pets">Pets</option>#}
+{#                <option value="Photography">Photography</option>#}
+{#                <option value="Politics">Politics</option>#}
+{#                <option value="Technology"> Technology</option>#}
+{#                <option value="Television">Television</option>#}
+{#                <option value="Special">Special Occasion</option>#}
+{#                <option value="Spiritual">Spiritual</option>#}
+{#                <option value="Sports"> Sports</option>#}
+{#                <option value="Writing">Writing</option>#}
+{#              </select>#}
+{#            </div >#}
+{#          </div>#}
+{#          <!-- Category End -->#}
+{##}
+{##}
+{#            <!-- Search -->#}
+{#            <div class="row">#}
+{#                <div class="col-sm-12">#}
+{#                   <form class="col-sm-12" role="search">#}
+{#                    <div class="form-group">#}
+{#                      <input type="text" class="form-control" id="textsearch" placeholder="Title Search">#}
+{#                    </div>#}
+{#                  </form>#}
+{#                    <div class="row">#}
+{#                    <button type="submit" class="btn btn-default col-sm-2" id="target" >Search</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- end search-->#}
+{#            <hr>#}
+{#      </div>#}
+{##}
+{#</div>#}
+{##}
+{##}
+{#<!-- script for category -->#}
+{# <script type="text/javascript">#}
+{#    var config = {#}
+{#      '.chosen-select'           : {},#}
+{#      '.chosen-select-deselect'  : {allow_single_deselect:true},#}
+{#      '.chosen-select-no-single' : {disable_search_threshold:10},#}
+{#      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},#}
+{#      '.chosen-select-width'     : {width:"95%"}#}
+{#    };#}
+{#    for (var selector in config) {#}
+{#      var j = $(selector).chosen(config[selector]);#}
+{##}
+{#        console.log(j)#}
+{#    }#}
+{#  </script>#}
+{#<script src="{% static "js/events.js" %}"></script>#}
+{#<!-- script for date picker -->#}
 
 
 {% endblock main %}

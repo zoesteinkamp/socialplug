@@ -5,10 +5,16 @@
 {% block message %}
 {% endblock %}
 {% block sidebar %}
-<ul id="sidebar" class="nav nav-stacked affix" style="border-left: 1px solid">
-    <li><a href="{% url 'messages_inbox' %} ">{% trans "Inbox" %}</a></li>
-    <li><a href="{% url 'messages_outbox' %} ">{% trans "Sent Messages" %}</a></li>
-    <li><a href="{% url 'messages_compose' %} ">{% trans "New Message" %}</a></li>
-    <li><a href="{% url 'messages_trash' %} ">{% trans "Trash" %}</a></li>
-</ul>
+        <a href="{% url 'messages_inbox' %}" class="list-group-item">
+            <i class="fa fa-inbox" style="padding-right: 5px"></i>{% trans "Inbox" %}
+        </a>
+        <a href="{% url 'messages_outbox' %}" class="list-group-item">
+            <i class="fa fa-arrow-up" style="padding-right: 5px"></i>{% trans "Sent Messages" %}
+        </a>
+        <a href="{% url 'messages_compose' %}" class="list-group-item">
+            <i class="fa fa-plus-square" style="padding-right: 5px"></i>{% trans "New Message" %}
+        </a>
+        <a href="{% url 'messages_trash' %}" class="list-group-item">
+            <i class="fa fa-trash" style="padding-right: 5px"></i>{% trans "Trash" %}
+        </a>
 {% endblock %}

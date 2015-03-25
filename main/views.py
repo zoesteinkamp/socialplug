@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from geopy.distance import great_circle
 from dragonapp.models import LocationCurrent
 from main import forms
 from main.forms import UserForm, ProfileForm
@@ -47,26 +48,11 @@ def postit(request, id=None):
     }
     return render(request,'postit.html', data)
 
-
-def index(request):
-    if request.user.is_authenticated():
-        id = request.user.id
-        user = User.objects.get(id=id)
-        data={
-            'user': user,
-        }
-    else:
-        data= {}
-    return render(request, "home.html", data)
-
-@login_required
-def eventpost(request, template='event_post.html'):
-    return render(request, template)
-
 @login_required
 def bigsearch(request, template='bigsearch.html'):
     return render(request, template)
 
+@login_required
 def privacypolicy(request, template='privacypolicy.htm'):
     return render(request, template)
 
@@ -89,10 +75,42 @@ def route(request, template='messagebase.html'):
 
 @login_required
 def searchevent(request):
-    return render(request, 'searchevents.html', {
-        'events': Event.objects.all(),
-        'list': list(Event.objects.all()),
-    })
+    user = LocationCurrent.objects.get(user=request.user.id)
+    user_location = (user.latitude, user.longititude)
+    events = Event.objects.all()
+    events_in_five = []
+    events_in_50 = []
+    events_over_50 = []
+
+    for event in events:
+        event_location = (event.latitude, event.longitude)
+        distance = great_circle(user_location, event_location).miles
+
+        if distance < 5:
+            event_in_distance = Event.objects.get(title=event)
+            events_in_five.append(event_in_distance)
+        else:
+            pass
+
+        if 5 < distance < 50:
+            event_in_distance = Event.objects.get(title=event)
+            events_in_50.append(event_in_distance)
+            print event_in_distance
+        else:
+            pass
+
+        if distance > 50:
+            event_in_distance = Event.objects.get(title=event)
+            events_over_50.append(event_in_distance)
+        else:
+            pass
+
+    data = {
+        'events_in_five': events_in_five,
+        'events_in_50': events_in_50,
+        'events_over_50': events_over_50,
+    }
+    return render(request, 'searchevents.html', data)
 
 @login_required
 def event_post(request):
@@ -116,14 +134,14 @@ def event_post(request):
             Event.objects.create(title=title, zipcode=zipcode, state=state, user=user, address=address,
                                  date=date, time=time, description=description,
                                  category=category)
-            return HttpResponseRedirect('test.html')
+            return redirect('/event/')
             # do something.
         else:
             return render(request, "event_post.html", data)
     else:
         return render(request, "event_post.html", data)
 
-
+@login_required
 def settings(request):
     form_class = UserForm
     second_form = ProfileForm
@@ -160,6 +178,7 @@ def settings(request):
     else:
         return render(request, 'settings.html', data)
 
+@login_required
 def bio(request):
     Profileform = forms.ProfileForm
     data = {
@@ -169,12 +188,12 @@ def bio(request):
     if request.method == 'POST':
         formset = Profileform(request.POST)
         if formset.is_valid():
-            user = request.user.id
+            user = request.user
             bio = formset.cleaned_data['bio']
 
-            UserProfile.objects.filter(user=user).update(bio=bio)
+            UserProfile.objects.filter(username=user).update(bio=bio)
 
-            return redirect('/users/{}'.format(newuser))
+            return redirect('/users/{}'.format(user))
         else:
             return render(request, 'bio.html', data)
     else:

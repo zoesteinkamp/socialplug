@@ -12,7 +12,6 @@ class EventForm(forms.ModelForm):
         model = Event
         exclude = ['user', 'latitude', 'longitude']
 
-
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile

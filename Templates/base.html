@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% block head_title %}GoFriend{% endblock %}</title>
+    <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
 
@@ -64,16 +64,8 @@
 
   </head>
   <body>
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-	{% for message in messages %}
-	<li>{{message}}</li>
-	{% endfor %}
-      </ul>
-    </div>
-    {% endif %}
+
+
         <nav class="navbar navbar-inverse navbar-fixed-top navstuff">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -83,7 +75,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" style=" color: #1EBE39" href="/"><i class="fa fa-user-plus" style="padding-right: 4px"></i>
+              <a class="navbar-brand inline-object" style="color: #1EBE39;" href="/"><img src="{% static 'favicon/favicon-32x32.png' %}" style="float: left">
                   <span style="color: white">Go</span>Friend</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -120,9 +112,6 @@
         {% endblock %}
 
         {% block hugepage %}
-        {% endblock %}
-
-        {% block extra_body %}
         {% endblock %}
 
         </div>

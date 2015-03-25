@@ -7,8 +7,39 @@
 {% load staticfiles %}
 {% providers_media_js %}
 
+{% block extra_head %}
+    {% if user.is_authicated %}
+    {% else %}
+    <script src="http://www.webglearth.com/v2/api.js"></script>
+    <script>
+      function initialize() {
+        var earth = new WE.map('earth_div');
+        WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+
+        var marker = WE.marker([37.7913967, -122.4019093]).addTo(earth);
+{#        marker.bindPopup("<b>Hello world!</b><br>I am a popup.<br /><span style='font-size:10px;color:#999'>Tip: Another popup is hidden in Cairo..</span>", {maxWidth: 150, closeButton: true}).openPopup();#}
+
+        var marker2 = WE.marker([42.877742, -97.380979]).addTo(earth);
+        var marker3 = WE.marker([42.877742, -95.38093]).addTo(earth);
+        var marker3 = WE.marker([44.877742, -95.38093]).addTo(earth);
+        var marker4 = WE.marker([40.7913967, -122.4019093]).addTo(earth);
+        var marker4 = WE.marker([35.7913967, -119.4019093]).addTo(earth);
+{#        marker2.bindPopup("<b>Cairo</b><br>Yay, you found me!", {maxWidth: 120, closeButton: false});#}
+
+        earth.setView([42.877742, -97.380979], 3);
+      }
+    </script>
+    <style>
+      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+    </style>
+
+    {% endif %}
+{% endblock %}
 
 {% block content %}
+
+
+
     {% if user.is_authenticated %}
 <script src="{% static "js/swamp.js" %}"></script>
 <script>
@@ -26,39 +57,29 @@ console.log(swamp);
 console.log(username);
 </script>
 
-      <div class="col-sm-2">
-          <ul id="sidebar" class="nav nav-stacked affix" style="border-right: 1px solid">
-            <li>
-                <a href="{% url 'messages_redirect' %}">Messages
+<div class="col-sm-3 sidebar">
+    <div class="list-group">
+        <span class="list-group-item btn-success">
+            Submenu
+        </span>
+        <a href="{% url 'messages_redirect' %}" class="list-group-item">
+            <i class="fa fa-comment-o" style="padding-right: 5px"></i>Messages
                     <i class="badge" style="float: right">{% inbox_count %}</i>
-                </a>
-            </li>
-            <li><a href="{% url 'search_people' %}">Find people near you</a></li>
-            <li><a href="{% url 'search_event' %}">Find Personal Events</a></li>
-            <li><a href="{% url 'event_post' %}">Create an Event</a></li>
-        </ul>
-      </div>
+        </a>
+        <a href="{% url 'search_people' %}" class="list-group-item">
+            <i class="fa fa-search"></i> Find people near you
+        </a>
+        <a href="{% url 'search_event' %}" class="list-group-item">
+            <i class="fa fa-user" style="padding-right: 5px"></i>Find Personal Events
+        </a>
+        <a href="{% url 'event_post' %}" class="list-group-item">
+            <i class="fa fa-calendar" style="padding-right: 5px"></i>Create an Event
+        </a>
+    </div>
+</div>
+
 
         {% block main %}
-{#      <div class="col-sm-3">#}
-{#        <div id="midCol" data-spy="affix" data-offset-top="300">#}
-{#        <div class="well"><h3><a href="http://getbootstrap.com">Bootstrap 3 is Here.</a></h3>#}
-{#          		In simple terms, a responsive web design figures out what resolution of#}
-{#                device it's being served on. Flexible grids then size correctly to fit#}
-{#                the screen.</div>#}
-{#        <div class="well">#}
-{#        		<img class="img-responsive" src="//placehold.it/300x300">#}
-{#        </div>#}
-{#        <div class="well">The new Bootstrap 3 is a smaller build. The separate Bootstrap#}
-{#                base and responsive.css files have now been merged into one. There is no#}
-{#                more fixed grid, only fluid..</div>#}
-{#        <div class="well">Well, that's it for now Jim.</div>#}
-{#        <div class="well">A big design trend for 2013 is "flat" design. Gone are the days of excessive#}
-{#                gradients and shadows. Designers are producing cleaner flat designs, and#}
-{#                Bootstrap 3 takes advantage of this minimalist trend.#}
-{#        Aliquam in felis sit amet augue.</div>#}
-{#         </div>#}
-{#      </div>#}
       <div class="col-sm-7">
           <div class="row">
             <div class="col col-sm-12"><h2>Responsive</h2><p>In simple terms, a responsive web design figures out what resolution of
@@ -92,9 +113,12 @@ console.log(username);
         	<hr>
       </div>
 
-
         {% endblock %}
     {% else %}
+
+    <body onload="initialize()">
+      <div id="earth_div"></div>
+        </body>
 
     {% endif %}
 
