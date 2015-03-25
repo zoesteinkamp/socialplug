@@ -1,3 +1,5 @@
+from user import username
+import user
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -48,10 +50,6 @@ def postit(request, id=None):
     return render(request,'postit.html', data)
 
 @login_required
-def eventpost(request, template='event_post.html'):
-    return render(request, template)
-
-@login_required
 def bigsearch(request, template='bigsearch.html'):
     return render(request, template)
 
@@ -77,7 +75,9 @@ def route(request, template='messagebase.html'):
 
 @login_required
 def searchevent(request):
+
     return render(request, 'searchevents.html', {
+        'userprofile' : UserProfile.objects.all(),
         'events': Event.objects.all(),
         'list': list(Event.objects.all()),
     })

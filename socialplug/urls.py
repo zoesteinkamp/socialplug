@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
-from main.api.views import GlobalSearchList
+# from main.api.views import GlobalSearchList
 
 
 admin.autodiscover()
@@ -41,7 +41,7 @@ urlpatterns = patterns('',
     url(r'^messages/', include('django_messages.urls')),
 
     # the include, admin, search, and privacy policy
-    url(r'^bigsearch/foobar', GlobalSearchList.as_view(), name='bigsearch'),
+    # url(r'^bigsearch/foobar', GlobalSearchList.as_view(), name='bigsearch'),
     url(r'^privacypolicy/', 'main.views.privacypolicy', name='privacypolicy'),
     url(r'^api/', include('main.api.urls')),
     url(r'^admin/', include(admin.site.urls)),

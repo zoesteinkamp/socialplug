@@ -20,6 +20,7 @@ $( "#target" ).click(function() {
   var title = $('#textsearch').val();
   var date = $('#datesearch').val();
   console.log(distance + category + title + date);
+
     if (title != "" && distance !="" && category !="" && date !="" ) {// everyone
         var paramed = {'title': title, 'category': category, 'distance': distance, 'date': date};
         var param = jQuery.param( paramed );
@@ -293,10 +294,11 @@ $( "#target" ).click(function() {
         var paramed = {'distance': distance};
         var param = jQuery.param( paramed );
         $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
+
           var items = [];
           for (key in data) {
-              $.each(data[key], function (id, val) {
-                  items.push(id + val);
+              $.each(data, function () {
+                  items.push([data]);
 
               });
           }
@@ -307,13 +309,18 @@ $( "#target" ).click(function() {
     }else if(title === "" && distance === "" && category !="" && date===""){ // only category
         var paramed = { 'category': category};
         var param = jQuery.param( paramed );
+        console.log(param);
           $.getJSON( "/api/event/?"+ param + "&format=json", function( data ) {
+              console.log(data)
           var items = [];
           for (key in data) {
-              $.each(data[key], function (id, val) {
-                  items.push(id + val);
+              var hi = data[key]
+              var user = hi.user;
 
-              });
+              //$.each(data[key], function (id, val) {
+              //    items.push(id + val);
+
+              //});
           }
               console.log(items)
           });
