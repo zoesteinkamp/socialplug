@@ -144,7 +144,6 @@ def searchevent(request):
     return render(request, 'searchevents.html', {
         'userprofile' : UserProfile.objects.all(),
         'events': Event.objects.all(),
-        'list': list(Event.objects.all()),
     })
 
 

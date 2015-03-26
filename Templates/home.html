@@ -11,6 +11,7 @@
     {% if user.is_authicated %}
     {% else %}
     <script src="http://www.webglearth.com/v2/api.js"></script>
+
     <script>
       function initialize() {
         var earth = new WE.map('earth_div');
@@ -37,11 +38,7 @@
 {% endblock %}
 
 {% block content %}
-
-
-
     {% if user.is_authenticated %}
-
 <script>
 var user = "{{ user.id }}";
 var username = "{{ user.username }}";
@@ -73,73 +70,80 @@ var swamp = "{{ swamp.id }}";
 
 
         {% block main %}
-      <div class="col-sm-8">
+{#      <div class="col-sm-8">#}
 {#    <div class="row">#}
-        <div class="col-sm-9">
-            <div class="panel-group col-sm-9" id="accordion">
-                {% for event in events_in_five %}
-                  <div class="panel panel-default btn-success">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">
-                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>
-                      </h4>
-                    </div>
-                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">
-                      <div class="panel-body">{{ event.description }}</div>
-                    </div>
-                  </div>
-                {% endfor %}
-            </div>
-        </div>
+{#        <div class="col-sm-9">#}
+{#            <div class="panel-group col-sm-9" id="accordion">#}
+{#                {% for event in events_in_five %}#}
+{#                  <div class="panel panel-default btn-success">#}
+{#                    <div class="panel-heading">#}
+{#                      <h4 class="panel-title">#}
+{#                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">#}
+{#                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>#}
+{#                      </h4>#}
+{#                    </div>#}
+{#                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">#}
+{#                      <div class="panel-body">{{ event.description }}</div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
 {#    </div>#}
-
+{##}
 {#        <div class="row">#}
-        <div class="col-sm-9">
-            <div class="panel-group col-sm-9" id="accordion">
-                {% for event in events_in_50 %}
-                  <div class="panel panel-default btn-warning">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">
-                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>
-                      </h4>
-                    </div>
-                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">
-                      <div class="panel-body">{{ event.description }}</div>
-                    </div>
-                  </div>
-                {% endfor %}
-            </div>
-        </div>
+{#        <div class="col-sm-9">#}
+{#            <div class="panel-group col-sm-9" id="accordion">#}
+{#                {% for event in events_in_50 %}#}
+{#                  <div class="panel panel-default btn-warning">#}
+{#                    <div class="panel-heading">#}
+{#                      <h4 class="panel-title">#}
+{#                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">#}
+{#                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>#}
+{#                      </h4>#}
+{#                    </div>#}
+{#                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">#}
+{#                      <div class="panel-body">{{ event.description }}</div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
 {#    </div>#}
-            <div class="col-sm-9">
-            <div class="panel-group col-sm-9" id="accordion">
-                {% for event in events_over_50 %}
-                  <div class="panel panel-default btn-danger">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">
-                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>
-                      </h4>
-                    </div>
-                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">
-                      <div class="panel-body">{{ event.description }}</div>
-                    </div>
-                  </div>
-                {% endfor %}
-            </div>
-        </div>
-      </div>
-
-
+{#            <div class="col-sm-9">#}
+{#            <div class="panel-group col-sm-9" id="accordion">#}
+{#                {% for event in events_over_50 %}#}
+{#                  <div class="panel panel-default btn-danger">#}
+{#                    <div class="panel-heading">#}
+{#                      <h4 class="panel-title">#}
+{#                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">#}
+{#                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>#}
+{#                      </h4>#}
+{#                    </div>#}
+{#                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">#}
+{#                      <div class="panel-body">{{ event.description }}</div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+            <img src="{% static "img/BeFunky_1.jpg.jpg" %}" style="width:580px;height:580px">
         {% endblock %}
+
     {% else %}
+
 
     <body onload="initialize()">
       <div id="earth_div"></div>
         </body>
 
+
     {% endif %}
+
+
+
 
 {% endblock %}

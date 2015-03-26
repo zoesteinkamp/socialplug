@@ -28,19 +28,19 @@
               <input type="datetime" class="form-control" id="datesearch" placeholder="YYYY-MM-DD">
             </div>
         </form></li>
-        <li class="dropdown">
-          <div class="row">
-                <div class="col-sm-12">
-                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="distancesearch"> Distance <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                          <li><input type="radio" id="1" name="1mile" value="1"><label for="1"> 1 Mile </label></li>
-                          <li><input type="radio" id="5" name="5mile" value="5"><label for="5"> 5 Miles </label></li>
-                          <li><input type="radio" id="10" name="10mile" value="10"><label for="10"> 10 Miles </label></li>
-                          <li><input type="radio" id="50" name="50mile" value="50"><label for="50"> 50 Miles </label></li>
-                        </ul>
-                </div>
-              </div>
-          </li>
+{#        <li class="dropdown">#}
+{#          <div class="row">#}
+{#                <div class="col-sm-12">#}
+{#                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="distancesearch"> Distance <span class="caret"></span></button>#}
+{#                        <ul class="dropdown-menu">#}
+{#                          <li><input type="radio" id="1" name="1mile" value="1"><label for="1"> 1 Mile </label></li>#}
+{#                          <li><input type="radio" id="5" name="5mile" value="5"><label for="5"> 5 Miles </label></li>#}
+{#                          <li><input type="radio" id="10" name="10mile" value="10"><label for="10"> 10 Miles </label></li>#}
+{#                          <li><input type="radio" id="50" name="50mile" value="50"><label for="50"> 50 Miles </label></li>#}
+{#                        </ul>#}
+{#                </div>#}
+{#              </div>#}
+{#          </li>#}
           <li class="dropdown">
               <div class="row">
             <div class="col-sm-12">
@@ -85,7 +85,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
+<div id="distancesearch"></div>
 
 <div class="col-sm-12" id="post">
 
@@ -93,19 +93,20 @@
 
 
 <div id="startscreen" class="col-sm-12">
-    {% for event in events %}
 <h3> Search for Personal Events!</h3>
+    {% for event in events %}
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">{{ event.title }} </a>
-         <img class="inline-block float-right" src="{{ event.image }}"  alt="" style="height: 80px; width: 80px;"/>
+        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapse{{ event.id }}">{{ event.title }} </a>
+         <img class="inline-block float-right" src="/static/{{ event.image }}"  alt="" style="height: 100px; width: 100px;"/>
       </h4>
     </div>
-    <div id="collapse{{ event.id }}" class="panel-collapse collapse in">
+    <div id="collapse{{ event.id }}" aria-expanded="false" class="accordion-body collapse">
       <div class="panel-body">
         <p>{{ event.description }}<p>
+          <a href="{% url 'postit'  event.id %}"><button> Post </button></a>
       </div>
     </div>
   </div>
@@ -118,6 +119,7 @@
 
 <!-- script for category -->
 <script type="text/javascript">
+
     var config = {
       '.chosen-select'           : {},
       '.chosen-select-deselect'  : {allow_single_deselect:true},

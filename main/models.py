@@ -277,7 +277,47 @@ class Event(models.Model):
 
     def images(self):
         if self.category == 'Crafts':
-            self.image='img/craft.jpg'
+            self.image='img/crafts.jpg'
+        elif self.category == 'Business':
+            self.image ='img/business.jpg'
+        elif self.category == 'Education':
+            self.image = 'img/education.jpg'
+        elif self.category == 'family':
+            self.image = 'img/family.jpg'
+        elif self.category == 'Fashion':
+            self.image = 'img/fashion.jpg'
+        elif self.category == 'Fitness':
+            self.image = 'img/fitness.jpg'
+        elif self.category == 'Food':
+            self.image = 'img/food.jpg'
+        elif self.category == 'Gaming':
+            self.image = 'img/gaming.jpg'
+        elif self.category == 'Learning':
+            self.image = 'img/learning.jpg'
+        elif self.category == 'Literature':
+            self.image = 'img/literature.jpg'
+        elif self.category == 'Music':
+            self.image = 'img/music.jpg'
+        elif self.category == 'Outdoor':
+            self.image = 'img/outdoor.jpg'
+        elif self.category == 'Pets':
+            self.image = 'img/pets.jpg'
+        elif self.category == 'Photography':
+            self.image = 'img/photography.jpg'
+        elif self.category == 'Politics':
+            self.image = 'img/politics.jpg'
+        elif self.category == 'Special':
+            self.image = 'img/special.jpg'
+        elif self.category == 'Spiritual':
+            self.image = 'img/spiritual.jpg'
+        elif self.category == 'Sports':
+            self.image = 'img/sports.jpg'
+        elif self.category == 'Technology':
+            self.image = 'img/technology.jpg'
+        elif self.category == 'Television':
+            self.image = 'img/television.jpg'
+        elif self.category == 'Writing':
+            self.image = 'img/writing.jpg'
 
     def save(self, *args, **kwargs):
         self.location()
