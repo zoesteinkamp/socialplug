@@ -1,0 +1,141 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{% load app_filters %}
+
+{% block main %}
+
+      <div class="col-sm-9">
+      <div class="row">
+          <h2>Find Events</h2><p>
+      </div>
+          <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><form class="col-sm-12" role="search">
+            <div class="form-group">
+              <input type="datetime" class="form-control" id="datesearch" placeholder="YYYY-MM-DD">
+            </div>
+        </form></li>
+{#        <li class="dropdown">#}
+{#          <div class="row">#}
+{#                <div class="col-sm-12">#}
+{#                     <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" id="distancesearch"> Distance <span class="caret"></span></button>#}
+{#                        <ul class="dropdown-menu">#}
+{#                          <li><input type="radio" id="1" name="1mile" value="1"><label for="1"> 1 Mile </label></li>#}
+{#                          <li><input type="radio" id="5" name="5mile" value="5"><label for="5"> 5 Miles </label></li>#}
+{#                          <li><input type="radio" id="10" name="10mile" value="10"><label for="10"> 10 Miles </label></li>#}
+{#                          <li><input type="radio" id="50" name="50mile" value="50"><label for="50"> 50 Miles </label></li>#}
+{#                        </ul>#}
+{#                </div>#}
+{#              </div>#}
+{#          </li>#}
+          <li class="dropdown">
+              <div class="row">
+            <div class="col-sm-12">
+                <select id="categorysearch" data-placeholder="Category" class="chosen-select" tabindex="4">
+                <option value=""></option>
+                <option value="Buisness">Buisness</option>
+                <option value="Crafts">Crafts</option>
+                <option value="Education">Education</option>
+                <option value="Family">Family</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Fitness"> Fitness</option>
+                <option value="Food"> Food </option>
+                <option value="Learning">Learning</option>
+                <option value="Literature">Literature</option>
+                <option value="Gaming"> Gaming</option>
+                <option value="Music">Music</option>
+                <option value="Outdoor">Outdoors</option>
+                <option value="Pets">Pets</option>
+                <option value="Photography">Photography</option>
+                <option value="Politics">Politics</option>
+                <option value="Technology"> Technology</option>
+                <option value="Television">Television</option>
+                <option value="Special">Special Occasion</option>
+                <option value="Spiritual">Spiritual</option>
+                <option value="Sports"> Sports</option>
+                <option value="Writing">Writing</option>
+              </select>
+            </div >
+          </div>
+          </li>
+          <li>
+       <form class="col-sm-8" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" id="textsearch" placeholder="Title Search">
+        </div>
+      </form>
+        <div class="row">
+        <button type="submit" class="btn btn-default col-sm-4" id="target" >Search</button>
+        </div>
+          </li>
+          </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id="distancesearch"></div>
+
+<div class="col-sm-12" id="post">
+
+</div>
+
+
+<div id="startscreen" class="col-sm-12">
+<h3> Search for Personal Events!</h3>
+    {% for event in events %}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" href="#collapse{{ event.id }}">{{ event.title }} </a>
+         <img class="inline-block float-right" src="/static/{{ event.image }}"  alt="" style="height: 100px; width: 100px;"/>
+      </h4>
+    </div>
+    <div id="collapse{{ event.id }}" aria-expanded="false" class="accordion-body collapse">
+      <div class="panel-body">
+        <p>{{ event.description }}<p>
+          <a href="{% url 'postit'  event.id %}"><button class="btn btn-success"> Post </button></a>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+
+</div>
+
+
+<!-- script for category -->
+<script type="text/javascript">
+
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    };
+    for (var selector in config) {
+      var j = $(selector).chosen(config[selector]);
+
+        console.log(j)
+    }
+  </script>
+<script src="{% static "js/events.js" %}"></script>
+<!-- script for date picker -->
+
+
+{% endblock main %}
+

@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+
+{% block main %}
+
+
+      <div class="col-sm-7">
+          <div class="row">
+            <div class="col col-sm-12"><h2>Your Messages</h2>
+                <hr/>
+                <p>{% block message %}{% endblock %}</p></div>
+          </div>
+        	<hr>
+      </div>
+
+
+
+<div class="col-sm-2 sidebar">
+    <div class="list-group">
+        <span class="list-group-item btn-success">
+            Messages
+        </span>
+        {% block sidebar %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

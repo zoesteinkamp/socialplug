@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load socialaccount %}
+{% load inbox %}
+{% load staticfiles %}
+{% providers_media_js %}
+
+{% block extra_head %}
+    {% if user.is_authicated %}
+    {% else %}
+    <script src="http://www.webglearth.com/v2/api.js"></script>
+
+    <script>
+      function initialize() {
+        var earth = new WE.map('earth_div');
+        WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(earth);
+
+        var marker = WE.marker([37.7913967, -122.4019093]).addTo(earth);
+{#        marker.bindPopup("<b>Hello world!</b><br>I am a popup.<br /><span style='font-size:10px;color:#999'>Tip: Another popup is hidden in Cairo..</span>", {maxWidth: 150, closeButton: true}).openPopup();#}
+
+        var marker2 = WE.marker([42.877742, -97.380979]).addTo(earth);
+        var marker3 = WE.marker([42.877742, -95.38093]).addTo(earth);
+        var marker3 = WE.marker([44.877742, -95.38093]).addTo(earth);
+        var marker4 = WE.marker([40.7913967, -122.4019093]).addTo(earth);
+        var marker4 = WE.marker([35.7913967, -119.4019093]).addTo(earth);
+{#        marker2.bindPopup("<b>Cairo</b><br>Yay, you found me!", {maxWidth: 120, closeButton: false});#}
+
+        earth.setView([42.877742, -97.380979], 3.5);
+      }
+    </script>
+    <style>
+      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+    </style>
+
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+<script>
+var user = "{{ user.id }}";
+var username = "{{ user.username }}";
+var swamp = "{{ swamp.id }}";
+{#console.log(swamp);#}
+{#console.log(username);#}
+</script>
+
+<div class="col-sm-3 sidebar" style="padding-left: 20px">
+    <div class="list-group">
+        <span class="list-group-item btn-success">
+            Submenu
+        </span>
+        <a href="{% url 'messages_redirect' %}" class="list-group-item">
+            <i class="fa fa-comment-o" style="padding-right: 5px"></i>Messages
+                    <i class="badge" style="float: right">{% inbox_count %}</i>
+        </a>
+        <a href="{% url 'search_people' %}" class="list-group-item">
+            <i class="fa fa-search"></i> Find people near you
+        </a>
+        <a href="{% url 'search_event' %}" class="list-group-item">
+            <i class="fa fa-user" style="padding-right: 5px"></i>Find Personal Events
+        </a>
+        <a href="{% url 'event_post' %}" class="list-group-item">
+            <i class="fa fa-calendar" style="padding-right: 5px"></i>Create an Event
+        </a>
+    </div>
+</div>
+
+
+        {% block main %}
+{#      <div class="col-sm-8">#}
+{#    <div class="row">#}
+{#        <div class="col-sm-9">#}
+{#            <div class="panel-group col-sm-9" id="accordion">#}
+{#                {% for event in events_in_five %}#}
+{#                  <div class="panel panel-default btn-success">#}
+{#                    <div class="panel-heading">#}
+{#                      <h4 class="panel-title">#}
+{#                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">#}
+{#                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>#}
+{#                      </h4>#}
+{#                    </div>#}
+{#                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">#}
+{#                      <div class="panel-body">{{ event.description }}</div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#        <div class="row">#}
+{#        <div class="col-sm-9">#}
+{#            <div class="panel-group col-sm-9" id="accordion">#}
+{#                {% for event in events_in_50 %}#}
+{#                  <div class="panel panel-default btn-warning">#}
+{#                    <div class="panel-heading">#}
+{#                      <h4 class="panel-title">#}
+{#                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">#}
+{#                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>#}
+{#                      </h4>#}
+{#                    </div>#}
+{#                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">#}
+{#                      <div class="panel-body">{{ event.description }}</div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#            <div class="col-sm-9">#}
+{#            <div class="panel-group col-sm-9" id="accordion">#}
+{#                {% for event in events_over_50 %}#}
+{#                  <div class="panel panel-default btn-danger">#}
+{#                    <div class="panel-heading">#}
+{#                      <h4 class="panel-title">#}
+{#                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ event.id }}">#}
+{#                            {{ event.title }}<span style="float: right;">{{ event.date }}</span></a>#}
+{#                      </h4>#}
+{#                    </div>#}
+{#                    <div id="collapse{{ event.id }}" class="panel-collapse collapse">#}
+{#                      <div class="panel-body">{{ event.description }}</div>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#      </div>#}
+{##}
+{##}
+            <img src="{% static "img/BeFunky_1.jpg.jpg" %}" style="width:580px;height:580px">
+        {% endblock %}
+
+    {% else %}
+
+
+    <body onload="initialize()">
+      <div id="earth_div"></div>
+        </body>
+
+
+    {% endif %}
+
+
+
+
+{% endblock %}

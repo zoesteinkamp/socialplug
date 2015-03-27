@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+{%  load staticfiles %}
+
+{% block main %}
+
+    <div class="col-sm-5">
+        <div class="col-sm-12">
+            <div class="panel-group col-sm-12" id="accordion">
+                {% for person, interest in people_with_interests.items %}
+                  <div class="panel panel-default">
+                    <div class="panel-heading" onclick="jQuery('#collapse{{ person.id }}').collapse('toggle');">
+                      <h4 class="panel-title">
+                          <img class="inline-block" src="{{ person.avatar_url }}" alt="" style="height: 50px; width: 50px;"/>
+                          <a href="{% url 'profile' person.user %}" style="float: right">{{ person.user }}</a>
+                          <p class="col-xs-6 pull-right">Common Interests: {{ interest|length }}</p>
+                      </h4>
+                    </div>
+                    <div id="collapse{{ person.id }}" class="panel-collapse collapse">
+                        {% for value in interest %}
+                      <div class="panel-body">
+                            <a href="{{ value.image }}" class="thumbnail text-center" style="height: 100px">{{ value.name|slice:':13' }}
+                                 <img src="{{ value.image }}" class="img-responsive" style="height: 50px; width: 50px">
+                            </a>
+                      </div>
+                            {% endfor %}
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+      <div class="col-sm-4 float-right">
+          <div class="row">
+                <div class="col col-sm-12"><h2>People near you</h2>
+                    <div id="map-canvas"></div>
+                </div>
+        	    <hr>
+          </div>
+      </div>
+
+
+      <style>
+          #map-canvas {
+            height: 400px;
+          }
+    </style>
+{% endblock main %}

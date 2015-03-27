@@ -1,0 +1,15 @@
+{% extends 'settings_sidebar.html' %}
+{% load bootstrap_tags %}
+
+{% block main %}
+    <div class="col-sm-offset-1 col-sm-9">
+        <form class="" method="post">
+          {% csrf_token %}
+            {{ userform|as_bootstrap }}
+            {{ profileform|as_bootstrap }}
+            <div class="form-actions text-center">
+                  <button type="submit" class="btn btn-primary ">Update</button>
+            </div>
+        </form>
+    </div>
+{% endblock  %}

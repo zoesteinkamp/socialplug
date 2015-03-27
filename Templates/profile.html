@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+
+{% load i18n %}
+{% load url from future %}
+{% load account %}
+{% load socialaccount %}
+
+
+
+{% block head_title %}Profile{% endblock %}
+
+{% block content %}
+<hr class="">
+<div class="container target">
+    <div class="row">
+        <div class="col-sm-10">
+             <h1 class="">{{ user.username }}</h1>
+            {% if userprofile.user_id  == request.user.id %}
+            {% else %}
+                <a href="{% url 'messages_compose_to' userprofile.user %}"><button type="button" class="btn btn-success">Send me a message</button></a>
+            {% endif %}
+<br>
+        </div>
+      <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="{{ userprofile.avatar_url }}"></a>
+
+        </div>
+    </div>
+  <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+            <ul class="list-group">
+                <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span>{{ user.date_joined }}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Active</strong></span>
+                    {% if user.is_active == True %}
+                    <i style="color:green" class="fa fa-check-square"></i>
+                    {% else %}
+                     <i style="color:red" class="fa fa-exclamation-circle"></i>
+                    {% endif %}
+                </li>
+                    <li class="list-group-item text-right"><span class="pull-left">
+                        <strong class="">Full name</strong>
+                    </span>{{ user.first_name }} {{ user.last_name }}
+                    {% if userprofile.user_id  == request.user.id %}
+                    <a href="{% url 'settings' %}"><i class="fa fa-plus"></i></a>
+                    {% else %}
+                    {% endif %}
+                    </li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Social Media
+                    {% if userprofile.user_id  == request.user.id %}
+                    <a href="{% url 'socialaccount_connections' %}" style="float: right">Change</a>
+                        {% else %}
+                    {% endif %}
+                    </div>
+                <div class="panel-body"><i class="fa fa-facebook fa-2x"></i>
+                    <i class="fa fa-spotify fa-2x"></i> <i class="fa fa-instagram fa-2x"></i>  <i class="fa fa-google-plus fa-2x"></i>
+
+                </div>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i>
+
+                </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Events Attended</strong></span> 0 </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Likes</strong></span> 0 </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Posts</strong></span> 0 </li>
+            </ul>
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-9" style="" contenteditable="false">
+            <div class="panel panel-default">
+                <div class="panel-heading"> Bio
+                    {% if userprofile.user_id  == request.user.id %}
+                    <a href="{% url 'bio'%}" style="float: right">Change</a>
+                        {% else %}
+                    {% endif %}
+                </div>
+                <div class="panel-body"> {{ userprofile.bio }}
+
+                </div>
+            </div>
+            <div class="panel panel-default target">
+                <div class="panel-heading" contenteditable="false">Photos</div>
+                <div class="panel-body">
+                <div class="row">
+                    {% for photo in userphotos %}
+                <div class="col-lg-3 col-sm-3 col-xs-6">
+                    <a href="{{ photo.photo }}" class="thumbnail text-center">
+                         <img src="{{ photo.photo }}" class="img-responsive" style="height: 200px; width: 200px">
+                    </a>
+                </div>
+                {% endfor %}
+                </div>
+
+        </div>
+
+    </div>
+           <div class="panel panel-default">
+                <div class="panel-heading">Interest</div>
+                <div class="panel-body">
+                <div class="row">
+                    {% for interest in interests %}
+                <div class="col-lg-3 col-sm-3 col-xs-6">
+                    <a href="{{ interest.image }}" class="thumbnail text-center">{{ interest.name|slice:':20' }}
+                         <img src="{{ interest.image }}" class="img-responsive" style="height: 50px; width: 50px">
+                    </a>
+                </div>
+                {% endfor %}
+                </div>
+
+        </div>
+
+        </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Subscriptions</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for sub in subscriptions %}
+                                <div class="col-lg-3 col-sm-3 col-xs-6">
+                                    <a href="{{ sub.image }}" class="thumbnail text-center">{{ sub.title|slice:':20' }}
+                                        <img src="{{ sub.image }}" class="img-responsive" style="height: 50px; width: 50px">
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+             </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Music</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {% for artist in music %}
+                                <div class="col-lg-3 col-sm-3 col-xs-6">
+                                    <a href="{{ artist.image }}" class="thumbnail text-center">{{ artist.artist|slice:':20' }}
+                                        <img src="{{ artist.image }}" class="img-responsive" style="height: 50px; width: 50px">
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+            </div>
+
+            <div id="push"></div>
+        </div>
+
+
+
+
+    </div>
+</div>
+{% endblock %}
