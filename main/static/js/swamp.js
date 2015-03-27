@@ -187,13 +187,13 @@ swampdragon.ready(function () {
                     }
 
 
-                    $("#logout").click(function () {
-                        console.log("Dont show up")
-                        swampdragon.delete('locationcurrent', {id: currentdragon}, function (context, data) {
-                        }, function (context, data) {
-                            console.log("Could not find user to delete")
-                        });
-                    });
+                    //$("#logout").click(function () {
+                    //    console.log("Dont show up")
+                    //    swampdragon.delete('locationcurrent', {id: currentdragon}, function (context, data) {
+                    //    }, function (context, data) {
+                    //        console.log("Could not find user to delete")
+                    //    });
+                    //});
 
 
                 });

@@ -416,7 +416,7 @@ $( "#target" ).click(function() {
   '<div class="panel panel-default">'+ '<div class="panel-heading">' + '<h4 class="panel-title">' + '<a data-toggle="collapse" data-parent="#accordion" href="#collapse'+ data[i].id + ' "> ' + data[i].title + '</a>'+
          '<img class="inline-block float-right" src="' + data[i].image +'" alt="" style="height: 80px; width: 80px;"/>'+
       '</h4>'+ '</div>'+ '<div id="collapse'+ data[i].id + '" class="accordion-body collapse">'+
-      '<div class="panel-body">'+ '<p>' + data[i].description + '<p>' +  '<a href="{% url ' + ' + postit + ' + ' '  + event.id + '%}">' + '<button>'
+      '<div class="panel-body">'+ '<p>' + data[i].description + '<p>' +  '<a href="{% url ' + ' + postit + ' + ' '  + event.id + '%}">' + '<button class="btn btn-success" >'
                       + 'Post' +  '</button>'+ '</a>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>')
 
 

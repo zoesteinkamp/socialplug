@@ -25,4 +25,4 @@ djangorestframework-filters
 django-filters
 swampdragon-auth
 django-extensions
-django-datetime-widget=0.9.3
+django-datetime-widget

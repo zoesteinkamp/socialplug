@@ -158,7 +158,7 @@ SOCIALACCOUNT_PROVIDERS = \
     }
 
 
-SITE_ID = 2
+SITE_ID = 1
 AUTH_PROFILE_MODULE = 'main.UserProfile'
 
 

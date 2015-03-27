@@ -33,11 +33,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <h3>{{ posts.title }}</h3>
 
     <div>{{ posts.description }}</div>
+    <br>
     <div> {{ posts.time }}</div>
+    <br>
     <div>{{ posts.date }} </div>
+    <br>
     <div> {{ posts.category }}</div>
+    <br>
     <a href="{% url 'messages_compose_to' posts.user %}"><button> Message Me! </button></a>
-
+    <br>
 <div class="col-sm-4 float-right">
   <div class="row">
     <div id="postmap"></div>
